@@ -1,8 +1,8 @@
 <template>
   <div class="hai-content">
-    <!-- <div class="service-tit">
+    <div class="service-tit">
       <span class="span1">1+3架构</span>
-    </div> -->
+    </div>
     <div class="arch_content">
       <div class="lside">
         <div class="top">
@@ -24,28 +24,60 @@
           </div>
           <div class="box2">
             <div class="ability_box">
-              <div class="ab_arrow"></div>
               <div class="ab_box">
+                <div class="ab_arrow"></div>
                 <div class="ab_column"></div>
-                <div class="ab_name">产业精准招商</div>
               </div>
+              <div class="ab_name">产业精准招商</div>
             </div>
             <div class="ability_box">
-              <div class="ab_arrow"></div>
               <div class="ab_box">
+                <div class="ab_arrow"></div>
                 <div class="ab_column"></div>
-                <div class="ab_name">产业精准招商</div>
               </div>
+              <div class="ab_name">经济运行分析</div>
             </div>
             <div class="ability_box">
-              <div class="ab_arrow"></div>
               <div class="ab_box">
+                <div class="ab_arrow"></div>
                 <div class="ab_column"></div>
-                <div class="ab_name">产业精准招商</div>
               </div>
+              <div class="ab_name">企业主动服务</div>
             </div>
           </div>
-          <div class="box3">222</div>
+          <div class="dotted_line">
+            <div class="inner"></div>
+          </div>
+          <div class="box3">
+            <div class="r3">
+              <div class="item orange">企业服务门户</div>
+              <div class="item">资本市场培育</div>
+            </div>
+            <div class="r3">
+              <div class="item">经济标签统计分析</div>
+              <div class="item">产业晴雨表</div>
+            </div>
+            <div class="r3">
+              <div class="item green">区域产业政策及要素比对</div>
+            </div>
+            <div class="r3">
+              <div class="item">精准匹配</div>
+              <div class="item green">政策搜索</div>
+              <div class="item">以商招商</div>
+            </div>
+            <div class="r3">
+              <div class="item orange item_new">企业关系图谱</div>
+              <div class="item orange item_new">企业业务图谱</div>
+            </div>
+            <div class="r3">
+              <div class="item orange item_new">企业实力指数</div>
+              <div class="item orange item_new">企业风险分析</div>
+            </div>
+            <div class="r3">
+              <div class="item item_new">信用活力报告</div>
+              <div class="item">生命周期服务</div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="rside">
@@ -58,7 +90,7 @@
         </div>
         <div class="img_box">
           <span class="img"></span>
-          <div class="name">政府</div>
+          <div class="name">企业</div>
         </div>
       </div>
     </div>
@@ -129,24 +161,119 @@ export default {
           height: 200px;
         }
       }
-      .box2{
-        width: 320px;
-        height:100%;
-        background:pink;
-        .ability_box{
-            .ab_arrow{
-            }
-            .ab_box{
-              .ab_column{}
-              .ab_name{}
-            }
-        }
-             
-      }
-      .box3{
-        width: 530px;
+      .box2 {
+        z-index: 2;
+        width: 380px;
         height: 100%;
-        background: red;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        .ability_box {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: space-between;
+          overflow: hidden;
+          .ab_box {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-between;
+            .ab_arrow {
+              height: 36px;
+              width: 72px;
+              background-image: url('../../assets/p1_arrow.gif');
+              background-size: cover;
+            }
+            .ab_column::after {
+              top: 50%;
+              left: 100%;
+              position: absolute;
+              content: '';
+              display: block;
+              width: 110px;
+              border-top: 2px dotted #23e9f4;
+              height: 0px;
+            }
+            .ab_column {
+              position: relative;
+              background-image: url('../../assets/p1_column.png');
+              background-size: cover;
+              height: 111px;
+              width: 166px;
+            }
+          }
+          .ab_name {
+            padding-left: 70px;
+            font-size: 30px;
+            font-weight: bold;
+            color: #fff;
+            padding-top: 15px;
+          }
+        }
+      }
+      .dotted_line {
+        flex: 1;
+        z-index: 3;
+        height: calc(100% - 60px);
+        border: 2px dotted #23e9f4;
+        border-right: none;
+        width: 48px;
+        margin: 30px 0;
+      }
+      .box3 {
+        z-index: 4;
+        width: 480px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .r3 {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          .item {
+            text-align: center;
+            min-height: 60px;
+            background: #008df8;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 28px;
+            line-height: 60px;
+            padding: 0 23px;
+          }
+          .item_new {
+            position: relative;
+          }
+          .item_new::after {
+            position: absolute;
+            content: '';
+            display: block;
+            top: 0;
+            left: 10px;
+            width: 38px;
+            height: 21px;
+            background-image: url('../../assets/p1_new.png');
+            background-size: cover;
+          }
+          .orange {
+            background: #ffa300;
+          }
+          .green {
+            background: #00be19;
+          }
+        }
+        .r3:nth-child(3) {
+          .item {
+            width: 100%;
+          }
+        }
+        .r3:nth-child(4),
+        .r3:nth-child(4) {
+          .item {
+            padding: 0 15px;
+          }
+        }
       }
     }
   }
@@ -175,10 +302,12 @@ export default {
       .img {
         height: 60px;
         width: 60px;
-        background: red;
+        background-image: url('../../assets/p1_zf.png');
+        background-size: cover;
         margin-bottom: 20px;
       }
     }
+
     div.img_box:first-child {
       height: 138px;
     }
@@ -188,6 +317,10 @@ export default {
     }
     div.img_box:last-child {
       margin-bottom: 0;
+      .img {
+        background-image: url('../../assets/p1_company.png');
+        background-size: cover;
+      }
     }
   }
 }
