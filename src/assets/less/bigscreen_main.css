@@ -1,0 +1,418 @@
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.led-main {
+  font-family: "SourceHanSansCN-Regular";
+  overflow-x: scroll;
+}
+.led-main-title {
+  position: absolute;
+  height: auto;
+  text-align: center;
+  margin-left: calc(50% - 40rem);
+}
+.led-main-title .logo {
+  margin-top: 1.5rem;
+  width: 80rem;
+  height: 8rem;
+  background: url('../bigscreen/bigscreen_logo.png') center 0 / 100% auto no-repeat;
+}
+.led-main-board {
+  padding-bottom: calc(100vh - 100%);
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  min-width: 4095px;
+  min-height: 768px;
+  display: flex;
+  background: #00082e url('../bigscreen/bg.jpg') 0 0 / 100% 100% no-repeat;
+}
+.led-main-board .left-board {
+  height: 100%;
+  flex: 1;
+  flex-shrink: 0;
+  color: #00fffc;
+  color: #ff758d;
+  padding: 3rem 2rem 2rem 4rem;
+  overflow: hidden;
+}
+.led-main-board .left-board .left-row-1,
+.led-main-board .left-board .left-row-2,
+.led-main-board .left-board .left-row-3 {
+  margin: 1.5rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.led-main-board .left-board .left-row-1 .panel-title1,
+.led-main-board .left-board .left-row-2 .panel-title1,
+.led-main-board .left-board .left-row-3 .panel-title1 {
+  float: left;
+}
+.led-main-board .left-board .left-row-1 {
+  height: 8rem;
+}
+.led-main-board .left-board .left-row-1 .left-row-1-col {
+  background: url('../bigscreen/left_total_bg.png') 0 0 / 90% auto no-repeat;
+  color: white;
+  text-align: center;
+  padding: 0.4rem 0.3rem 0.4rem 0.1rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.led-main-board .left-board .left-row-1 .left-row-1-col .ant-col {
+  height: 8rem;
+}
+.led-main-board .left-board .left-row-1 .left-row-1-col .ant-col .title {
+  height: 3.2rem;
+  line-height: 3.2rem;
+  letter-spacing: 1px;
+  font-family: 'SourceHanSansCN-Regular';
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.led-main-board .left-board .left-row-1 .left-row-1-col .ant-col .num {
+  height: 3rem;
+  line-height: 3rem;
+  white-space: nowrap;
+}
+.led-main-board .left-board .left-row-1 .left-row-1-col .ant-col .num span {
+  font-size: 2.4rem;
+  font-family: 'digital' !important;
+  letter-spacing: 2px;
+  color: #fff700;
+  padding-right: 5px;
+}
+.led-main-board .left-board .left-row-1 .left-row-1-col .icon-1 {
+  background: url('../bigscreen/left_total_icon1.png') 0 0 / 90% auto no-repeat;
+}
+.led-main-board .left-board .left-row-1 .left-row-1-col .icon-2 {
+  background: url('../bigscreen/left_total_icon2.png') 0 0 / 90% auto no-repeat;
+}
+.led-main-board .left-board .left-row-1 .left-row-1-col .icon-3 {
+  background: url('../bigscreen/left_total_icon3.png') 0 0 / 90% auto no-repeat;
+}
+.led-main-board .left-board .left-row-2 {
+  padding: 0 1rem;
+}
+.led-main-board .left-board .left-row-2 .left-row-2-banner {
+  float: right;
+  background: url('../bigscreen/left-row-2-banner.png') 0 center / 100% auto no-repeat;
+  width: calc(100% - 16rem);
+  height: 3rem;
+  overflow: hidden;
+}
+.led-main-board .left-board .left-row-2 .chart-row {
+  width: 90%;
+  height: 22rem;
+  margin: 2rem 0 0;
+}
+.led-main-board .left-board .left-row-3 {
+  padding: 0 1rem;
+  /* 主屏左下侧的光环 */
+}
+.led-main-board .left-board .left-row-3 .left-row-3-swiper {
+  clear: both;
+}
+.led-main-board .left-board .left-row-3 .page1_panel3 {
+  width: 100%;
+  height: auto;
+  clear: both;
+  margin-top: 5rem;
+}
+.led-main-board .left-board .left-row-3 .page1_panel3 .page1_panel3_list {
+  display: flex;
+  margin-top: 1.5rem;
+}
+.led-main-board .left-board .left-row-3 .page1_panel3 .page1_panel3_list > li {
+  flex: 1;
+  position: relative;
+  width: 10rem;
+  height: 9rem;
+  padding: 2rem 0 2rem;
+  margin: 0 0 4rem;
+  background: url('../bigscreen/page1_3_1.png') no-repeat bottom / 10rem auto;
+  list-style: none;
+  font-size: 1rem;
+}
+.led-main-board .left-board .left-row-3 .page1_panel3 .page1_panel3_list > li:before {
+  content: '';
+  display: block;
+  width: 5.4rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 132, 255, 0.5);
+  position: absolute;
+  left: 50%;
+  top: 6rem;
+  margin-left: -2.6rem;
+  opacity: 0.5;
+  -webkit-animation: circleup 2s ease-in-out infinite;
+  animation: circleup 2s ease-in-out infinite;
+}
+.led-main-board .left-board .left-row-3 .page1_panel3 .page1_panel3_list > li:after {
+  content: '';
+  display: block;
+  width: 5.4rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 132, 255);
+  position: absolute;
+  left: 50%;
+  top: 6rem;
+  margin-left: -2.6rem;
+  opacity: 0.5;
+  -webkit-animation: circleup 2s ease-in-out infinite;
+  animation: circleup 2s ease-in-out infinite;
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+}
+@-webkit-keyframes circleup {
+  from {
+    -webkit-transform: scale(1) translate(0, 0);
+    transform: scale(1) translate(0, 0);
+    opacity: 0.5;
+  }
+  to {
+    -webkit-transform: scale(1.5) translate(0, -2rem);
+    transform: scale(1.5) translate(0, -2rem);
+    opacity: 0;
+  }
+}
+@keyframes circleup {
+  from {
+    -webkit-transform: scale(1) translate(0, 0);
+    transform: scale(1) translate(0, 0);
+    opacity: 0.5;
+  }
+  to {
+    -webkit-transform: scale(1.5) translate(0, -2rem);
+    transform: scale(1.5) translate(0, -2rem);
+    opacity: 0;
+  }
+}
+.led-main-board .left-board .left-row-3 .page1_panel3 .page1_panel3_list > li .title {
+  position: absolute;
+  width: 100%;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 400;
+  text-align: center;
+  bottom: -4rem;
+}
+.led-main-board .left-board .left-row-3 .page1_panel3 .page1_panel3_list > li .number {
+  width: 100%;
+  position: absolute;
+  bottom: -2.5rem;
+  text-align: center;
+  color: white;
+}
+.led-main-board .left-board .left-row-3 .page1_panel3 .page1_panel3_list > li .number .number-text {
+  color: #00fff6;
+  font-family: 'digital';
+  font-size: 1.6rem !important;
+  font-weight: 400;
+  letter-spacing: 2px;
+  padding-right: 5px;
+}
+.led-main-board .left-board .left-row-3 .page1_panel3 .page1_panel3_list > li .per {
+  width: 100%;
+  position: absolute;
+  top: 1rem;
+  color: #00e7fb;
+  font-family: 'SourceHanSansCN-Regular';
+  font-size: 1.8rem;
+  font-weight: 550;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.led-main-board .left-board .left-row-3 .page1_panel3 .page1_panel3_list > li .info > span {
+  color: #00fff6;
+  font-weight: 700;
+}
+.led-main-board .center-board {
+  height: 100%;
+  flex: 4;
+}
+.led-main-board .right-board {
+  height: 100%;
+  flex: 1;
+  padding: 1rem 2rem 2rem 4rem;
+}
+.led-main-board .right-board .right-row-1,
+.led-main-board .right-board .right-row-2,
+.led-main-board .right-board .right-row-3 {
+  margin: 1rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.led-main-board .right-board .right-row-1 .panel-title1,
+.led-main-board .right-board .right-row-2 .panel-title1,
+.led-main-board .right-board .right-row-3 .panel-title1 {
+  float: left;
+}
+.led-main-board .right-board .right-row-2 .chart-row {
+  padding: 0 5%;
+  width: 100%;
+  height: 10rem;
+}
+.led-main-board .right-board .right-row-3 .right-row-3-flex .right-row-3-flex-item {
+  height: 14rem;
+}
+.led-main-board .right-board .right-row-3 .assorts-row {
+  width: 100%;
+  height: 5rem;
+}
+.led-main-board .right-board .right-row-3 .assorts-row .assorts-title {
+  height: 4rem;
+  text-align: center;
+}
+.led-main-board .right-board .right-row-3 .assorts-row .assorts-title .area {
+  color: #f9bb00;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.led-main-board .right-board .right-row-3 .assorts-row .assorts-title .area span {
+  font-size: 1.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.led-main-board .right-board .right-row-3 .assorts-row .assorts-title .name {
+  color: white;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.led-main-board .right-board .right-row-3 .assorts-row .assorts-content {
+  height: 4.5rem;
+  padding: 0.8rem;
+  background: url('../bigscreen/title_bg3.png') no-repeat 0 0 / 100% 100%;
+  font-size: 0.8rem;
+  line-height: 1.7rem;
+  color: white;
+  overflow: hidden;
+  white-space: normal;
+  word-break: break-all;
+}
+.led-main-board .right-board .right-row-3 .chart-row {
+  width: 100%;
+  height: 10rem;
+}
+/* 主屏的panel标题1 */
+.panel-title-row {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.panel-title-row::after {
+  clear: both;
+}
+.panel-title1 {
+  background: url('../bigscreen/panel-title1_bg.png') 0 bottom / 100% auto no-repeat;
+  width: 15rem;
+  height: 4.5rem;
+  padding-left: 3.5rem;
+  margin-left: 0.5rem;
+}
+.panel-title1 .panel-title1-text {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  -webkit-line-clamp: 2;
+  background-image: -webkit-linear-gradient(bottom, #6744fc, #2ff7d2);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.chart {
+  width: 100%;
+  height: 100%;
+}
+/* 横向滚动 */
+.logo-warp {
+  width: 40rem;
+  height: 4rem;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.logo-warp ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 0 2rem;
+}
+.logo-warp ul.ul-item {
+  display: flex;
+}
+.logo-warp ul.ul-item .li-item {
+  width: 10rem;
+  height: 4rem;
+  margin-right: 0.8rem;
+}
+.logo-warp ul.ul-item .li-item img {
+  width: 100%;
+}
+/* 纵向滚动 */
+.assorts-warp {
+  height: 10rem;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.assorts-warp ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+}
+.assorts-warp ul li,
+.assorts-warp ul a {
+  display: block;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+}
+/* 纵向滚动 */
+.news-warp {
+  width: 20rem;
+  height: 4.5rem;
+  margin: 0 1rem;
+  overflow: hidden;
+}
+.news-warp ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.news-warp ul li,
+.news-warp ul a {
+  display: block;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: white;
+}
+.news-warp ul li span,
+.news-warp ul a span {
+  font-size: 1rem;
+}
+.news-warp ul li .color1,
+.news-warp ul a .color1 {
+  color: #f9bb00;
+}
+.news-warp ul li .color2,
+.news-warp ul a .color2 {
+  color: #0060ff;
+}
+/*# sourceMappingURL=./bigscreen_main.css.map */

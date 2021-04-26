@@ -1,0 +1,11 @@
+@font-face {
+  font-family: "digital";
+  src: url("../fonts/digital/digital.eot");
+  src: url("../fonts/digital/digital.eot?#iefix") format('embedded-opentype'), url("../fonts/digital/digital.woff") format("woff"), url("../fonts/digital/digital.ttf") format("truetype"), url("../fonts/digital/digital.svg") format("svg");
+}
+@font-face {
+  font-family: 'SourceHanSansCN-Regular';
+  src: url('../fonts/SourceHanSansCN-Regular/SourceHanSansCN-Regular.eot');
+  src: url('../fonts/SourceHanSansCN-Regular/SourceHanSansCN-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/SourceHanSansCN-Regular/SourceHanSansCN-Regular.woff') format('woff'), url('../fonts/SourceHanSansCN-Regular/SourceHanSansCN-Regular.ttf') format('truetype'), url('../fonts/SourceHanSansCN-Regular/SourceHanSansCN-Regular.svg') format('svg');
+}
+/*# sourceMappingURL=./fonts.css.map */

@@ -1,0 +1,40 @@
+/*大屏-主屏公用样式*/
+@images: "../bigscreen";
+
+.ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* 主屏的panel标题1 */
+.panel-title-row{
+    .ellipsis();
+
+    &::after{
+        clear: both;
+    }
+}
+.panel-title1{
+    background: url('@{images}/panel-title1_bg.png') 0 bottom escape("/") 100% auto no-repeat;
+    width: 15rem;
+    height: 4.5rem;
+    padding-left: 3.5rem;
+    margin-left: 0.5rem;
+
+    .panel-title1-text{
+        font-size: 2rem;
+        font-weight: 600;
+        letter-spacing: 3px;
+        -webkit-line-clamp: 2;
+        background-image: -webkit-linear-gradient(bottom, rgba(103,68,252,1),rgba(47,247,210,1));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        .ellipsis();
+    }
+}
+
+.chart{
+    width: 100%;
+    height: 100%;
+}
