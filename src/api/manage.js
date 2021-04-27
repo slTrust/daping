@@ -201,3 +201,11 @@ export function getEnterprise() {
     method: 'get'
   })
 }
+
+//企业画像
+export function getPortray(enterpriseId) {
+  return axios({
+    url: '/bigscreen/report/queryEnterprisePortray?enterpriseId=' + enterpriseId,
+    method: 'get'
+  })
+}

@@ -49,29 +49,54 @@
             <div class="inner"></div>
           </div>
           <div class="box3">
+<!--
+政策兑现、精准匹配、资本市场培育、
+企业服务门户、政策搜索、产业晴雨表、
+产业标签统计分析、区域产业要素分析与研判、
+区域产业政策及要素比对、区域经济驾驶舱、
+经济标签统计分析、自定义产业财税分析、
+
+区域产业要素与招商标的对比分析、产业链招商、
+以商招商、企业关系图谱、企业业务图谱、
+企业实力指数、企业风险分析、信用活力报告、
+生命周期服务
+-->
             <div class="r3">
-              <div class="item orange">企业服务门户</div>
+              <div class="item orange">政策兑现</div>
+              <div class="item">精准匹配</div>
               <div class="item">资本市场培育</div>
             </div>
             <div class="r3">
-              <div class="item">经济标签统计分析</div>
+              <div class="item orange">企业服务门户</div>
+              <div class="item orange">生命周期服务</div>
+              <div class="item">政策搜索</div>
               <div class="item">产业晴雨表</div>
             </div>
             <div class="r3">
-              <div class="item green">区域产业政策及要素比对</div>
+              <div class="item green">产业标签统计分析</div>
+              <div class="item green">区域产业要素分析与研判</div>
             </div>
             <div class="r3">
-              <div class="item">精准匹配</div>
-              <div class="item green">政策搜索</div>
-              <div class="item">以商招商</div>
+              <div class="item">区域产业政策及要素比对</div>
+              <div class="item green">区域经济驾驶舱</div>
             </div>
             <div class="r3">
+              <div class="item">经济标签统计分析</div>
+              <div class="item green">自定义产业财税分析</div>
+            </div>
+            <div class="r3">
+              <div class="item orange item_new">区域产业要素与招商标的对比分析</div>
+              <div class="item orange item_new">产业链招商</div>
+            </div>
+            <div class="r3">
+              <div class="item orange item_new">以商招商</div>
               <div class="item orange item_new">企业关系图谱</div>
               <div class="item orange item_new">企业业务图谱</div>
             </div>
             <div class="r3">
               <div class="item orange item_new">企业实力指数</div>
               <div class="item orange item_new">企业风险分析</div>
+              <div class="item orange item_new">信用活力报告</div>
             </div>
             <div class="r3">
               <div class="item item_new">信用活力报告</div>
@@ -234,13 +259,12 @@ export default {
           justify-content: space-between;
           .item {
             text-align: center;
-            min-height: 60px;
             background: #008df8;
             border-radius: 4px;
             color: #fff;
-            font-size: 28px;
-            line-height: 60px;
-            padding: 0 23px;
+            font-size: 18px;
+            line-height: 20px;
+            padding:10px;
           }
           .item_new {
             position: relative;
@@ -265,15 +289,9 @@ export default {
           }
         }
         .r3:nth-child(3) {
-          .item {
-            width: 100%;
-          }
         }
         .r3:nth-child(4),
         .r3:nth-child(4) {
-          .item {
-            padding: 0 15px;
-          }
         }
       }
     }
