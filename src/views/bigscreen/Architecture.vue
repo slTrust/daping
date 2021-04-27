@@ -182,7 +182,7 @@ export default {
             .ab_arrow {
               height: 36px;
               width: 72px;
-              background-image: url('../../assets/p1_arrow.gif');
+              background-image: url('../../assets/bigscreen/p1_arrow.gif');
               background-size: cover;
             }
             .ab_column::after {
@@ -197,7 +197,7 @@ export default {
             }
             .ab_column {
               position: relative;
-              background-image: url('../../assets/p1_column.png');
+              background-image: url('../../assets/bigscreen/p1_column.png');
               background-size: cover;
               height: 111px;
               width: 166px;
@@ -254,7 +254,7 @@ export default {
             left: 10px;
             width: 38px;
             height: 21px;
-            background-image: url('../../assets/p1_new.png');
+            background-image: url('../../assets/bigscreen/p1_new.png');
             background-size: cover;
           }
           .orange {
@@ -303,7 +303,7 @@ export default {
       .img {
         height: 60px;
         width: 60px;
-        background-image: url('../../assets/p1_zf.png');
+        background-image: url('../../assets/bigscreen/p1_zf.png');
         background-size: cover;
         margin-bottom: 20px;
       }
@@ -319,7 +319,7 @@ export default {
     div.img_box:last-child {
       margin-bottom: 0;
       .img {
-        background-image: url('../../assets/p1_company.png');
+        background-image: url('../../assets/bigscreen/p1_company.png');
         background-size: cover;
       }
     }
@@ -420,7 +420,7 @@ export default {
 }
 .txt2 {
   animation: tag_move 4s ease 2s infinite;
-  color: #3eacff;
+  color: #FFA300;
 }
 .txt3 {
   animation: tag_move 4s linear 0.5s infinite;
