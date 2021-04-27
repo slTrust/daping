@@ -246,6 +246,7 @@ export default {
             position: relative;
           }
           .item_new::after {
+            animation: animation_opacity 1s linear 0s infinite;
             position: absolute;
             content: '';
             display: block;
@@ -368,6 +369,18 @@ export default {
   }
   100% {
     transform: translate(-50%, -70%) rotate(360deg);
+  }
+}
+
+@keyframes animation_opacity {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
