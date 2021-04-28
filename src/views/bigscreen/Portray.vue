@@ -508,7 +508,7 @@ const echarts = require('echarts')
 /*websocket集成*/
 import store from '@/store/'
 import { randomUUID } from '@/utils/util'
-import func from 'vue-editor-bridge'
+// import func from 'vue-editor-bridge'
 export default {
   name: 'Portray',
   data() {
@@ -641,12 +641,12 @@ export default {
           lines.push({
             source: item.code,
             target: item.pcode,
-            // label:{
-              // show:true,
-              // formatter:function(){
-              //   return 1111
-              // }
-            // }
+            label:{
+              show:true,
+              formatter:function(){
+                return 1111
+              }
+            }
           })
           if (item.children != null) {
             forEachDeepNode(item.children)
