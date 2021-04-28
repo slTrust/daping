@@ -12,48 +12,19 @@
         </div>
         <div class="content">
           <div class="box1">
-            <div class="wave-container">
-              <div class="wave"></div>
+            <div ref="chartWave"
+                 style="height: 100%;width:100%;">
             </div>
             <div class="texts">
+              <span v-for="(item,idx) in currentTxtsArr"
+                    :class="`txt txt${idx%count+1}`"
+                    :key=item>
+                {{item}}
+              </span>
               <!-- <span class="txt txt1">企业标签</span>
               <span class="txt txt2">产品标签</span>
               <span class="txt txt3">政策标签</span>
               <span class="txt txt4">产业链标签</span> -->
-              <span class="txt">高新技术企业</span>  
-              <span class="txt">瞪羚企业</span>  
-              <span class="txt">小微企业</span>  
-              <span class="txt">国有企业</span> 
-              <span class="txt">有限责任公司</span>  
-              <span class="txt">股份有限公司</span>  
-              <span class="txt">私营企业</span>  
-              <span class="txt">联营企业</span> 
-              <span class="txt">独资企业</span>  
-              <span class="txt">科技型中小企业</span>  
-              <span class="txt">雏鹰企业</span>  
-              <span class="txt">独角兽企业</span> 
-              <span class="txt">外商投资企业</span>  
-              <span class="txt">人才政策</span>  
-              <span class="txt">财税政策</span>  
-              <span class="txt">科技政策</span>    
-              <span class="txt">人工智能</span>  
-              <span class="txt">大数据</span>            
-              <span class="txt">集成电路</span>       
-              <span class="txt">物理网</span>       
-              <span class="txt">网络安全</span>       
-              <span class="txt">互联网+</span>       
-              <span class="txt">云计算</span>       
-              <span class="txt">电子商务</span>       
-              <span class="txt">智能终端</span>       
-              <span class="txt">智能机器人</span>       
-              <span class="txt">新能源汽车</span>       
-              <span class="txt">互动娱乐</span>       
-              <span class="txt">影视动漫</span>  
-              <span class="txt">出版传媒</span>       
-              <span class="txt">文化演艺</span>     
-              <span class="txt">民办教育</span>       
-              <span class="txt">课外培训</span>                         
-              
             </div>
           </div>
           <div class="box2">
@@ -83,18 +54,6 @@
             <div class="inner"></div>
           </div>
           <div class="box3">
-            <!--
-政策兑现、精准匹配、资本市场培育、
-企业服务门户、政策搜索、产业晴雨表、
-产业标签统计分析、区域产业要素分析与研判、
-区域产业政策及要素比对、区域经济驾驶舱、
-经济标签统计分析、自定义产业财税分析、
-
-区域产业要素与招商标的对比分析、产业链招商、
-以商招商、企业关系图谱、企业业务图谱、
-企业实力指数、企业风险分析、信用活力报告、
-生命周期服务
--->
             <div class="r3">
               <div class="item orange">政策兑现</div>
               <div class="item">精准匹配</div>
@@ -153,14 +112,209 @@
 </template>
 
 <script>
+const echarts = require('echarts')
+// import 'echarts-liquidfill'
+import '../../assets/echarts.liquidiff.min.js'
 export default {
   name: 'Archiecture',
   data() {
-    return {}
+    return {
+      timer: null,
+      currentIndex: 0,
+      currentTxtsArr: [],
+      count: 4,
+      txts: [
+        '高新技术企业',
+        '瞪羚企业',
+        '小微企业',
+        '国有企业',
+        '有限责任公司',
+        '股份有限公司',
+        '私营企业',
+        '联营企业',
+        '独资企业',
+        '科技型中小企业',
+        '雏鹰企业',
+        '独角兽企业',
+        '外商投资企业',
+        '人才政策',
+        '财税政策',
+        '科技政策',
+        '人工智能',
+        '大数据',
+        '集成电路',
+        '物理网',
+        '网络安全',
+        '互联网+',
+        '云计算',
+        '电子商务',
+        '智能终端',
+        '智能机器人',
+        '新能源汽车',
+        '互动娱乐',
+        '影视动漫',
+        '出版传媒',
+        '文化演艺',
+        '民办教育',
+        '课外培训',
+      ],
+    }
   },
   created() {},
-  mounted() {},
-  methods: {},
+  mounted() {
+    this.initChart()
+    if (this.timer) {
+      clearInterval(this.timer)
+    } else {
+      this.timer = setInterval(this.loop, 4000)
+    }
+  },
+  methods: {
+    loop() {
+      let count = 4
+      if (this.currentIndex >= this.txts.length) {
+        this.currentIndex = 0
+      }
+      let len = this.txts.length
+      let start = this.currentIndex
+      let currentArr = []
+      for (let i = start; i < start + 5; i++) {
+        let idx = i
+        if (idx >= len) {
+          idx = idx % (len - 1)
+        }
+        currentArr.push(this.txts[idx])
+      }
+      this.currentTxtsArr = currentArr
+      this.currentIndex += count
+    },
+    initChart() {
+      let myChart = echarts.init(this.$refs.chartWave)
+      var value = 0.75
+      var data = [value, value, value]
+      let option = {
+        // backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [
+        //   {
+        //     offset: 0,
+        //     color: '#431ab8',
+        //   },
+        //   {
+        //     offset: 1,
+        //     color: '#471bba',
+        //   },
+        // ]),
+        title: {
+          show: false,
+          text: (value * 100).toFixed(0) + '{a|%}',
+          textStyle: {
+            fontSize: 50,
+            fontFamily: 'Microsoft Yahei',
+            fontWeight: 'normal',
+            color: '#bcb8fb',
+            rich: {
+              a: {
+                fontSize: 28,
+              },
+            },
+          },
+          x: 'center',
+          y: '35%',
+        },
+
+        series: [
+          {
+            type: 'liquidFill',
+            radius: '95%',
+            center: ['50%', '50%'],
+            //  shape: 'roundRect',
+            data: data,
+            backgroundStyle: {
+              color: {
+                type: 'linear',
+                x: 1,
+                y: 0,
+                x2: 0.5,
+                y2: 1,
+                colorStops: [
+                  {
+                    offset: 1,
+                    color: 'rgba(68, 145, 253, 0)',
+                  },
+                  {
+                    offset: 0.5,
+                    color: 'rgba(68, 145, 253, .25)',
+                  },
+                  {
+                    offset: 0,
+                    color: 'rgba(68, 145, 253, 1)',
+                  },
+                ],
+                globalCoord: false,
+              },
+            },
+            outline: {
+              borderDistance: 0,
+              itemStyle: {
+                borderWidth: 20,
+                borderColor: {
+                  type: 'linear',
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: 'rgba(69, 73, 240, 0)',
+                    },
+                    {
+                      offset: 0.5,
+                      color: 'rgba(69, 73, 240, .25)',
+                    },
+                    {
+                      offset: 1,
+                      color: 'rgba(69, 73, 240, 1)',
+                    },
+                  ],
+                  globalCoord: false,
+                },
+                shadowBlur: 10,
+                shadowColor: '#000',
+              },
+            },
+            color: {
+              type: 'linear',
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                {
+                  offset: 1,
+                  color: 'rgba(58, 71, 212, 0)',
+                },
+                {
+                  offset: 0.5,
+                  color: 'rgba(31, 222, 225, .2)',
+                },
+                {
+                  offset: 0,
+                  color: 'rgba(31, 222, 225, 1)',
+                },
+              ],
+              globalCoord: false,
+            },
+            label: {
+              normal: {
+                formatter: '',
+              },
+            },
+          },
+        ],
+      }
+      option && myChart.setOption(option)
+    },
+  },
 }
 </script>
 <style scoped lang="less">
@@ -203,18 +357,9 @@ export default {
       .box1 {
         width: 580px;
         height: 540px;
-        border: 20px solid #00439f;
-        border-bottom-left-radius: 40%;
-        border-bottom-right-radius: 40%;
-        background: linear-gradient(180deg, rgba(0, 122, 214, 1) 0%, rgba(0, 29, 84, 1) 100%);
+        border: 20px solid transparent;
         overflow: hidden;
         position: relative;
-        .texts {
-          position: absolute;
-          bottom: 0;
-          width: 100%;
-          height: 200px;
-        }
       }
       .box2 {
         z-index: 2;
@@ -374,52 +519,6 @@ export default {
   }
 }
 
-.wave-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.wave {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(0, 109, 196, 0) 0%, rgba(0, 109, 196, 1) 100%);
-}
-.wave::before,
-.wave::after {
-  content: '';
-  position: absolute;
-  width: 1000px;
-  height: 1000px;
-  top: 0;
-  left: 50%;
-  background: rgb(0, 109, 196);
-  opacity: 0.4;
-  border-radius: 45%;
-  transform: translate(-50%, -70%) rotate(0);
-  animation: rotate 6s linear infinite;
-  z-index: 10;
-}
-.wave::after {
-  border-radius: 47%;
-  background: rgb(0, 109, 196);
-  opacity: 0.8;
-  transform: translate(-50%, -70%) rotate(0);
-  animation: rotate 10s linear -5s infinite;
-  z-index: 20;
-}
-
-@keyframes rotate {
-  50% {
-    transform: translate(-50%, -73%) rotate(180deg);
-  }
-  100% {
-    transform: translate(-50%, -70%) rotate(360deg);
-  }
-}
-
 @keyframes animation_opacity {
   0% {
     opacity: 1;
@@ -433,49 +532,81 @@ export default {
 }
 
 // 标签
-@keyframes tag_move {
+@keyframes tag_move1 {
   0% {
-    transform: translate(50px, 50px);
-  }
-  25% {
-    transform: translate(150px, 30px);
-  }
-  50% {
-    transform: translate(100px, 120px);
-  }
-  75% {
-    transform: translate(70px, 70px);
+    transform: translate(0px, 250px);
   }
   100% {
-    transfrom: translate(50px, 16px);
+    transfrom: translate(0px, 20px);
+    opacity: 0.1;
+  }
+}
+@keyframes tag_move2 {
+  0% {
+    transform: translate(30px, 200px);
+  }
+  100% {
+    transfrom: translate(30px, 60px);
+    opacity: 0.1;
+  }
+}
+
+@keyframes tag_move3 {
+  0% {
+    transform: translate(120px, 320px);
+  }
+  100% {
+    transfrom: translate(120px, 60px);
+    opacity: 0.1;
+  }
+}
+@keyframes tag_move4 {
+  0% {
+    opacity: 1;
+    transform: translate(260px, 250px);
+  }
+  100% {
+    transfrom: translate(260px, 60px);
+    opacity: 0.1;
   }
 }
 .texts {
-  width: 500px;
-  height: 200px;
-  margin: 20px auto;
+  display: block;
+  position: absolute;
+  right: 100px;
+  left: 100px;
+  top: 100px;
+  bottom: 100px;
+  // background: pink;
 }
 .texts .txt {
+  z-index: 10;
+  position: absolute;
   display: inline-block;
   height: 20px;
   border-radius: 100%;
   font-size: 24px;
   font-weight: bold;
+  opacity: 0.8;
 }
 .txt1 {
-  animation: tag_move 4s linear 0s infinite;
+  transform: translate(0, 20px);
+  animation: tag_move1 4s linear 250ms infinite;
   color: #3eacff;
 }
 .txt2 {
-  animation: tag_move 4s ease 2s infinite;
+  transform: translate(30px, 60px);
+  animation: tag_move2 4s linear 0ms infinite;
   color: #ffa300;
 }
 .txt3 {
-  animation: tag_move 4s linear 0.5s infinite;
-  color: #23e9f4;
+  transform: translate(120px, 90px);
+  animation: tag_move3 4s linear 0ms infinite;
+  color: #00be19;
 }
 .txt4 {
-  animation: tag_move 4s linear 1.5s infinite;
-  color: #00be19;
+  transform: translate(260px, 60px);
+  animation: tag_move4 4s linear 0ms infinite;
+  color: #23e9f4;
 }
 </style>

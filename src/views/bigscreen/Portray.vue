@@ -5,14 +5,17 @@
     </div>
     <main>
       <div class="ht"></div>
-      <div class="lside" v-if="baseInfo != null">
-        <div class="recommendPNG" v-show="baseInfo.recommendFlag == 1"></div>
+      <div class="lside"
+           v-if="baseInfo != null">
+        <div class="recommendPNG"
+             v-show="baseInfo.recommendFlag == 1"></div>
         <div class="recommendOffice">推荐办公区：{{ baseInfo.recommendOffice }}</div>
         <div class="content">
           <div class="l-info">
             <div class="l-inner">
               <div class="logo">
-                <img :src="baseInfo.logoUrl" alt="" />
+                <img :src="baseInfo.logoUrl"
+                     alt="" />
               </div>
               <div class="name">{{ baseInfo.name }}</div>
               <ul>
@@ -44,13 +47,16 @@
             </div>
           </div>
           <div class="r-charts">
-            <div ref="chartRadar" class="chart chart1"></div>
-            <div ref="chartColumn" class="chart chart2"></div>
+            <div ref="chartRadar"
+                 class="chart chart1"></div>
+            <div ref="chartColumn"
+                 class="chart chart2"></div>
           </div>
         </div>
       </div>
       <div class="rside">
-        <div ref="echartId" class="my-echarts"></div>
+        <div ref="echartId"
+             class="my-echarts"></div>
       </div>
     </main>
   </div>
@@ -392,8 +398,7 @@ let mock_data = {
               descr: null,
               direction: 1,
               children: null,
-            }
-           
+            },
           ],
         },
       ],
@@ -541,7 +546,7 @@ export default {
   },
   methods: {
     getData() {
-      const execData = (res)=>{
+      const execData = (res) => {
         let { baseInfo, atlas, riskDetails, strengthDetails } = res.result
         this.baseInfo = baseInfo != null ? baseInfo : {}
         this.atlas = atlas != null ? atlas : {}
@@ -558,21 +563,21 @@ export default {
         }
       })
       execData(mock_data)
-     
-       setInterval(()=>{
-        mock_data.result.baseInfo.name = parseInt(Math.random()*100)
+
+      setInterval(() => {
+        mock_data.result.baseInfo.name = parseInt(Math.random() * 100)
         console.log(mock_data.result.baseInfo.name)
-        mock_data.result.strengthDetails[0].cnt = parseInt(Math.random()*100);
-        mock_data.result.strengthDetails[1].cnt = parseInt(Math.random()*100);
-        mock_data.result.strengthDetails[2].cnt = parseInt(Math.random()*100);
-        mock_data.result.strengthDetails[3].cnt = parseInt(Math.random()*100);
-        mock_data.result.riskDetails[0].cnt = parseInt(Math.random()*100);
-        mock_data.result.riskDetails[1].cnt = parseInt(Math.random()*100);
-        mock_data.result.riskDetails[2].cnt = parseInt(Math.random()*100);
-        mock_data.result.riskDetails[3].cnt = parseInt(Math.random()*100);
-        mock_data.result.atlas.name =  parseInt(Math.random()*10000)
+        mock_data.result.strengthDetails[0].cnt = parseInt(Math.random() * 100)
+        mock_data.result.strengthDetails[1].cnt = parseInt(Math.random() * 100)
+        mock_data.result.strengthDetails[2].cnt = parseInt(Math.random() * 100)
+        mock_data.result.strengthDetails[3].cnt = parseInt(Math.random() * 100)
+        mock_data.result.riskDetails[0].cnt = parseInt(Math.random() * 100)
+        mock_data.result.riskDetails[1].cnt = parseInt(Math.random() * 100)
+        mock_data.result.riskDetails[2].cnt = parseInt(Math.random() * 100)
+        mock_data.result.riskDetails[3].cnt = parseInt(Math.random() * 100)
+        mock_data.result.atlas.name = parseInt(Math.random() * 10000)
         execData(mock_data)
-      },2000) 
+      }, 2000)
     },
     initChart() {
       let { indicator, data: radarData } = this.setRadarData()
@@ -641,12 +646,12 @@ export default {
           lines.push({
             source: item.code,
             target: item.pcode,
-            label:{
-              show:true,
-              formatter:function(){
-                return 1111
-              }
-            }
+            label: {
+              show: true,
+              formatter: function () {
+                return item.descr || ''
+              },
+            },
           })
           if (item.children != null) {
             forEachDeepNode(item.children)
@@ -780,7 +785,7 @@ export default {
       findUp(data.name, allNode)
       // 逐级向上查找
       // console.log('-------------逐级向上查找')
-      let levelRelationNames = levelRelation.map(code=>{
+      let levelRelationNames = levelRelation.map((code) => {
         let item = allNode.find((e) => e.name === code)
         return item._name
       })
@@ -1022,7 +1027,7 @@ export default {
     },
     /*websocket集成*/
     websocketOnmessage: function (e) {
-      console.log(new Date().toLocaleTimeString() + "-----接收消息-------",e.data);
+      console.log(new Date().toLocaleTimeString() + '-----接收消息-------', e.data)
       var data = eval('(' + e.data + ')') //解析对象
       if (data.type == 'bigscreen') {
         if (data.data.func == 'main_to_portray') {
