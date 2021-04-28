@@ -69,7 +69,6 @@
             <div class="r3">
               <div class="item orange">企业服务门户</div>
               <div class="item orange">生命周期服务</div>
-              <div class="item">政策搜索</div>
               <div class="item">产业晴雨表</div>
             </div>
             <div class="r3">
@@ -99,7 +98,7 @@
               <div class="item orange item_new">信用活力报告</div>
             </div>
             <div class="r3">
-              <div class="item item_new">信用活力报告</div>
+              <div class="item">政策搜索</div>
               <div class="item">生命周期服务</div>
             </div>
           </div>
@@ -264,7 +263,7 @@ export default {
             color: #fff;
             font-size: 18px;
             line-height: 28px;
-            padding: 12px;
+            padding: 12px 20px;
           }
           .item_new {
             position: relative;

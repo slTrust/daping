@@ -9,7 +9,7 @@
            v-if="baseInfo!=null">
         <div class="recommendPNG"
              v-show="baseInfo.recommendFlag==1"></div>
-        <div class="recommendOffice">推荐办公区：生态城园区</div>
+        <div class="recommendOffice">推荐办公区：{{baseInfo.recommendOffice}}</div>
         <div class="content">
           <div class="l-info">
             <div class="l-inner">
@@ -65,301 +65,7 @@
 <script>
 // 数据接口url
 // http://121.36.9.239:9999/bigscreen/report/queryEnterprisePortray?enterpriseId=91310000792783700P
-let mock_data = {
-  success: true,
-  message: '操作成功！',
-  code: 200,
-  result: {
-    baseInfo: {
-      id: 1,
-      creditNo: '91310000792783700P',
-      name: '上海爱数信息技术股份有限公司',
-      registCapi: '18122.5935万元人民币',
-      industry: '专业技术服务业',
-      financingDt: '2020年6月',
-      financingRound: 'D轮',
-      strength: 90,
-      risk: 10,
-      logoUrl: 'https://image.qcc.com/logo/2d2b06eba4d1f32c25e25b08e3edf53e.jpg?x-oss-process=style/logo_200',
-      scaleMin: 1500,
-      scaleMax: 2000,
-      tel: '021-54222601',
-      econKind: '私营企业',
-    },
-    atlas: {
-      name: '上海爱数信息技术股份有限公司',
-      pname: '上海爱数信息技术股份有限公司',
-      descr: null,
-      direction: 0,
-      children: [
-        {
-          name: '分支机构',
-          pname: '上海爱数信息技术股份有限公司',
-          descr: null,
-          direction: 0,
-          children: [
-            {
-              name: '爱数智城',
-              pname: '分支机构',
-              descr: null,
-              direction: 0,
-              children: null,
-            },
-            {
-              name: '长沙分公司',
-              pname: '分支机构',
-              descr: null,
-              direction: 0,
-              children: null,
-            },
-          ],
-        },
-        {
-          name: '投资公司',
-          pname: '上海爱数信息技术股份有限公司',
-          descr: null,
-          direction: 0,
-          children: null,
-        },
-        {
-          name: '控股子公司',
-          pname: '上海爱数信息技术股份有限公司',
-          descr: null,
-          direction: 0,
-          children: null,
-        },
-        {
-          name: '竞争企业',
-          pname: '上海爱数信息技术股份有限公司',
-          descr: null,
-          direction: 0,
-          children: [
-            {
-              name: 'AnyBackup',
-              pname: '竞争企业',
-              descr: null,
-              direction: 0,
-              children: [
-                {
-                  name: '鼎甲',
-                  pname: 'AnyBackup',
-                  descr: '竞品：测试',
-                  direction: 0,
-                  children: null,
-                },
-              ],
-            },
-            {
-              name: 'AnyData',
-              pname: '竞争企业',
-              descr: null,
-              direction: 0,
-              children: null,
-            },
-            {
-              name: 'AnyRobot',
-              pname: '竞争企业',
-              descr: null,
-              direction: 0,
-              children: [
-                {
-                  name: '日志易',
-                  pname: 'AnyRobot',
-                  descr: '竞品：测试',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '听云',
-                  pname: 'AnyRobot',
-                  descr: '竞品：听云',
-                  direction: 0,
-                  children: null,
-                },
-              ],
-            },
-            {
-              name: 'AnyShare',
-              pname: '竞争企业',
-              descr: null,
-              direction: 0,
-              children: null,
-            },
-          ],
-        },
-        {
-          name: '上下游企业',
-          pname: '上海爱数信息技术股份有限公司',
-          descr: null,
-          direction: 0,
-          children: [
-            {
-              name: 'Oracle',
-              pname: '上下游企业',
-              descr: '上游',
-              direction: 0,
-              children: null,
-            },
-            {
-              name: '太极',
-              pname: '上下游企业',
-              descr: '下游',
-              direction: 0,
-              children: null,
-            },
-          ],
-        },
-        {
-          name: '参股投资企业',
-          pname: '上海爱数信息技术股份有限公司',
-          descr: null,
-          direction: 1,
-          children: null,
-        },
-        {
-          name: '控股企业',
-          pname: '上海爱数信息技术股份有限公司',
-          descr: null,
-          direction: 1,
-          children: null,
-        },
-        {
-          name: '主要股东',
-          pname: '上海爱数信息技术股份有限公司',
-          descr: null,
-          direction: 1,
-          children: [
-            {
-              name: '贺鸿富',
-              pname: '主要股东',
-              descr: null,
-              direction: 1,
-              children: null,
-            },
-            {
-              name: '邓平',
-              pname: '主要股东',
-              descr: null,
-              direction: 1,
-              children: null,
-            },
-            {
-              name: '李基亮',
-              pname: '主要股东',
-              descr: null,
-              direction: 1,
-              children: null,
-            },
-          ],
-        },
-      ],
-    },
-    strengthDetails: [
-      {
-        id: 1,
-        creditNo: '91310000792783700P',
-        type: '00',
-        typeDesc: '注册资本',
-        cnt: 90,
-      },
-      {
-        id: 2,
-        creditNo: '91310000792783700P',
-        type: '01',
-        typeDesc: '营收实力',
-        cnt: 90,
-      },
-      {
-        id: 3,
-        creditNo: '91310000792783700P',
-        type: '02',
-        typeDesc: '税收贡献',
-        cnt: 90,
-      },
-      {
-        id: 4,
-        creditNo: '91310000792783700P',
-        type: '03',
-        typeDesc: '生存能力',
-        cnt: 90,
-      },
-      {
-        id: 5,
-        creditNo: '91310000792783700P',
-        type: '04',
-        typeDesc: '资本市场吸引力',
-        cnt: 90,
-      },
-      {
-        id: 6,
-        creditNo: '91310000792783700P',
-        type: '05',
-        typeDesc: '人才吸引力',
-        cnt: 90,
-      },
-      {
-        id: 7,
-        creditNo: '91310000792783700P',
-        type: '06',
-        typeDesc: '创新投入产出能力',
-        cnt: 90,
-      },
-      {
-        id: 8,
-        creditNo: '91310000792783700P',
-        type: '07',
-        typeDesc: '创新实力',
-        cnt: 90,
-      },
-      {
-        id: 9,
-        creditNo: '91310000792783700P',
-        type: '08',
-        typeDesc: '企业品牌活跃度',
-        cnt: 90,
-      },
-    ],
-    riskDetails: [
-      {
-        id: 1,
-        creditNo: '91310000792783700P',
-        type: '00',
-        typeDesc: '企业风险风险',
-        cnt: 10,
-      },
-      {
-        id: 2,
-        creditNo: '91310000792783700P',
-        type: '01',
-        typeDesc: '经营风险',
-        cnt: 10,
-      },
-      {
-        id: 3,
-        creditNo: '91310000792783700P',
-        type: '02',
-        typeDesc: '司法风险',
-        cnt: 10,
-      },
-      {
-        id: 4,
-        creditNo: '91310000792783700P',
-        type: '03',
-        typeDesc: '监管风险',
-        cnt: 10,
-      },
-      {
-        id: 5,
-        creditNo: '91310000792783700P',
-        type: '04',
-        typeDesc: '工商风险',
-        cnt: 10,
-      },
-    ],
-  },
-  timestamp: 1619519632959,
-}
-import { getEnterprise, getPortray } from '@/api/manage'
+import { getPortray } from '@/api/manage'
 const echarts = require('echarts')
 export default {
   name: 'Service',
@@ -372,28 +78,15 @@ export default {
       strengthDetails: null,
       dataArr: [],
       dots: [
-        // {name: '企业',symbolSize: 60,category: 0},{name: '政策',symbolSize: 60,category: 1},
-        // {name: '产业',symbolSize: 60,category: 2},{name: '商标种类',symbolSize: 40,category: 0},
-        // {name: '发布单位',symbolSize: 40,category: 1},{name: '上游产业',symbolSize: 40,category: 2},
-        // {name: '测试1',symbolSize: 40,category: 2},{name: '测试2',symbolSize: 40,category: 2},
-        // {name: '测试3',symbolSize: 40,category: 2},{name: '测试4',symbolSize: 40,category: 2},
-        // {name: '测试5',symbolSize: 40,category: 2},{name: '测试6',symbolSize: 40,category: 2},
-        // {name: '测试7',symbolSize: 40,category: 2},{name: '测试8',symbolSize: 40,category: 2}
       ],
       lines: [
-        // {source: '企业',target: '政策',name: ''}, {source: '政策',target: '产业',name: ''},
-        // {source: '企业',target: '商标种类',name: ''},{source: '政策',target: '发布单位',name: ''},
-        // {source: '产业',target: '上游产业',name: ''},{source: '上游产业',target: '测试1',name: ''},
-        // {source: '测试1',target: '测试2',name: ''},{source: '产业',target: '测试3',name: ''},
-        // {source: '产业',target: '测试4',name: ''},{source: '产业',target: '测试5',name: ''},
-        // {source: '产业',target: '测试6',name: ''},{source: '产业',target: '测试7',name: ''},
-        // {source: '产业',target: '测试8',name: ''}
       ],
     }
   },
   created() {},
   mounted() {
     this.enterpriseId = this.$route.params.id || '91310000792783700P'
+    // this.enterpriseId = '91120116MA05J2D11M'
     this.enterpriseId = '91310000792783700P'
     this.getData()
   },
@@ -402,26 +95,14 @@ export default {
       getPortray(this.enterpriseId).then((res) => {
         if (res.success) {
           let { baseInfo, atlas, riskDetails, strengthDetails } = res.result
-          console.log(res.result)
           this.baseInfo = baseInfo
           this.atlas = atlas
           this.riskDetails = riskDetails
           this.strengthDetails = strengthDetails
-        } else {
-          console.log('数据获取失败！！！采用mock数据')
-          let { baseInfo, atlas, riskDetails, strengthDetails } = mock_data.result
-          console.log(baseInfo)
-          console.log(atlas)
-          console.log(riskDetails)
-          this.baseInfo = baseInfo
-          this.atlas = atlas
-          this.riskDetails = riskDetails
-          this.strengthDetails = strengthDetails
+          this.$nextTick(() => {
+            this.initChart()
+          })
         }
-        this.baseInfo.recommendFlag = 1 // 推荐标志
-        this.$nextTick(() => {
-          this.initChart()
-        })
       })
     },
     initChart() {
@@ -429,12 +110,41 @@ export default {
       this.initRadar(indicator, radarData)
       let { c_category, data } = this.setColumnData()
       this.initColumn(c_category, data)
-      // let {dot,links} =
-      this.setGraphData()
+
+      let {dots, lines} = this.setGraphData()
+
+      this.setGraph(dots, lines)
+
+    },
+    setGraphCategoryColor(){
+      let mapCategory = {}
+      let mapColor = {
+        'root':'rgb(14,67,255)', // 首节点
+        '主要股东':'rgb(255,51,87)', // red
+
+        '控股子公司':'rgb(0,105,255)',
+        '投资公司':'rgb(0,105,255)',
+        '分支机构':'rgb(0,105,255)',
+
+        '上下游企业':'rgb(0,209,64)', // green
+
+        '竞争企业':'rgb(255,147,42)',
+
+        '控股企业':'rgb(0,139,209)',
+        '参股投资企业':'rgb(0,139,209)'
+      }
+      let rootNode = JSON.parse(JSON.stringify(this.atlas))
+      mapCategory[rootNode.name] = mapColor['root'];
+      let currentNode = this.atlas
+      currentNode.children.forEach((e) => {
+        let color = mapColor[e.name] ||'black';
+        mapCategory[e.name] = color;
+      })
+      console.log(mapCategory)
+      return mapCategory;
     },
     setGraphData() {
       let mapCategory = {}
-      let category = []
       let dots = []
       let lines = []
 
@@ -445,29 +155,41 @@ export default {
       currentNode.children.forEach((e) => {
         mapCategory[e.name] = 1
       })
+      let generatorId = ()=>Math.abs(parseInt(Math.random()*1000000))
+      let rid = generatorId();
       dots.push({
+        // id:rid,
         name: rootNode.name,
         direction: rootNode.direction,
+        target_name:rootNode.name,
         pname: rootNode.pname,
         descr: rootNode.descr,
-        id: rootNode.name,
         symbolSize: 120,
       })
       function forEachDeepNode(node) {
         node.forEach((item) => {
-          console.log(item)
+          item.target_name = item.pname + item.name
+          item.id = generatorId();
           dots.push({
+            // id:item.id,
             name: item.name,
             direction: item.direction,
+            target_name:item.target_name,
             pname: item.pname,
             descr: item.descr,
-            id: item.name,
             symbolSize: 70,
           })
+          // let pnode = dots.find(e=>{
+          //   return e.name == item.pname
+          // })
+          // console.log('------find  p='+ item.pname)
+          // console.log(JSON.stringify(pnode))
+          // console.log('------find  p')
           lines.push({
             name: '',
             source: item.name,
-            target: item.pname,
+            target:item.pname
+            // target: pnode?pnode.id:null
           })
           if (item.children != null) {
             forEachDeepNode(item.children)
@@ -475,39 +197,29 @@ export default {
         })
       }
       forEachDeepNode(currentNode.children)
-      console.log(dots)
-      console.log(lines)
-      this.setGraph(dots, lines)
-    },
-    getList(arr, type, pCode) {
-      for (let i = 0; i < arr.length; i++) {
-        let lineObj = {}
-        let obj = {
-          id: arr[i].code,
-          name: arr[i].name,
-        }
-        obj.symbolSize = 40
-        obj.category = type
-        this.dots.push(obj)
-        lineObj.source = pCode
-        lineObj.target = arr[i].code
-        lineObj.name = ''
-        this.lines.push(lineObj)
-        if (arr[i].children) {
-          this.getList(arr[i].children, type, arr[i].code)
-        }
+      console.log('------------------------------------')
+      dots.forEach(e=>{
+        console.log(`${e.name}-${e.pname}-id=${e.id}`)
+      })
+      lines.forEach(e=>{
+        console.log(JSON.stringify(e))
+      })
+      return {
+        dots,
+        lines
       }
     },
     setGraph(dot, lines) {
-      let categories = []
-      console.log(categories)
+      let _this = this;
       let option = {
-        // legend: {
-        //   data: categories.map((item) => item.name),
-        // },
-        color: ['#e28400', '#23e9f4', '#00a1fc'],
         title: {
-          text: '',
+          text: '企业知识图谱',
+          left: '10',
+          top: 10,
+          textStyle: {
+            color: '#fff',
+            fontSize: 32,
+          },
         },
         tooltip: {
           show: false,
@@ -562,7 +274,6 @@ export default {
                     newParamsName = params
                   }
                   //将最终的字符串返回
-                  console.log(newParamsName)
                   return newParamsName
                 },
               },
@@ -586,12 +297,49 @@ export default {
             },
             data: dot,
             links: lines,
+            itemStyle:{
+              normal:{
+                color:function (params){
+                  // return 'red'
+                  return _this.findInCategoryColor(params,dot)
+                }
+              }
+            },
             // categories: categories,
           },
         ],
       }
       let myChart = echarts.init(this.$refs.echartId)
       myChart.setOption(option)
+    },
+    findInCategoryColor(params,allNode) {
+      let map = this.setGraphCategoryColor();
+      let data = params.data;
+      let name= data.name;
+      let res = 'black';
+      let levelRelation = [];
+      function findUp(start,allNode){
+        allNode.forEach(item=>{
+          if(item.name===start){
+            levelRelation.push(item.name);
+            if(item.pname && levelRelation.includes(item.pname) ===false){
+              findUp(item.pname,allNode)
+            }
+          }
+        })
+      }
+      findUp(name,allNode)
+      console.log('-------------levelRelation')
+      console.log(levelRelation)
+      // 逐级向上查找
+     for(let i=0;i<levelRelation.length;i++){
+       let item = levelRelation[i];
+        if(item in map){
+          res = map[item]
+          break;
+        }
+      }
+      return res;
     },
     setRadarData() {
       let indicator = []
@@ -608,7 +356,6 @@ export default {
       }
     },
     initRadar(indicator, data) {
-      console.log(data, indicator)
       let myChart = echarts.init(this.$refs.chartRadar, null, { renderer: 'svg' })
       var option = {
         backgroundColor: 'transparent',
@@ -680,6 +427,7 @@ export default {
       }
     },
     initColumn(xData, yData) {
+      yData = [90,80,70,60,50]
       let myChart = echarts.init(this.$refs.chartColumn)
       var option
       option = {
@@ -701,10 +449,11 @@ export default {
           axisLabel: {
             show: true,
             interval: 0,
-            rotate: 45,
+            rotate: 15,
+            margin:5,
             textStyle: {
               color: '#c3dbff', //更改坐标轴文字颜色
-              fontSize: 14, //更改坐标轴文字大小
+              fontSize: 12, //更改坐标轴文字大小
             },
           },
 
@@ -732,17 +481,65 @@ export default {
             alignWithLabel: false,
           },
         },
+        grid: {
+          left: '10%',
+          right: '4%',
+          bottom: '3%',
+          top:'20%',
+          containLabel: true
+        },
         series: [
           {
+            // 分隔:蓝色线
+            type: "pictorialBar",
+            symbolRepeat: true,
+            symbolMargin: 3,
+            symbol: "rect",
+            symbolClip: true,
+            symbolSize: [30, 3],
+            symbolPosition: "start",
+            symbolOffset: [0, 0],
+            symbolBoundingData: 100,
             data: yData,
-            type: 'bar',
-            barWidth: 30,
-            showBackground: true,
             itemStyle: {
-              // 图形的形状
-              color: 'rgb(137,147,200)',
+              color: 'rgb(0,130,255)',
             },
+            z: 3
           },
+          {
+            // 分隔:蓝色线
+            type: "pictorialBar",
+            symbolRepeat: true,
+            symbolMargin: 3,
+            symbol: "rect",
+            symbolClip: true,
+            symbolSize: [30, 3],
+            symbolPosition: "start",
+            symbolOffset: [0, 0],
+            symbolBoundingData: 100,
+            data: yData,
+            itemStyle: {
+              // color: 'red'
+            },
+            z: 2
+          },
+          {
+            // 分隔 背景
+            type: "pictorialBar",
+            symbolRepeat: true,
+            symbolMargin: 3,
+            symbol: "rect",
+            symbolClip: true,
+            symbolSize: [30, 3],
+            symbolPosition: "start",
+            symbolOffset: [0, 0],
+            symbolBoundingData: 100,
+            data: [100,100,100,100,100],
+            itemStyle: {
+              color: 'rgb(0,28,73)',
+            },
+            z: 1
+          }
         ],
       }
 
