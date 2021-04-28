@@ -49,7 +49,7 @@
             <div class="inner"></div>
           </div>
           <div class="box3">
-<!--
+            <!--
 政策兑现、精准匹配、资本市场培育、
 企业服务门户、政策搜索、产业晴雨表、
 产业标签统计分析、区域产业要素分析与研判、
@@ -263,8 +263,8 @@ export default {
             border-radius: 4px;
             color: #fff;
             font-size: 18px;
-            line-height: 20px;
-            padding:10px;
+            line-height: 28px;
+            padding: 12px;
           }
           .item_new {
             position: relative;
@@ -438,7 +438,7 @@ export default {
 }
 .txt2 {
   animation: tag_move 4s ease 2s infinite;
-  color: #FFA300;
+  color: #ffa300;
 }
 .txt3 {
   animation: tag_move 4s linear 0.5s infinite;
