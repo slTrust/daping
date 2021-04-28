@@ -5,70 +5,512 @@
     </div>
     <main>
       <div class="ht"></div>
-      <div class="lside"
-           v-if="baseInfo!=null">
-        <div class="recommendPNG"
-             v-show="baseInfo.recommendFlag==1"></div>
-        <div class="recommendOffice">推荐办公区：{{baseInfo.recommendOffice}}</div>
+      <div class="lside" v-if="baseInfo != null">
+        <div class="recommendPNG" v-show="baseInfo.recommendFlag == 1"></div>
+        <div class="recommendOffice">推荐办公区：{{ baseInfo.recommendOffice }}</div>
         <div class="content">
           <div class="l-info">
             <div class="l-inner">
               <div class="logo">
-                <img :src="baseInfo.logoUrl"
-                     alt="">
+                <img :src="baseInfo.logoUrl" alt="" />
               </div>
-              <div class="name">{{baseInfo.name}}</div>
+              <div class="name">{{ baseInfo.name }}</div>
               <ul>
                 <li>
                   <div class="label">企业规模:</div>
-                  <div class="value">{{baseInfo.scaleMin}}-{{baseInfo.scaleMax}}</div>
+                  <div class="value">{{ baseInfo.scaleMin }}-{{ baseInfo.scaleMax }}</div>
                 </li>
                 <li>
                   <div class="label">企业性质:</div>
-                  <div class="value">{{baseInfo.econKind}}</div>
+                  <div class="value">{{ baseInfo.econKind }}</div>
                 </li>
                 <li>
                   <div class="label">融资情况:</div>
-                  <div class="value">{{baseInfo.financingDt}} {{baseInfo.financingRound}}</div>
+                  <div class="value">{{ baseInfo.financingDt }} {{ baseInfo.financingRound }}</div>
                 </li>
                 <li>
                   <div class="label">联系电话:</div>
-                  <div class="value">{{baseInfo.tel}}</div>
+                  <div class="value">{{ baseInfo.tel }}</div>
                 </li>
               </ul>
               <div class="score">
                 <div class="label">企业实力指数</div>
-                <div class="value">{{baseInfo.strength}}</div>
+                <div class="value">{{ baseInfo.strength }}</div>
               </div>
               <div class="score">
                 <div class="label">企业风险指数</div>
-                <div class="value">{{baseInfo.risk}}</div>
+                <div class="value">{{ baseInfo.risk }}</div>
               </div>
             </div>
           </div>
           <div class="r-charts">
-            <div ref="chartRadar"
-                 class="chart chart1"></div>
-            <div ref="chartColumn"
-                 class="chart chart2"></div>
+            <div ref="chartRadar" class="chart chart1"></div>
+            <div ref="chartColumn" class="chart chart2"></div>
           </div>
         </div>
       </div>
       <div class="rside">
-        <div ref="echartId"
-             class="my-echarts"></div>
+        <div ref="echartId" class="my-echarts"></div>
       </div>
     </main>
   </div>
 </template>
 
 <script>
-// 数据接口url
-// http://121.36.9.239:9999/bigscreen/report/queryEnterprisePortray?enterpriseId=91310000792783700P
+let mock_data = {
+  success: true,
+  message: '操作成功！',
+  code: 200,
+  result: {
+    baseInfo: {
+      id: 5,
+      creditNo: '91520381MA6DP84K7W',
+      name: '中智智人信息技术有限公司',
+      registCapi: '5000万元人民币',
+      industry: '信息传输、软件和信息技术服务业',
+      financingDt: '-',
+      financingRound: '-',
+      strength: 90,
+      risk: 10,
+      logoUrl: 'http://121.36.9.239:9999/bigscreen/common/static/logo/zhongzhizhiren.png',
+      scaleMin: 100,
+      scaleMax: 199,
+      tel: null,
+      econKind: null,
+      recommendOffice: '生态城园区',
+      recommendFlag: 1,
+    },
+    atlas: {
+      name: '中智智人信息技术有限公司',
+      code: '91520381MA6DP84K7W',
+      pcode: '91520381MA6DP84K7W',
+      descr: null,
+      direction: 0,
+      children: [
+        {
+          name: '分支机构',
+          code: 'fzjg',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 0,
+          children: null,
+        },
+        {
+          name: '投资公司',
+          code: 'tzgs',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 0,
+          children: null,
+        },
+        {
+          name: '控股子公司',
+          code: 'kgzgs',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 0,
+          children: null,
+        },
+        {
+          name: '竞争企业',
+          code: 'jzqy',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 0,
+          children: [
+            {
+              name: '中智智人',
+              code: 'jzqy10',
+              pcode: 'jzqy',
+              descr: null,
+              direction: 0,
+              children: [
+                {
+                  name: '郑州远传信息技术有限公司',
+                  code: 'jzqy1022',
+                  pcode: 'jzqy10',
+                  descr: '竞品：远传信息',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '融创天成科技成都有限公司',
+                  code: 'jzqy1023',
+                  pcode: 'jzqy10',
+                  descr: '竞品：融创天成',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '北京快人科技有限公司',
+                  code: 'jzqy1024',
+                  pcode: 'jzqy10',
+                  descr: '竞品：快人科技',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '上海联栈信息科技有限公司',
+                  code: 'jzqy1025',
+                  pcode: 'jzqy10',
+                  descr: '竞品：Unistacks',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '浙江云安阁科技有限公司',
+                  code: 'jzqy1026',
+                  pcode: 'jzqy10',
+                  descr: '竞品：云安阁',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '隆正信息科技有限公司',
+                  code: 'jzqy1027',
+                  pcode: 'jzqy10',
+                  descr: '竞品：隆正信息',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '北京友友天宇系统技术有限公司',
+                  code: 'jzqy1028',
+                  pcode: 'jzqy10',
+                  descr: '竞品：友友系统',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '北京云势数据科技有限责任公司',
+                  code: 'jzqy1029',
+                  pcode: 'jzqy10',
+                  descr: '竞品：云势数据',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '武汉瑞云互动科技有限公司',
+                  code: 'jzqy1030',
+                  pcode: 'jzqy10',
+                  descr: '竞品：武汉瑞云互动科技',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '广州市科南软件有限公司',
+                  code: 'jzqy1031',
+                  pcode: 'jzqy10',
+                  descr: '竞品：conow科南软件',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '神州灵云(北京)科技有限公司',
+                  code: 'jzqy1032',
+                  pcode: 'jzqy10',
+                  descr: '竞品：神州灵云',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '深圳秦云网科技有限公司',
+                  code: 'jzqy1033',
+                  pcode: 'jzqy10',
+                  descr: '竞品：秦云网',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '无锡聚云科技有限公司',
+                  code: 'jzqy1034',
+                  pcode: 'jzqy10',
+                  descr: '竞品：无锡聚云科技ClearClouds',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '北京美邦天下科技有限公司',
+                  code: 'jzqy1035',
+                  pcode: 'jzqy10',
+                  descr: '竞品：美邦天下科技',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '浪潮电子信息产业股份有限公司',
+                  code: 'jzqy1036',
+                  pcode: 'jzqy10',
+                  descr: '竞品：浪潮信息',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '上海幸乙网络科技有限公司',
+                  code: 'jzqy1037',
+                  pcode: 'jzqy10',
+                  descr: '竞品：易拓云',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '武汉柒零社商业服务有限责任公司',
+                  code: 'jzqy1038',
+                  pcode: 'jzqy10',
+                  descr: '竞品：微小智能',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '数说(长沙)信息科技有限公司',
+                  code: 'jzqy1039',
+                  pcode: 'jzqy10',
+                  descr: '竞品：芝麻数据',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '武汉谷泰软件科技有限公司',
+                  code: 'jzqy1040',
+                  pcode: 'jzqy10',
+                  descr: '竞品：谷泰软件',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '成都云路天行科技有限公司',
+                  code: 'jzqy1041',
+                  pcode: 'jzqy10',
+                  descr: '竞品：云路天行',
+                  direction: 0,
+                  children: null,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: '上下游企业',
+          code: 'sxyqy',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 0,
+          children: [
+            {
+              name: '中信银行股份有限公司',
+              code: 'sxyqy6',
+              pcode: 'sxyqy',
+              descr: '下游',
+              direction: 0,
+              children: null,
+            },
+            {
+              name: '北京开运联合信息技术股份有限公司',
+              code: 'sxyqy7',
+              pcode: 'sxyqy',
+              descr: '上游',
+              direction: 0,
+              children: null,
+            },
+          ],
+        },
+        {
+          name: '参股投资企业',
+          code: 'cgtzqy',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 1,
+          children: null,
+        },
+        {
+          name: '控股企业',
+          code: 'kgqy',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 1,
+          children: null,
+        },
+        {
+          name: '主要股东',
+          code: 'zygd',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 1,
+          children: [
+            {
+              name: '王晓辉',
+              code: 'zygd10',
+              pcode: 'zygd',
+              descr: null,
+              direction: 1,
+              children: null,
+            },
+            {
+              name: '叶欲晓',
+              code: 'zygd11',
+              pcode: 'zygd',
+              descr: null,
+              direction: 1,
+              children: null,
+            },
+            {
+              name: '杨秀明',
+              code: 'zygd12',
+              pcode: 'zygd',
+              descr: null,
+              direction: 1,
+              children: null,
+            },
+            {
+              name: '章祖达',
+              code: 'zygd13',
+              pcode: 'zygd',
+              descr: null,
+              direction: 1,
+              children: null,
+            },
+            {
+              name: '李欣、',
+              code: 'zygd14',
+              pcode: 'zygd',
+              descr: null,
+              direction: 1,
+              children: null,
+            },
+            {
+              name: '张婷',
+              code: 'zygd15',
+              pcode: 'zygd',
+              descr: null,
+              direction: 1,
+              children: null,
+            },
+            {
+              name: '张珅',
+              code: 'zygd16',
+              pcode: 'zygd',
+              descr: null,
+              direction: 1,
+              children: null,
+            }
+           
+          ],
+        },
+      ],
+    },
+    strengthDetails: [
+      {
+        id: 37,
+        creditNo: '91520381MA6DP84K7W',
+        type: '00',
+        typeDesc: '注册资本',
+        cnt: 90,
+      },
+      {
+        id: 38,
+        creditNo: '91520381MA6DP84K7W',
+        type: '01',
+        typeDesc: '营收实力',
+        cnt: 90,
+      },
+      {
+        id: 39,
+        creditNo: '91520381MA6DP84K7W',
+        type: '02',
+        typeDesc: '税收贡献',
+        cnt: 90,
+      },
+      {
+        id: 40,
+        creditNo: '91520381MA6DP84K7W',
+        type: '03',
+        typeDesc: '生存能力',
+        cnt: 98,
+      },
+      {
+        id: 41,
+        creditNo: '91520381MA6DP84K7W',
+        type: '04',
+        typeDesc: '资本市场吸引力',
+        cnt: 89,
+      },
+      {
+        id: 42,
+        creditNo: '91520381MA6DP84K7W',
+        type: '05',
+        typeDesc: '人才吸引力',
+        cnt: 90,
+      },
+      {
+        id: 43,
+        creditNo: '91520381MA6DP84K7W',
+        type: '06',
+        typeDesc: '创新投入产出能力',
+        cnt: 90,
+      },
+      {
+        id: 44,
+        creditNo: '91520381MA6DP84K7W',
+        type: '07',
+        typeDesc: '创新实力',
+        cnt: 87,
+      },
+      {
+        id: 45,
+        creditNo: '91520381MA6DP84K7W',
+        type: '08',
+        typeDesc: '企业品牌活跃度',
+        cnt: 87,
+      },
+    ],
+    riskDetails: [
+      {
+        id: 21,
+        creditNo: '91520381MA6DP84K7W',
+        type: '00',
+        typeDesc: '异动风险',
+        cnt: 9,
+      },
+      {
+        id: 22,
+        creditNo: '91520381MA6DP84K7W',
+        type: '01',
+        typeDesc: '经营风险',
+        cnt: 10,
+      },
+      {
+        id: 23,
+        creditNo: '91520381MA6DP84K7W',
+        type: '02',
+        typeDesc: '司法风险',
+        cnt: 15,
+      },
+      {
+        id: 24,
+        creditNo: '91520381MA6DP84K7W',
+        type: '03',
+        typeDesc: '监管风险',
+        cnt: 10,
+      },
+      {
+        id: 25,
+        creditNo: '91520381MA6DP84K7W',
+        type: '04',
+        typeDesc: '工商风险',
+        cnt: 10,
+      },
+    ],
+  },
+  timestamp: 1619597515330,
+}
 import { getPortray } from '@/api/manage'
 const echarts = require('echarts')
+/*websocket集成*/
+import store from '@/store/'
+import { randomUUID } from '@/utils/util'
+import func from 'vue-editor-bridge'
 export default {
-  name: 'Service',
+  name: 'Portray',
   data() {
     return {
       enterpriseId: null,
@@ -77,71 +519,94 @@ export default {
       riskDetails: null,
       strengthDetails: null,
       dataArr: [],
-      dots: [
-      ],
-      lines: [
-      ],
+      dots: [],
+      lines: [],
+      /*websocket集成*/
+      pageId: randomUUID(),
+      websock: null,
+      lockReconnect: false,
+      heartCheck: null,
     }
   },
   created() {},
   mounted() {
-    this.enterpriseId = this.$route.params.id || '91310000792783700P'
-    // this.enterpriseId = '91120116MA05J2D11M'
-    this.enterpriseId = '91310000792783700P'
     this.getData()
+    /*websocket集成*/
+    this.initWebSocket()
+    this.heartCheckFun()
+  },
+  /*websocket集成*/
+  destroyed: function () {
+    this.websocketOnclose()
   },
   methods: {
     getData() {
+      const execData = (res)=>{
+        let { baseInfo, atlas, riskDetails, strengthDetails } = res.result
+        this.baseInfo = baseInfo != null ? baseInfo : {}
+        this.atlas = atlas != null ? atlas : {}
+        this.riskDetails = riskDetails != null ? riskDetails : []
+        this.strengthDetails = strengthDetails != null ? strengthDetails : []
+        this.$nextTick(() => {
+          this.initChart()
+        })
+      }
       getPortray(this.enterpriseId).then((res) => {
+        console.log('------------ajax----')
         if (res.success) {
-          let { baseInfo, atlas, riskDetails, strengthDetails } = res.result
-          this.baseInfo = baseInfo
-          this.atlas = atlas
-          this.riskDetails = riskDetails
-          this.strengthDetails = strengthDetails
-          this.$nextTick(() => {
-            this.initChart()
-          })
+          // execData(res)
         }
       })
+      execData(mock_data)
+     
+       setInterval(()=>{
+        mock_data.result.baseInfo.name = parseInt(Math.random()*100)
+        console.log(mock_data.result.baseInfo.name)
+        mock_data.result.strengthDetails[0].cnt = parseInt(Math.random()*100);
+        mock_data.result.strengthDetails[1].cnt = parseInt(Math.random()*100);
+        mock_data.result.strengthDetails[2].cnt = parseInt(Math.random()*100);
+        mock_data.result.strengthDetails[3].cnt = parseInt(Math.random()*100);
+        mock_data.result.riskDetails[0].cnt = parseInt(Math.random()*100);
+        mock_data.result.riskDetails[1].cnt = parseInt(Math.random()*100);
+        mock_data.result.riskDetails[2].cnt = parseInt(Math.random()*100);
+        mock_data.result.riskDetails[3].cnt = parseInt(Math.random()*100);
+        mock_data.result.atlas.name =  parseInt(Math.random()*10000)
+        execData(mock_data)
+      },2000) 
     },
     initChart() {
       let { indicator, data: radarData } = this.setRadarData()
       this.initRadar(indicator, radarData)
       let { c_category, data } = this.setColumnData()
       this.initColumn(c_category, data)
-
-      let {dots, lines} = this.setGraphData()
-
+      let { dots, lines } = this.setGraphData()
       this.setGraph(dots, lines)
-
     },
-    setGraphCategoryColor(){
+    setGraphCategoryColor() {
       let mapCategory = {}
       let mapColor = {
-        'root':'rgb(14,67,255)', // 首节点
-        '主要股东':'rgb(255,51,87)', // red
+        root: 'rgb(14,67,255)', // 首节点
+        主要股东: 'rgb(255,51,87)', // red
 
-        '控股子公司':'rgb(0,105,255)',
-        '投资公司':'rgb(0,105,255)',
-        '分支机构':'rgb(0,105,255)',
+        控股子公司: 'rgb(0,105,255)',
+        投资公司: 'rgb(0,105,255)',
+        分支机构: 'rgb(0,105,255)',
 
-        '上下游企业':'rgb(0,209,64)', // green
+        上下游企业: 'rgb(0,209,64)', // green
 
-        '竞争企业':'rgb(255,147,42)',
+        竞争企业: 'rgb(255,147,42)',
 
-        '控股企业':'rgb(0,139,209)',
-        '参股投资企业':'rgb(0,139,209)'
+        控股企业: 'rgb(0,139,209)',
+        参股投资企业: 'rgb(0,139,209)',
       }
       let rootNode = JSON.parse(JSON.stringify(this.atlas))
-      mapCategory[rootNode.name] = mapColor['root'];
+      mapCategory[rootNode.name] = mapColor['root']
       let currentNode = this.atlas
       currentNode.children.forEach((e) => {
-        let color = mapColor[e.name] ||'black';
-        mapCategory[e.name] = color;
+        let color = mapColor[e.name] || 'black'
+        mapCategory[e.name] = color
       })
-      console.log(mapCategory)
-      return mapCategory;
+      return mapCategory
     },
     setGraphData() {
       let mapCategory = {}
@@ -155,41 +620,33 @@ export default {
       currentNode.children.forEach((e) => {
         mapCategory[e.name] = 1
       })
-      let generatorId = ()=>Math.abs(parseInt(Math.random()*1000000))
-      let rid = generatorId();
       dots.push({
-        // id:rid,
-        name: rootNode.name,
+        name: rootNode.code,
+        pname: rootNode.pcode,
         direction: rootNode.direction,
-        target_name:rootNode.name,
-        pname: rootNode.pname,
+        _name: rootNode.name,
         descr: rootNode.descr,
         symbolSize: 120,
       })
       function forEachDeepNode(node) {
         node.forEach((item) => {
-          item.target_name = item.pname + item.name
-          item.id = generatorId();
           dots.push({
-            // id:item.id,
-            name: item.name,
+            name: item.code,
+            pname: item.pcode,
+            _name: item.name,
             direction: item.direction,
-            target_name:item.target_name,
-            pname: item.pname,
             descr: item.descr,
             symbolSize: 70,
           })
-          // let pnode = dots.find(e=>{
-          //   return e.name == item.pname
-          // })
-          // console.log('------find  p='+ item.pname)
-          // console.log(JSON.stringify(pnode))
-          // console.log('------find  p')
           lines.push({
-            name: '',
-            source: item.name,
-            target:item.pname
-            // target: pnode?pnode.id:null
+            source: item.code,
+            target: item.pcode,
+            // label:{
+              // show:true,
+              // formatter:function(){
+              //   return 1111
+              // }
+            // }
           })
           if (item.children != null) {
             forEachDeepNode(item.children)
@@ -197,20 +654,13 @@ export default {
         })
       }
       forEachDeepNode(currentNode.children)
-      console.log('------------------------------------')
-      dots.forEach(e=>{
-        console.log(`${e.name}-${e.pname}-id=${e.id}`)
-      })
-      lines.forEach(e=>{
-        console.log(JSON.stringify(e))
-      })
       return {
         dots,
-        lines
+        lines,
       }
     },
     setGraph(dot, lines) {
-      let _this = this;
+      let _this = this
       let option = {
         title: {
           text: '企业知识图谱',
@@ -244,7 +694,7 @@ export default {
                   color: '#fff',
                 },
                 formatter: (data, b, c) => {
-                  let params = data.name
+                  let params = data.data._name
                   let newParamsName = '' // 最终拼接成的字符串
                   let paramsNameNumber = params.length // 实际标签的个数
                   let provideNumber = 10 // 每行能显示的字的个数
@@ -297,13 +747,13 @@ export default {
             },
             data: dot,
             links: lines,
-            itemStyle:{
-              normal:{
-                color:function (params){
+            itemStyle: {
+              normal: {
+                color: function (params) {
                   // return 'red'
-                  return _this.findInCategoryColor(params,dot)
-                }
-              }
+                  return _this.findInCategoryColor(params, dot)
+                },
+              },
             },
             // categories: categories,
           },
@@ -312,34 +762,37 @@ export default {
       let myChart = echarts.init(this.$refs.echartId)
       myChart.setOption(option)
     },
-    findInCategoryColor(params,allNode) {
-      let map = this.setGraphCategoryColor();
-      let data = params.data;
-      let name= data.name;
-      let res = 'black';
-      let levelRelation = [];
-      function findUp(start,allNode){
-        allNode.forEach(item=>{
-          if(item.name===start){
-            levelRelation.push(item.name);
-            if(item.pname && levelRelation.includes(item.pname) ===false){
-              findUp(item.pname,allNode)
+    findInCategoryColor(params, allNode) {
+      let map = this.setGraphCategoryColor()
+      let data = params.data
+      let res = 'black'
+      let levelRelation = []
+      function findUp(start, allNode) {
+        allNode.forEach((item) => {
+          if (item.name === start) {
+            levelRelation.push(item.name)
+            if (item.pname && levelRelation.includes(item.pname) === false) {
+              findUp(item.pname, allNode)
             }
           }
         })
       }
-      findUp(name,allNode)
-      console.log('-------------levelRelation')
-      console.log(levelRelation)
+      findUp(data.name, allNode)
       // 逐级向上查找
-     for(let i=0;i<levelRelation.length;i++){
-       let item = levelRelation[i];
-        if(item in map){
+      // console.log('-------------逐级向上查找')
+      let levelRelationNames = levelRelation.map(code=>{
+        let item = allNode.find((e) => e.name === code)
+        return item._name
+      })
+      levelRelationNames.forEach((item) => {})
+      for (let i = 0; i < levelRelationNames.length; i++) {
+        let item = levelRelationNames[i]
+        if (item in map) {
           res = map[item]
-          break;
+          break
         }
       }
-      return res;
+      return res
     },
     setRadarData() {
       let indicator = []
@@ -427,7 +880,6 @@ export default {
       }
     },
     initColumn(xData, yData) {
-      yData = [90,80,70,60,50]
       let myChart = echarts.init(this.$refs.chartColumn)
       var option
       option = {
@@ -450,7 +902,7 @@ export default {
             show: true,
             interval: 0,
             rotate: 15,
-            margin:5,
+            margin: 5,
             textStyle: {
               color: '#c3dbff', //更改坐标轴文字颜色
               fontSize: 12, //更改坐标轴文字大小
@@ -485,65 +937,163 @@ export default {
           left: '10%',
           right: '4%',
           bottom: '3%',
-          top:'20%',
-          containLabel: true
+          top: '20%',
+          containLabel: true,
         },
         series: [
           {
             // 分隔:蓝色线
-            type: "pictorialBar",
+            type: 'pictorialBar',
             symbolRepeat: true,
             symbolMargin: 3,
-            symbol: "rect",
+            symbol: 'rect',
             symbolClip: true,
             symbolSize: [30, 3],
-            symbolPosition: "start",
+            symbolPosition: 'start',
             symbolOffset: [0, 0],
             symbolBoundingData: 100,
             data: yData,
             itemStyle: {
               color: 'rgb(0,130,255)',
             },
-            z: 3
+            z: 3,
           },
           {
             // 分隔:蓝色线
-            type: "pictorialBar",
+            type: 'pictorialBar',
             symbolRepeat: true,
             symbolMargin: 3,
-            symbol: "rect",
+            symbol: 'rect',
             symbolClip: true,
             symbolSize: [30, 3],
-            symbolPosition: "start",
+            symbolPosition: 'start',
             symbolOffset: [0, 0],
             symbolBoundingData: 100,
             data: yData,
             itemStyle: {
               // color: 'red'
             },
-            z: 2
+            z: 2,
           },
           {
             // 分隔 背景
-            type: "pictorialBar",
+            type: 'pictorialBar',
             symbolRepeat: true,
             symbolMargin: 3,
-            symbol: "rect",
+            symbol: 'rect',
             symbolClip: true,
             symbolSize: [30, 3],
-            symbolPosition: "start",
+            symbolPosition: 'start',
             symbolOffset: [0, 0],
             symbolBoundingData: 100,
-            data: [100,100,100,100,100],
+            data: [100, 100, 100, 100, 100],
             itemStyle: {
               color: 'rgb(0,28,73)',
             },
-            z: 1
-          }
+            z: 1,
+          },
         ],
       }
 
       option && myChart.setOption(option)
+    },
+    /*websocket集成*/
+    initWebSocket: function () {
+      // WebSocket与普通的请求所用协议有所不同，ws等同于http，wss等同于https
+      var userId = store.getters.userInfo.id
+      const domain = window._CONFIG['socketDomainURL'].replace('https://', 'wss://').replace('http://', 'ws://')
+      const url = `${domain}/bigscreenWebsocket/${userId}/${this.pageId}`
+      this.websock = new WebSocket(url)
+      this.websock.onopen = this.websocketOnopen
+      this.websock.onerror = this.websocketOnerror
+      this.websock.onmessage = this.websocketOnmessage
+      this.websock.onclose = this.websocketOnclose
+    },
+    /*websocket集成*/
+    websocketOnopen: function () {
+      // console.log("BigScreenWebSocket连接成功");
+      //心跳检测重置
+      this.heartCheck.reset().start()
+    },
+    /*websocket集成*/
+    websocketOnerror: function (e) {
+      // console.log("BigScreenWebSocket连接发生错误");
+      this.reconnect()
+    },
+    /*websocket集成*/
+    websocketOnmessage: function (e) {
+      console.log(new Date().toLocaleTimeString() + "-----接收消息-------",e.data);
+      var data = eval('(' + e.data + ')') //解析对象
+      if (data.type == 'bigscreen') {
+        if (data.data.func == 'main_to_portray') {
+          var enterpriseId = data.data.enterpriseId
+          if (this.enterpriseId != enterpriseId) {
+            this.enterpriseId = enterpriseId
+            console.log('enterpriseId----change-')
+            //  console.log(enterpriseId)
+            // this.getData();
+          }
+        }
+      }
+      //心跳检测重置
+      this.heartCheck.reset().start()
+    },
+    /*websocket集成*/
+    websocketOnclose: function (e) {
+      console.log('BigScreen-connection closed (' + e + ')')
+      if (e) {
+        console.log('BigScreen-connection closed (' + e.code + ')')
+      }
+      this.reconnect()
+    },
+    /*websocket集成*/
+    websocketSend(text) {
+      // 数据发送
+      try {
+        this.websock.send(text)
+      } catch (err) {
+        console.log('BigScreen-send failed (' + err.code + ')')
+      }
+    },
+    /*websocket集成*/
+    reconnect() {
+      var that = this
+      if (that.lockReconnect) return
+      that.lockReconnect = true
+      //没连接上会一直重连，设置延迟避免请求过多
+      setTimeout(function () {
+        console.info('BigScreen-尝试重连...')
+        that.initWebSocket()
+        that.lockReconnect = false
+      }, 5000)
+    },
+    /*websocket集成*/
+    heartCheckFun() {
+      var that = this
+      //心跳检测,每20s心跳一次
+      that.heartCheck = {
+        timeout: 20000,
+        timeoutObj: null,
+        serverTimeoutObj: null,
+        reset: function () {
+          clearTimeout(this.timeoutObj)
+          clearTimeout(this.serverTimeoutObj)
+          return this
+        },
+        start: function () {
+          var self = this
+          this.timeoutObj = setTimeout(function () {
+            //这里发送一个心跳，后端收到后，返回一个心跳消息，
+            //onmessage拿到返回的心跳就说明连接正常
+            that.websocketSend(JSON.stringify({ type: 'heartcheck', data: false }))
+            console.info('客户端发送心跳')
+            self.serverTimeoutObj = setTimeout(function () {
+              //如果超过一定时间还没重置，说明后端主动断开了
+              that.websock.close() //如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+            }, self.timeout)
+          }, this.timeout)
+        },
+      }
     },
   },
 }

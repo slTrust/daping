@@ -16,10 +16,44 @@
               <div class="wave"></div>
             </div>
             <div class="texts">
-              <span class="txt txt1">企业标签</span>
+              <!-- <span class="txt txt1">企业标签</span>
               <span class="txt txt2">产品标签</span>
               <span class="txt txt3">政策标签</span>
-              <span class="txt txt4">产业链标签</span>
+              <span class="txt txt4">产业链标签</span> -->
+              <span class="txt">高新技术企业</span>  
+              <span class="txt">瞪羚企业</span>  
+              <span class="txt">小微企业</span>  
+              <span class="txt">国有企业</span> 
+              <span class="txt">有限责任公司</span>  
+              <span class="txt">股份有限公司</span>  
+              <span class="txt">私营企业</span>  
+              <span class="txt">联营企业</span> 
+              <span class="txt">独资企业</span>  
+              <span class="txt">科技型中小企业</span>  
+              <span class="txt">雏鹰企业</span>  
+              <span class="txt">独角兽企业</span> 
+              <span class="txt">外商投资企业</span>  
+              <span class="txt">人才政策</span>  
+              <span class="txt">财税政策</span>  
+              <span class="txt">科技政策</span>    
+              <span class="txt">人工智能</span>  
+              <span class="txt">大数据</span>            
+              <span class="txt">集成电路</span>       
+              <span class="txt">物理网</span>       
+              <span class="txt">网络安全</span>       
+              <span class="txt">互联网+</span>       
+              <span class="txt">云计算</span>       
+              <span class="txt">电子商务</span>       
+              <span class="txt">智能终端</span>       
+              <span class="txt">智能机器人</span>       
+              <span class="txt">新能源汽车</span>       
+              <span class="txt">互动娱乐</span>       
+              <span class="txt">影视动漫</span>  
+              <span class="txt">出版传媒</span>       
+              <span class="txt">文化演艺</span>     
+              <span class="txt">民办教育</span>       
+              <span class="txt">课外培训</span>                         
+              
             </div>
           </div>
           <div class="box2">
@@ -77,11 +111,12 @@
             </div>
             <div class="r3">
               <div class="item">区域产业政策及要素比对</div>
-              <div class="item green">区域经济驾驶舱</div>
+              <div class="item green">自定义产业财税分析</div>
             </div>
             <div class="r3">
               <div class="item">经济标签统计分析</div>
-              <div class="item green">自定义产业财税分析</div>
+              <div class="item">政策搜索</div>
+              <div class="item green">区域经济驾驶舱</div>
             </div>
             <div class="r3">
               <div class="item orange item_new">区域产业要素与招商标的对比分析</div>
@@ -96,10 +131,6 @@
               <div class="item orange item_new">企业实力指数</div>
               <div class="item orange item_new">企业风险分析</div>
               <div class="item orange item_new">信用活力报告</div>
-            </div>
-            <div class="r3">
-              <div class="item">政策搜索</div>
-              <div class="item">生命周期服务</div>
             </div>
           </div>
         </div>
