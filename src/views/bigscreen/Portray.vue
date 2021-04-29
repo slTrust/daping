@@ -37,6 +37,16 @@
                 </li>
               </ul>
             </div>
+            <div class="l-list">
+              <div class="title">
+                投资公司列表
+              </div>
+              <ul>
+                <li>投资公司11</li>
+                <li>投资公司2</li>
+                <li>投资公司3</li>
+              </ul>
+            </div>
           </div>
           <div class="r-charts">
             <div ref="chartRadar"
@@ -53,453 +63,7 @@
     </main>
   </div>
 </template>
-
 <script>
-let mock_data = {
-  success: true,
-  message: '操作成功！',
-  code: 200,
-  result: {
-    baseInfo: {
-      id: 5,
-      creditNo: '91520381MA6DP84K7W',
-      name: '中智智人信息技术有限公司',
-      registCapi: '5000万元人民币',
-      industry: '信息传输、软件和信息技术服务业',
-      financingDt: '-',
-      financingRound: '-',
-      strength: 90,
-      risk: 10,
-      logoUrl: 'http://121.36.9.239:9999/bigscreen/common/static/logo/zhongzhizhiren.png',
-      scaleMin: 100,
-      scaleMax: 199,
-      tel: null,
-      econKind: null,
-      recommendOffice: '生态城园区',
-      recommendFlag: 1,
-    },
-    atlas: {
-      name: '中智智人信息技术有限公司',
-      code: '91520381MA6DP84K7W',
-      pcode: '91520381MA6DP84K7W',
-      descr: null,
-      direction: 0,
-      children: [
-        {
-          name: '分支机构',
-          code: 'fzjg',
-          pcode: '91520381MA6DP84K7W',
-          descr: null,
-          direction: 0,
-          children: null,
-        },
-        {
-          name: '投资公司',
-          code: 'tzgs',
-          pcode: '91520381MA6DP84K7W',
-          descr: null,
-          direction: 0,
-          children: null,
-        },
-        {
-          name: '控股子公司',
-          code: 'kgzgs',
-          pcode: '91520381MA6DP84K7W',
-          descr: null,
-          direction: 0,
-          children: null,
-        },
-        {
-          name: '竞争企业',
-          code: 'jzqy',
-          pcode: '91520381MA6DP84K7W',
-          descr: null,
-          direction: 0,
-          children: [
-            {
-              name: '中智智人',
-              code: 'jzqy10',
-              pcode: 'jzqy',
-              descr: null,
-              direction: 0,
-              children: [
-                {
-                  name: '郑州远传信息技术有限公司',
-                  code: 'jzqy1022',
-                  pcode: 'jzqy10',
-                  descr: '竞品：远传信息',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '融创天成科技成都有限公司',
-                  code: 'jzqy1023',
-                  pcode: 'jzqy10',
-                  descr: '竞品：融创天成',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '北京快人科技有限公司',
-                  code: 'jzqy1024',
-                  pcode: 'jzqy10',
-                  descr: '竞品：快人科技',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '上海联栈信息科技有限公司',
-                  code: 'jzqy1025',
-                  pcode: 'jzqy10',
-                  descr: '竞品：Unistacks',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '浙江云安阁科技有限公司',
-                  code: 'jzqy1026',
-                  pcode: 'jzqy10',
-                  descr: '竞品：云安阁',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '隆正信息科技有限公司',
-                  code: 'jzqy1027',
-                  pcode: 'jzqy10',
-                  descr: '竞品：隆正信息',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '北京友友天宇系统技术有限公司',
-                  code: 'jzqy1028',
-                  pcode: 'jzqy10',
-                  descr: '竞品：友友系统',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '北京云势数据科技有限责任公司',
-                  code: 'jzqy1029',
-                  pcode: 'jzqy10',
-                  descr: '竞品：云势数据',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '武汉瑞云互动科技有限公司',
-                  code: 'jzqy1030',
-                  pcode: 'jzqy10',
-                  descr: '竞品：武汉瑞云互动科技',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '广州市科南软件有限公司',
-                  code: 'jzqy1031',
-                  pcode: 'jzqy10',
-                  descr: '竞品：conow科南软件',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '神州灵云(北京)科技有限公司',
-                  code: 'jzqy1032',
-                  pcode: 'jzqy10',
-                  descr: '竞品：神州灵云',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '深圳秦云网科技有限公司',
-                  code: 'jzqy1033',
-                  pcode: 'jzqy10',
-                  descr: '竞品：秦云网',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '无锡聚云科技有限公司',
-                  code: 'jzqy1034',
-                  pcode: 'jzqy10',
-                  descr: '竞品：无锡聚云科技ClearClouds',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '北京美邦天下科技有限公司',
-                  code: 'jzqy1035',
-                  pcode: 'jzqy10',
-                  descr: '竞品：美邦天下科技',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '浪潮电子信息产业股份有限公司',
-                  code: 'jzqy1036',
-                  pcode: 'jzqy10',
-                  descr: '竞品：浪潮信息',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '上海幸乙网络科技有限公司',
-                  code: 'jzqy1037',
-                  pcode: 'jzqy10',
-                  descr: '竞品：易拓云',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '武汉柒零社商业服务有限责任公司',
-                  code: 'jzqy1038',
-                  pcode: 'jzqy10',
-                  descr: '竞品：微小智能',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '数说(长沙)信息科技有限公司',
-                  code: 'jzqy1039',
-                  pcode: 'jzqy10',
-                  descr: '竞品：芝麻数据',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '武汉谷泰软件科技有限公司',
-                  code: 'jzqy1040',
-                  pcode: 'jzqy10',
-                  descr: '竞品：谷泰软件',
-                  direction: 0,
-                  children: null,
-                },
-                {
-                  name: '成都云路天行科技有限公司',
-                  code: 'jzqy1041',
-                  pcode: 'jzqy10',
-                  descr: '竞品：云路天行',
-                  direction: 0,
-                  children: null,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          name: '上下游企业',
-          code: 'sxyqy',
-          pcode: '91520381MA6DP84K7W',
-          descr: null,
-          direction: 0,
-          children: [
-            {
-              name: '中信银行股份有限公司',
-              code: 'sxyqy6',
-              pcode: 'sxyqy',
-              descr: '下游',
-              direction: 0,
-              children: null,
-            },
-            {
-              name: '北京开运联合信息技术股份有限公司',
-              code: 'sxyqy7',
-              pcode: 'sxyqy',
-              descr: '上游',
-              direction: 0,
-              children: null,
-            },
-          ],
-        },
-        {
-          name: '参股投资企业',
-          code: 'cgtzqy',
-          pcode: '91520381MA6DP84K7W',
-          descr: null,
-          direction: 1,
-          children: null,
-        },
-        {
-          name: '控股企业',
-          code: 'kgqy',
-          pcode: '91520381MA6DP84K7W',
-          descr: null,
-          direction: 1,
-          children: null,
-        },
-        {
-          name: '主要股东',
-          code: 'zygd',
-          pcode: '91520381MA6DP84K7W',
-          descr: null,
-          direction: 1,
-          children: [
-            {
-              name: '王晓辉',
-              code: 'zygd10',
-              pcode: 'zygd',
-              descr: null,
-              direction: 1,
-              children: null,
-            },
-            {
-              name: '叶欲晓',
-              code: 'zygd11',
-              pcode: 'zygd',
-              descr: null,
-              direction: 1,
-              children: null,
-            },
-            {
-              name: '杨秀明',
-              code: 'zygd12',
-              pcode: 'zygd',
-              descr: null,
-              direction: 1,
-              children: null,
-            },
-            {
-              name: '章祖达',
-              code: 'zygd13',
-              pcode: 'zygd',
-              descr: null,
-              direction: 1,
-              children: null,
-            },
-            {
-              name: '李欣、',
-              code: 'zygd14',
-              pcode: 'zygd',
-              descr: null,
-              direction: 1,
-              children: null,
-            },
-            {
-              name: '张婷',
-              code: 'zygd15',
-              pcode: 'zygd',
-              descr: null,
-              direction: 1,
-              children: null,
-            },
-            {
-              name: '张珅',
-              code: 'zygd16',
-              pcode: 'zygd',
-              descr: null,
-              direction: 1,
-              children: null,
-            },
-          ],
-        },
-      ],
-    },
-    strengthDetails: [
-      {
-        id: 37,
-        creditNo: '91520381MA6DP84K7W',
-        type: '00',
-        typeDesc: '注册资本',
-        cnt: 90,
-      },
-      {
-        id: 38,
-        creditNo: '91520381MA6DP84K7W',
-        type: '01',
-        typeDesc: '营收实力',
-        cnt: 90,
-      },
-      {
-        id: 39,
-        creditNo: '91520381MA6DP84K7W',
-        type: '02',
-        typeDesc: '税收贡献',
-        cnt: 90,
-      },
-      {
-        id: 40,
-        creditNo: '91520381MA6DP84K7W',
-        type: '03',
-        typeDesc: '生存能力',
-        cnt: 98,
-      },
-      {
-        id: 41,
-        creditNo: '91520381MA6DP84K7W',
-        type: '04',
-        typeDesc: '资本市场吸引力',
-        cnt: 89,
-      },
-      {
-        id: 42,
-        creditNo: '91520381MA6DP84K7W',
-        type: '05',
-        typeDesc: '人才吸引力',
-        cnt: 90,
-      },
-      {
-        id: 43,
-        creditNo: '91520381MA6DP84K7W',
-        type: '06',
-        typeDesc: '创新投入产出能力',
-        cnt: 90,
-      },
-      {
-        id: 44,
-        creditNo: '91520381MA6DP84K7W',
-        type: '07',
-        typeDesc: '创新实力',
-        cnt: 87,
-      },
-      {
-        id: 45,
-        creditNo: '91520381MA6DP84K7W',
-        type: '08',
-        typeDesc: '企业品牌活跃度',
-        cnt: 87,
-      },
-    ],
-    riskDetails: [
-      {
-        id: 21,
-        creditNo: '91520381MA6DP84K7W',
-        type: '00',
-        typeDesc: '异动风险',
-        cnt: 9,
-      },
-      {
-        id: 22,
-        creditNo: '91520381MA6DP84K7W',
-        type: '01',
-        typeDesc: '经营风险',
-        cnt: 10,
-      },
-      {
-        id: 23,
-        creditNo: '91520381MA6DP84K7W',
-        type: '02',
-        typeDesc: '司法风险',
-        cnt: 15,
-      },
-      {
-        id: 24,
-        creditNo: '91520381MA6DP84K7W',
-        type: '03',
-        typeDesc: '监管风险',
-        cnt: 10,
-      },
-      {
-        id: 25,
-        creditNo: '91520381MA6DP84K7W',
-        type: '04',
-        typeDesc: '工商风险',
-        cnt: 10,
-      },
-    ],
-  },
-  timestamp: 1619597515330,
-}
 import { getPortray } from '@/api/manage'
 const echarts = require('echarts')
 /*websocket集成*/
@@ -662,7 +226,7 @@ export default {
       let _this = this
       let option = {
         title: {
-          text: '企业知识图谱',
+          text: '',
           left: '10',
           top: 10,
           textStyle: {
@@ -814,7 +378,7 @@ export default {
         backgroundColor: 'transparent',
         title: {
           text: '企业实力指数：' +this.baseInfo.strength,
-          left: '50',
+          left: '100',
           top: 20,
           textStyle: {
             color: '#fff',
@@ -825,7 +389,7 @@ export default {
           {
             indicator: indicator,
             center: ['50%', '57%'],
-            radius: 85,
+            radius: 80,
             splitArea: {
               show: true,
               areaStyle: {
@@ -886,7 +450,7 @@ export default {
       option = {
         title: {
           text: '企业风险指数：' + _this.baseInfo.risk,
-          left: '50',
+          left: '120',
           top: 20,
           textStyle: {
             color: '#fff',
@@ -902,7 +466,7 @@ export default {
           axisLabel: {
             show: true,
             interval: 0,
-            rotate: 15,
+            rotate: 0,
             margin: 5,
             textStyle: {
               color: '#c3dbff', //更改坐标轴文字颜色
@@ -935,10 +499,10 @@ export default {
           },
         },
         grid: {
-          left: '10%',
-          right: '4%',
-          bottom: '3%',
-          top: '20%',
+          left: '5%',
+          right: '5%',
+          bottom: '10%',
+          top: '30%',
           containLabel: true,
         },
         series: [
@@ -1120,7 +684,7 @@ main {
   }
   .lside {
     height: 100%;
-    flex: 2;
+    flex: 1;
     background: transparent;
     display: flex;
     flex-direction: column;
@@ -1145,10 +709,15 @@ main {
       flex: 1;
       border: 2px solid rgb(0, 42, 110);
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       .l-info {
         flex: 1;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
         .l-inner {
+          flex:1;
           height: 100%;
           padding: 40px;
           .logo {
@@ -1169,7 +738,7 @@ main {
             text-align: center;
           }
           ul {
-            padding-bottom: 100px;
+            padding-bottom: 20px;
             padding-left: 0;
           }
           ul li {
@@ -1209,11 +778,33 @@ main {
             }
           }
         }
+        .l-list{
+          flex:1;
+          background: blue;
+          .title{
+            font-size: 24px;
+            line-height: 40px;
+            font-weight: bold;
+            color:#fff;
+            padding:10px 0;
+          }
+          ul{
+            margin:0;
+            padding:0;
+          }
+          padding-top:40px;
+          li{
+            list-style: none;
+            background: red;
+            line-height: 50px;
+            color:#fff;
+          }
+        }
       }
       .r-charts {
         flex: 1;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         .chart {
           flex: 1;
         }
@@ -1222,7 +813,7 @@ main {
   }
   .rside {
     height: 100%;
-    flex: 3;
+    flex: 1;
     .my-echarts {
       width: 100%;
       height: 100%;

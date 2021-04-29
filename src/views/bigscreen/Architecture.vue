@@ -16,15 +16,15 @@
                  style="height: 100%;width:100%;">
             </div>
             <div class="texts">
-              <span v-for="(item,idx) in currentTxtsArr"
+              <!-- <span v-for="(item,idx) in currentTxtsArr"
                     :class="`txt txt${idx%count+1}`"
                     :key="idx">
                 {{item}}
-              </span>
-              <!-- <span class="txt txt1">企业标签</span>
+              </span> -->
+              <span class="txt txt1">企业标签</span>
               <span class="txt txt2">产品标签</span>
               <span class="txt txt3">政策标签</span>
-              <span class="txt txt4">产业链标签</span> -->
+              <span class="txt txt4">产业链标签</span>
             </div>
           </div>
           <div class="box2">
@@ -55,41 +55,41 @@
           </div>
           <div class="box3">
             <div class="r3">
-              <div class="item orange">政策兑现</div>
+              <div class="item blue1">政策兑现</div>
               <div class="item">精准匹配</div>
               <div class="item">资本市场培育</div>
             </div>
             <div class="r3">
-              <div class="item orange">企业服务门户</div>
-              <div class="item orange">生命周期服务</div>
+              <div class="item blue1">企业服务门户</div>
+              <div class="item blue1">生命周期服务</div>
               <div class="item">产业晴雨表</div>
             </div>
             <div class="r3">
-              <div class="item green">产业标签统计分析</div>
-              <div class="item green">区域产业要素分析与研判</div>
+              <div class="item blue2">产业标签统计分析</div>
+              <div class="item blue2">区域产业要素分析与研判</div>
             </div>
             <div class="r3">
               <div class="item">区域产业政策及要素比对</div>
-              <div class="item green">自定义产业财税分析</div>
+              <div class="item blue2">自定义产业财税分析</div>
             </div>
             <div class="r3">
               <div class="item">经济标签统计分析</div>
               <div class="item">政策搜索</div>
-              <div class="item green">区域经济驾驶舱</div>
+              <div class="item blue2">区域经济驾驶舱</div>
             </div>
             <div class="r3">
-              <div class="item orange item_new">区域产业要素与招商标的对比分析</div>
-              <div class="item orange item_new">产业链招商</div>
+              <div class="item blue1 item_new">区域产业要素与招商标的对比分析</div>
+              <div class="item blue1 item_new">产业链招商</div>
             </div>
             <div class="r3">
-              <div class="item orange item_new">以商招商</div>
-              <div class="item orange item_new">企业关系图谱</div>
-              <div class="item orange item_new">企业业务图谱</div>
+              <div class="item blue1 item_new">以商招商</div>
+              <div class="item blue1 item_new">企业关系图谱</div>
+              <div class="item blue1 item_new">企业业务图谱</div>
             </div>
             <div class="r3">
-              <div class="item orange item_new">企业实力指数</div>
-              <div class="item orange item_new">企业风险分析</div>
-              <div class="item orange item_new">信用活力报告</div>
+              <div class="item blue1 item_new">企业实力指数</div>
+              <div class="item blue1 item_new">企业风险分析</div>
+              <div class="item blue1 item_new">信用活力报告</div>
             </div>
           </div>
         </div>
@@ -319,12 +319,11 @@ export default {
 </script>
 <style scoped lang="less">
 .arch_content {
-  margin: 50px auto 50px;
+  margin:50px 60px;
   border: 2px solid #0186f1;
   min-height: 840px;
   min-width: 1684px;
   padding: 20px 32px;
-
   display: flex;
   justify-content: space-between;
   align-content: space-between;
@@ -434,7 +433,7 @@ export default {
           justify-content: space-between;
           .item {
             text-align: center;
-            background: #008df8;
+            background: rgb(11, 131, 183);
             border-radius: 4px;
             color: #fff;
             font-size: 18px;
@@ -456,17 +455,12 @@ export default {
             background-image: url('../../assets/bigscreen/p1_new.png');
             background-size: cover;
           }
-          .orange {
-            background: rgb(242,148,57);
+          .blue1 {
+            background: rgb(21,76,193);
           }
-          .green {
-            background: rgb(28,178,109);
+          .blue2 {
+            background: rgb(10,73,145);
           }
-        }
-        .r3:nth-child(3) {
-        }
-        .r3:nth-child(4),
-        .r3:nth-child(4) {
         }
       }
     }
@@ -543,10 +537,10 @@ export default {
 }
 @keyframes tag_move2 {
   0% {
-    transform: translate(30px, 200px);
+    transform: translate(120px, 200px);
   }
   100% {
-    transfrom: translate(30px, 60px);
+    transfrom: translate(120px, 60px);
     opacity: 0.1;
   }
 }
@@ -563,10 +557,10 @@ export default {
 @keyframes tag_move4 {
   0% {
     opacity: 1;
-    transform: translate(260px, 250px);
+    transform: translate(250px, 250px);
   }
   100% {
-    transfrom: translate(260px, 60px);
+    transfrom: translate(250px, 60px);
     opacity: 0.1;
   }
 }
@@ -595,7 +589,7 @@ export default {
   color: #3eacff;
 }
 .txt2 {
-  transform: translate(30px, 60px);
+  transform: translate(120px, 60px);
   animation: tag_move2 2s linear 0ms infinite;
   color: #ffa300;
 }
@@ -605,7 +599,7 @@ export default {
   color: #00be19;
 }
 .txt4 {
-  transform: translate(260px, 60px);
+  transform: translate(250px, 60px);
   animation: tag_move4 2s linear 0ms infinite;
   color: #23e9f4;
 }
