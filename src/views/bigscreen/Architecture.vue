@@ -16,15 +16,15 @@
                  style="height: 100%;width:100%;">
             </div>
             <div class="texts">
-              <!-- <span v-for="(item,idx) in currentTxtsArr"
+              <span v-for="(item,idx) in currentTxtsArr"
                     :class="`txt txt${idx%count+1}`"
-                    :key="idx">
-                {{item}}
-              </span> -->
-              <span class="txt txt1">企业标签</span>
+                    :key="item">
+                  {{item}}
+              </span>
+              <!-- <span class="txt txt1">企业标签</span>
               <span class="txt txt2">产品标签</span>
               <span class="txt txt3">政策标签</span>
-              <span class="txt txt4">产业链标签</span>
+              <span class="txt txt4">产业链标签</span> -->
             </div>
           </div>
           <div class="box2">
@@ -166,11 +166,12 @@ export default {
     if (this.timer) {
       clearInterval(this.timer)
     } else {
-      this.timer = setInterval(this.loop, 4000)
+      this.timer = setInterval(this.loop, 2000)
     }
   },
   methods: {
     loop() {
+       this.currentTxtsArr = []
       let count = 4
       if (this.currentIndex >= this.txts.length) {
         this.currentIndex = 0

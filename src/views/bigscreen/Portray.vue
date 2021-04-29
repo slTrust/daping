@@ -39,12 +39,12 @@
             </div>
             <div class="l-list">
               <div class="title">
-                投资公司列表
+                产品列表
               </div>
               <ul>
-                <li>投资公司11</li>
-                <li>投资公司2</li>
-                <li>投资公司3</li>
+                <li>产品1</li>
+                <li>产品2</li>
+                <li>产品3</li>
               </ul>
             </div>
           </div>
@@ -780,7 +780,7 @@ main {
         }
         .l-list{
           flex:1;
-          background: blue;
+          // background: blue;
           .title{
             font-size: 24px;
             line-height: 40px;
@@ -795,7 +795,7 @@ main {
           padding-top:40px;
           li{
             list-style: none;
-            background: red;
+            // background: red;
             line-height: 50px;
             color:#fff;
           }

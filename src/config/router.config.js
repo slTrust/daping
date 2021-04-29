@@ -402,5 +402,15 @@ export const constantRouterMap = [
   {
     path: '/bigscreen/aaa',
     component: () => import('@/views/bigscreen/Aaa')
+  },
+  {
+    path: '/bigscreen/aaa',
+    component: () => import('@/views/bigscreen/Aaa')
+  },
+  {
+    path: '/bigscreen/econ_fct',
+    component: () => import('@/views/bigscreen/EconFct')
   }
+
+  
 ]
