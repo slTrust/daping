@@ -6,26 +6,27 @@
     <div class="top-img">
       <img style="width:100%;" src="@/assets/big/top-back.png" />
       <div class="mid-c">
-        <span>标签</span>
+        <!-- <span>标签</span> -->
+        <img src="@/assets/big/label.png" />
       </div>
       <div class="arrow-pub arrow-l">
         <span>产业链</span>
-        <img src="@/assets/big/fx-icon2.png" />
+        <img src="@/assets/big/dt-icon.gif" />
       </div>
       <div class="arrow-pub arrow-r">
-        <img src="@/assets/big/fx-icon.png" />
+        <img src="@/assets/big/dt-icon.gif" />
         <span>企业产品</span>
       </div>
-      <div class="pub-c pc1">智能<br>科技</div>
-      <div class="pub-c pc2">智能<br>科技</div>
-      <div class="pub-c pc3">智能<br>科技</div>
-      <div class="pub-c pc4">智能<br>科技</div>
-      <div class="pub-c pc5">智能<br>科技</div>
-      <div class="pub-c pc6">智能<br>科技</div>
-      <div class="pub-c pc7">智能<br>科技</div>
-      <div class="pub-c pc8">智能<br>科技</div>
-      <div class="pub-c pc9">智能<br>科技</div>
-      <div class="pub-c pc10">智能<br>科技</div>
+      <div class="pub-c pc1">智能科<br>技服务</div>
+      <div class="pub-c pc2">文化<br>旅游</div>
+      <div class="pub-c pc3">大<br>健康</div>
+      <div class="pub-c pc4">教育<br>培训</div>
+      <div class="pub-c pc5">绿色<br>金融</div>
+      <div class="pub-c pc6">大数据<br>采集</div>
+      <div class="pub-c pc7">人工<br>智能</div>
+      <div class="pub-c pc8">数据<br>中台</div>
+      <div class="pub-c pc9">企业<br>图谱</div>
+      <div class="pub-c pc10">AI智能<br>分析</div>
     </div>
     <div class="out-div">
       <a-row :gutter="[16,16]">
@@ -329,7 +330,7 @@
 <style scoped>
 .seamless-warp{
   width: 100%;
-  height: 180px;
+  height: 190px;
   overflow: hidden;
   color: #fff;
 }
@@ -349,7 +350,7 @@
   font-size: 18px;
 }
 .hai-content {
-  padding: 20px 100px;
+  padding: 0 100px;
 }
 .hai-content .out-div{
   border: 1px solid #00a1fc;
@@ -357,7 +358,7 @@
 }
 
 .hai-content .out-div .tab-tit{
-  color:#90e5ff;
+  color:#fff;
   text-align: center;
   margin-bottom: 5px;
   font-size: 24px;
@@ -380,9 +381,13 @@
   left: 44%;
   width: 10vw;
   height: 10vw;
-  background-color: #e28400;
+  background-color: #000c36;
   border-radius: 50%;
   text-align: center;
+}
+.top-img .mid-c img{
+  width: 100%;
+  height: auto;
 }
 .top-img .mid-c span{
   position: relative;
@@ -401,61 +406,53 @@
   width: 4vw;
   height: 4vw;
   border-radius: 4vw;
-  color: #fff;
+  background-color: #06164d;
+  color: #3ae8ff;
+  box-shadow: 0 0 10px 4px #079dff inset;
   text-align: center;
   padding-top: 0.7vw;
-  font-size: 16px;
+  font-size: 14px;
 }
 .top-img .pc1{
   top: 36%;
   left: 0;
-  background-color: #00a1fc;
 }
 .top-img .pc2{
   top: 21%;
   left: 6vw;
-  background-color: #00a1fc;
 }
 .top-img .pc3{
   bottom: 21%;
   left: 6vw;
-  background-color: #00a1fc;
 }
 .top-img .pc4{
   top: 12%;
   left: 12vw;
-  background-color: #00a1fc;
 }
 .top-img .pc5{
   bottom: 12%;
   left: 12vw;
-  background-color: #00a1fc;
 }
 
 .top-img .pc6{
   top: 36%;
   right: 0;
-  background-color: #00a1fc;
 }
 .top-img .pc7{
   top: 21%;
   right: 6vw;
-  background-color: #00a1fc;
 }
 .top-img .pc8{
   bottom: 21%;
   right: 6vw;
-  background-color: #00a1fc;
 }
 .top-img .pc9{
   top: 12%;
   right: 12vw;
-  background-color: #00a1fc;
 }
 .top-img .pc10{
   bottom: 12%;
   right: 12vw;
-  background-color: #00a1fc;
 }
 .arrow-pub{
   position: absolute;
@@ -464,7 +461,7 @@
   font-size: 20px;
 }
 .arrow-pub img{
-  height: 20px;
+  height: 26px;
   width: auto;
 }
 .arrow-l{
@@ -472,5 +469,8 @@
 }
 .arrow-r{
   right: 26%;
+}
+.arrow-r img{
+  transform:rotate(180deg);
 }
 </style>

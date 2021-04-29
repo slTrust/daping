@@ -318,10 +318,6 @@ export default {
 }
 </script>
 <style scoped lang="less">
-.hai-content {
-  padding: 0 30px;
-  padding-top: 4vh;
-}
 .arch_content {
   margin: 50px auto 50px;
   border: 2px solid #0186f1;
@@ -341,10 +337,13 @@ export default {
       justify-content: space-around;
       align-items: center;
       min-height: 138px;
-      font-size: 42px;
-      background: linear-gradient(270deg, #007bd8 0%, #002d6e 32%, #000b36 100%);
+      font-size: 36px;
+      // background: linear-gradient(270deg, #007bd8 0%, #002d6e 32%, #000b36 100%);
+      background: transparent;
       color: #fff;
       margin-bottom: 20px;
+      div {
+      }
     }
     .content {
       padding: 20px;
@@ -353,7 +352,8 @@ export default {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      background: linear-gradient(270deg, #007bd8 0%, #002d6e 32%, #000b36 100%);
+      // background: linear-gradient(270deg, #007bd8 0%, #002d6e 32%, #000b36 100%);
+      background: transparent;
       .box1 {
         width: 580px;
         height: 540px;
@@ -405,7 +405,7 @@ export default {
           }
           .ab_name {
             padding-left: 70px;
-            font-size: 30px;
+            font-size: 28px;
             font-weight: bold;
             color: #fff;
             padding-top: 15px;
@@ -457,10 +457,10 @@ export default {
             background-size: cover;
           }
           .orange {
-            background: #ffa300;
+            background: rgb(242,148,57);
           }
           .green {
-            background: #00be19;
+            background: rgb(28,178,109);
           }
         }
         .r3:nth-child(3) {

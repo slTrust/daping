@@ -24,7 +24,7 @@
                   <div class="value">{{ baseInfo.scaleMin }}-{{ baseInfo.scaleMax }}</div>
                 </li>
                 <li>
-                  <div class="label">企业性质:</div>
+                  <div class="label">企业类型:</div>
                   <div class="value">{{ baseInfo.econKind }}</div>
                 </li>
                 <li>
@@ -36,14 +36,6 @@
                   <div class="value">{{ baseInfo.tel }}</div>
                 </li>
               </ul>
-              <div class="score">
-                <div class="label">企业实力指数</div>
-                <div class="value">{{ baseInfo.strength }}</div>
-              </div>
-              <div class="score">
-                <div class="label">企业风险指数</div>
-                <div class="value">{{ baseInfo.risk }}</div>
-              </div>
             </div>
           </div>
           <div class="r-charts">
@@ -817,15 +809,16 @@ export default {
     },
     initRadar(indicator, data) {
       let myChart = echarts.init(this.$refs.chartRadar, null, { renderer: 'svg' })
+      let _this = this;
       var option = {
         backgroundColor: 'transparent',
         title: {
-          text: '企业能力',
-          left: '110',
+          text: '企业实力指数：' +this.baseInfo.strength,
+          left: '50',
           top: 20,
           textStyle: {
             color: '#fff',
-            fontSize: 32,
+            fontSize: 28,
           },
         },
         radar: [
@@ -888,15 +881,16 @@ export default {
     },
     initColumn(xData, yData) {
       let myChart = echarts.init(this.$refs.chartColumn)
+      let _this = this;
       var option
       option = {
         title: {
-          text: '企业风险',
-          left: '110',
+          text: '企业风险指数：' + _this.baseInfo.risk,
+          left: '50',
           top: 20,
           textStyle: {
             color: '#fff',
-            fontSize: 32,
+            fontSize: 28,
           },
         },
         xAxis: {
@@ -1167,7 +1161,7 @@ main {
             }
           }
           .name {
-            font-size: 32px;
+            font-size: 24px;
             line-height: 1.2;
             color: #fff;
             font-weight: bold;

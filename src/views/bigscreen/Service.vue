@@ -1,5 +1,5 @@
 <template>
-  <div class="hai-content">
+  <div class="hai-content service">
     <div class="service-tit">
       <span class="span1">主动服务</span>
     </div>
@@ -23,8 +23,9 @@
             :dataSource="formObj.questions"
             :columns="columns1"
             :loading="loading1">
-            <div class="col-t1" slot="progress" slot-scope="text">
-              <a-progress type="circle" :percent="Number(text)" :width="40" />
+            <div class="col-t1" slot="progress,status" slot-scope="text,name">
+              <span>{{name.status}}</span>
+              <!-- <a-progress type="circle" :percent="Number(name.progress)" :width="40" /> -->
             </div>
             <div class="col-t2" slot="operation" slot-scope="text">
               <span class="sp2">{{text=='call'?'':text}}</span>
@@ -37,6 +38,7 @@
 
     <a-row :gutter="50" class="vh-hg2">
       <a-col :span="8">
+        <div class="sub-tit">跟踪评价</div>
         <div class="cp-tit">
           精准推送量<span class="sp1">{{formObj.policypushTotal}}</span>
           政策兑换率<span>{{formObj.policypayRate}}</span>
@@ -44,9 +46,11 @@
         <div ref="myBar" class="my-bar"></div>
       </a-col>
       <a-col :span="16">
-        <div class="sub-tit">优企政策top5</div>
+        <div class="sub-tit">惠企政策TOP5</div>
         <ul class="sul">
-          <li v-for="(item,index) in formObj.policies" :key="index">{{item.policyContent}}</li>
+          <li v-for="(item,index) in formObj.policies" :key="index">
+            <span class="ft" :class="'c'+item.policyType">【{{item.policyTypeName}}】</span>{{item.policyContent}}<span class="at">{{item.publishDate}}</span>
+          </li>
         </ul>
       </a-col>
     </a-row>
@@ -66,20 +70,20 @@
         },
         loading1:false,
         columns1:[
-          {title: '咨询企业',align: "center",dataIndex: 'enterpriseName'},
-          {title: '企业问题',align: "center",dataIndex: 'questionContent'},
+          {title: '咨询企业',align: "left",dataIndex: 'enterpriseName'},
+          {title: '企业问题',align: "left",dataIndex: 'questionContent'},
           {title: '责任部门',align: "center",dataIndex: 'dutyDepart'},
-          {title: '办理进度',align: "center",dataIndex: 'progress',scopedSlots: { customRender: 'progress' }},
-          {title: '操作',align: "center",dataIndex: 'operation',scopedSlots: { customRender: 'operation' }}
+          {title: '办理进度',align: "center",dataIndex: 'progress,status',scopedSlots: { customRender: 'progress,status' }},
+          {title: '评价',align: "center",dataIndex: 'operation',scopedSlots: { customRender: 'operation' }}
         ]
-        
+
       }
     },
     created() {
       this.getDatas();
     },
     mounted(){
-      
+
     },
     methods: {
       getDatas(){
@@ -111,7 +115,7 @@
       setPie(arr){
         let option = {
             tooltip: {
-              trigger: 'item'
+              show:false
             },
             legend: {
               show:false
@@ -153,7 +157,7 @@
                 emphasis: {
                   label: {
                     show: true,
-                    fontSize: '40',
+                    fontSize: '20',
                     fontWeight: 'bold'
                   }
                 },
@@ -166,7 +170,7 @@
       },
       setBar(xData2,data1,data2){
         let option = {
-          backgroundColor: '#021132',
+          // backgroundColor: '#021132',
           tooltip: {
             trigger: 'item',
           },
@@ -205,7 +209,7 @@
           axisLabel: {
             textStyle: {
               color: '#fff',
-              fontSize:20,
+              fontSize:12,
             },
           }
         },
@@ -371,10 +375,16 @@
     }
   }
 </script>
+<style>
+.hai-content.service .ant-table-tbody > tr > td{
+  background-color: #000c34;
+  color: #91e5ce !important;
+  font-size: 16px;
+}
+</style>
 <style scoped>
 .hai-content{
   padding: 0 30px;
-  padding-top: 4vh;
 }
 .vh-hg1{
   height: 48vh;
@@ -383,19 +393,44 @@
   height: 38vh;
 }
 .hai-content .sub-tit{
-  color: #03f6d8;
-  font-size: 22px;
-  padding: 10px 0;
+  color: #fff;
+  font-size: 24px;
+  padding: 10px 0 20px;
+  font-weight: 600;
 }
 .hai-content .sul{
-  color: #0563e1;
+  color: #77bda6;
   font-size: 20px;
 }
 .hai-content .sul li{
   margin: 8px 0;
 }
+.hai-content .sul .ft{
+  display: inline-block;
+  width: 180px;
+}
+.hai-content .sul .c1{
+  color: #e7334b;
+}
+.hai-content .sul .c2{
+  color: #ffa800;
+}
+.hai-content .sul .c3{
+  color: #28f4a6;
+}
+.hai-content .sul .c4{
+  color: #1e89e5;
+}
+.hai-content .sul .c5{
+  color: #e7334b;
+}
+.hai-content .sul .at{
+  float: right;
+  color: #247bc5;
+}
 .hai-content .my-pie{
   height: 30vh;
+  padding-top: 60px;
 }
 .hai-content .my-bar{
   height: 30vh;
@@ -422,4 +457,7 @@
 .col-t2 .anticon{
   font-size: 28px;
 }
+
+
+
 </style>

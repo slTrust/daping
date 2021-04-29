@@ -145,7 +145,7 @@
           };
         }
         let option = {
-          color:['#e28400','#23e9f4','#00a1fc'],
+          color:['rgba(0,62,177,0.8)','rgba(7,155,221,0.8)','rgba(93,34,228,0.8)'],
           title: {
             text: ''
           },
@@ -237,7 +237,7 @@
 .out-line{
   display: inline-block;
   position: relative;
-  border: 4px solid #36B3E7;
+  border: 4px solid rgb(0, 28, 88);
   border-radius: 50%;
   padding: 10px;
   z-index: 2;
@@ -259,7 +259,7 @@
   bottom: -40px;
   left: 0;
   width: 100%;
-  color: #fff;
+  color: #6eb0e3;
   text-align: center;
   margin-top: 10px;
   font-size: 20px;
@@ -283,7 +283,7 @@
   left: 0;
   width: 100%;
   height: 4px;
-  background-color: #36B3E7;
+  background-color: rgb(0,28,88);
 }
 .out-right{
   position: absolute;
