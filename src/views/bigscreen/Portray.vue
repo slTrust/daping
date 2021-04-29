@@ -535,7 +535,9 @@ export default {
   },
   created() {},
   mounted() {
+     this.enterpriseId = '91310000792783700P'
     this.getData()
+
     /*websocket集成*/
     this.initWebSocket()
     this.heartCheckFun()
@@ -559,25 +561,25 @@ export default {
       getPortray(this.enterpriseId).then((res) => {
         console.log('------------ajax----')
         if (res.success) {
-          // execData(res)
+          execData(res)
         }
       })
-      execData(mock_data)
+      // execData(mock_data)
 
-      setInterval(() => {
-        mock_data.result.baseInfo.name = parseInt(Math.random() * 100)
-        console.log(mock_data.result.baseInfo.name)
-        mock_data.result.strengthDetails[0].cnt = parseInt(Math.random() * 100)
-        mock_data.result.strengthDetails[1].cnt = parseInt(Math.random() * 100)
-        mock_data.result.strengthDetails[2].cnt = parseInt(Math.random() * 100)
-        mock_data.result.strengthDetails[3].cnt = parseInt(Math.random() * 100)
-        mock_data.result.riskDetails[0].cnt = parseInt(Math.random() * 100)
-        mock_data.result.riskDetails[1].cnt = parseInt(Math.random() * 100)
-        mock_data.result.riskDetails[2].cnt = parseInt(Math.random() * 100)
-        mock_data.result.riskDetails[3].cnt = parseInt(Math.random() * 100)
-        mock_data.result.atlas.name = parseInt(Math.random() * 10000)
-        execData(mock_data)
-      }, 2000)
+      // setInterval(() => {
+      //   mock_data.result.baseInfo.name = parseInt(Math.random() * 100)
+      //   console.log(mock_data.result.baseInfo.name)
+      //   mock_data.result.strengthDetails[0].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.strengthDetails[1].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.strengthDetails[2].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.strengthDetails[3].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.riskDetails[0].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.riskDetails[1].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.riskDetails[2].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.riskDetails[3].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.atlas.name = parseInt(Math.random() * 10000)
+      //   execData(mock_data)
+      // }, 2000)
     },
     initChart() {
       let { indicator, data: radarData } = this.setRadarData()
@@ -1034,6 +1036,7 @@ export default {
           var enterpriseId = data.data.enterpriseId
           if (this.enterpriseId != enterpriseId) {
             this.enterpriseId = enterpriseId
+            this.enterpriseId = '91310000792783700P'
             console.log('enterpriseId----change-')
             //  console.log(enterpriseId)
             // this.getData();
