@@ -18,7 +18,7 @@
             <div class="texts">
               <span v-for="(item,idx) in currentTxtsArr"
                     :class="`txt txt${idx%count+1}`"
-                    :key=item>
+                    :key="idx">
                 {{item}}
               </span>
               <!-- <span class="txt txt1">企业标签</span>
@@ -591,22 +591,22 @@ export default {
 }
 .txt1 {
   transform: translate(0, 20px);
-  animation: tag_move1 4s linear 250ms infinite;
+  animation: tag_move1 2s linear 0ms infinite;
   color: #3eacff;
 }
 .txt2 {
   transform: translate(30px, 60px);
-  animation: tag_move2 4s linear 0ms infinite;
+  animation: tag_move2 2s linear 0ms infinite;
   color: #ffa300;
 }
 .txt3 {
   transform: translate(120px, 90px);
-  animation: tag_move3 4s linear 0ms infinite;
+  animation: tag_move3 2s linear 0ms infinite;
   color: #00be19;
 }
 .txt4 {
   transform: translate(260px, 60px);
-  animation: tag_move4 4s linear 0ms infinite;
+  animation: tag_move4 2s linear 0ms infinite;
   color: #23e9f4;
 }
 </style>
