@@ -7,7 +7,7 @@
       <div class="ps-top mbt60">
         <div class="pub-item">
           <div class="out-line">
-            <div class="himg bkimg1 rotate-img1">
+            <div class="himg bkimg1 rotate-img">
               <img class="img" src="@/assets/big/in1.png" />
             </div>
           </div>

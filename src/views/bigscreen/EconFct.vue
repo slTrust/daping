@@ -174,6 +174,7 @@ export default {
 main {
   padding-top: 10vh;
   padding-bottom:10vh;
+  padding:10vh 5vh;
   height: 90vh;
   display: flex;
   justify-content: space-between;
