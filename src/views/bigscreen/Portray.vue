@@ -5,17 +5,14 @@
     </div>
     <main>
       <div class="ht"></div>
-      <div class="lside"
-           v-if="baseInfo != null">
-        <div class="recommendPNG"
-             v-show="baseInfo.recommendFlag == 1"></div>
+      <div class="lside" v-if="baseInfo != null">
+        <div class="recommendPNG" v-show="baseInfo.recommendFlag == 1"></div>
         <div class="recommendOffice">推荐办公区：{{ baseInfo.recommendOffice }}</div>
         <div class="content">
           <div class="l-info">
             <div class="l-inner">
               <div class="logo">
-                <img :src="baseInfo.logoUrl"
-                     alt="" />
+                <img :src="baseInfo.logoUrl" alt="" />
               </div>
               <div class="name">{{ baseInfo.name }}</div>
               <ul>
@@ -38,9 +35,7 @@
               </ul>
             </div>
             <div class="l-list">
-              <div class="title">
-                产品列表
-              </div>
+              <div class="title">产品列表</div>
               <ul>
                 <li>产品1</li>
                 <li>产品2</li>
@@ -49,16 +44,13 @@
             </div>
           </div>
           <div class="r-charts">
-            <div ref="chartRadar"
-                 class="chart chart1"></div>
-            <div ref="chartColumn"
-                 class="chart chart2"></div>
+            <div ref="chartRadar" class="chart chart1"></div>
+            <div ref="chartColumn" class="chart chart2"></div>
           </div>
         </div>
       </div>
       <div class="rside">
-        <div ref="echartId"
-             class="my-echarts"></div>
+        <div ref="echartId" class="my-echarts"></div>
       </div>
     </main>
   </div>
@@ -87,11 +79,19 @@ export default {
       websock: null,
       lockReconnect: false,
       heartCheck: null,
+      // 图谱 legend
+      categories : [
+        { name: '竞争图谱', cover_name: ['竞争企业'], itemStyle: { color: 'rgb(255,147,42)' } },
+        { name: '投资图谱', cover_name: ['投资公司', '分支机构', '独资子公司'], itemStyle: { color: 'rgb(0,105,255)' } },
+        { name: '参股图谱', cover_name: ['控股企业', '参股投资企业','控股子公司'], itemStyle: { color: 'rgb(0,139,209)' } },
+        { name: '股权结构', cover_name: ['主要股东'], itemStyle: { color: 'rgb(255,51,87)' } },
+        { name: '上下游', cover_name: ['上下游企业'], itemStyle: { color: 'rgb(0,209,64)' } },
+      ]
     }
   },
   created() {},
   mounted() {
-     this.enterpriseId = '91310000792783700P'
+    this.enterpriseId = '91310000792783700P'
     this.getData()
 
     /*websocket集成*/
@@ -115,7 +115,6 @@ export default {
         })
       }
       getPortray(this.enterpriseId).then((res) => {
-        console.log('------------ajax----')
         if (res.success) {
           execData(res)
         }
@@ -142,35 +141,10 @@ export default {
       this.initRadar(indicator, radarData)
       let { c_category, data } = this.setColumnData()
       this.initColumn(c_category, data)
-      let { dots, lines } = this.setGraphData()
-      this.setGraph(dots, lines)
+      let { dots, lines} = this.setGraphData()
+      this.setGraph(dots, lines, this.categories)
     },
-    setGraphCategoryColor() {
-      let mapCategory = {}
-      let mapColor = {
-        root: 'rgb(14,67,255)', // 首节点
-        主要股东: 'rgb(255,51,87)', // red
 
-        控股子公司: 'rgb(0,105,255)',
-        投资公司: 'rgb(0,105,255)',
-        分支机构: 'rgb(0,105,255)',
-
-        上下游企业: 'rgb(0,209,64)', // green
-
-        竞争企业: 'rgb(255,147,42)',
-
-        控股企业: 'rgb(0,139,209)',
-        参股投资企业: 'rgb(0,139,209)',
-      }
-      let rootNode = JSON.parse(JSON.stringify(this.atlas))
-      mapCategory[rootNode.name] = mapColor['root']
-      let currentNode = this.atlas
-      currentNode.children.forEach((e) => {
-        let color = mapColor[e.name] || 'black'
-        mapCategory[e.name] = color
-      })
-      return mapCategory
-    },
     setGraphData() {
       let mapCategory = {}
       let dots = []
@@ -191,16 +165,18 @@ export default {
         descr: rootNode.descr,
         symbolSize: 120,
       })
-      function forEachDeepNode(node) {
+     
+      function forEachDeepNode(node, category) {
         node.forEach((item) => {
-          dots.push({
+          let temp = {
             name: item.code,
             pname: item.pcode,
             _name: item.name,
             direction: item.direction,
             descr: item.descr,
             symbolSize: 70,
-          })
+          }
+          dots.push(temp)
           lines.push({
             source: item.code,
             target: item.pcode,
@@ -217,29 +193,70 @@ export default {
         })
       }
       forEachDeepNode(currentNode.children)
+      this.setNodeCategory(dots)
       return {
         dots,
-        lines,
+        lines
       }
     },
-    setGraph(dot, lines) {
+     setNodeCategory(allNode) {
+       let _this = this;
+      allNode.forEach((e) => {
+       console.log(5,e)
+
+        let name = e.name;
+        let levelRelation = []
+        function findUp(start, allNode) {
+          allNode.forEach((item) => {
+            if (item.name === start) {
+              levelRelation.push(item.name)
+              if (item.pname && levelRelation.includes(item.pname) === false) {
+                findUp(item.pname, allNode)
+              }
+            }
+          })
+        }
+        findUp(name, allNode)
+        // 逐级向上查找
+        let levelRelationNames = levelRelation.map((code) => {
+          let item = allNode.find((e) => e.name === code)
+          return item._name
+        })
+        function findInCategoryMap(node_name){
+          let category = null
+          for(let i=0;i<_this.categories.length;i++){
+             let currentCategory = _this.categories[i]
+            if(currentCategory.cover_name.includes(node_name)){
+                category = i;
+                break;
+              }
+          }
+          return category;
+        }
+        console.log('----------levelRelationNames forEach------------')
+        for (let i = 0; i < levelRelationNames.length; i++) {
+          let node_name = levelRelationNames[i]
+          let findResult = findInCategoryMap(node_name)
+          if (findResult!==null) {
+            console.log('我找到了',node_name,findResult)
+            e.category = findResult
+            break
+          }
+        }
+      })
+    },
+    setGraph(dot, lines, categories) {
       let _this = this
       let option = {
-        title: {
-          text: '',
-          left: '10',
-          top: 10,
-          textStyle: {
-            color: '#fff',
-            fontSize: 32,
+        legend: [
+          {
+            // selectedMode: 'single',
+            data: categories.map((item) => item.name),
+            textStyle:{
+              color:'#fff'
+            }
           },
-        },
-        tooltip: {
-          show: false,
-        },
-        toolbox: {
-          show: false,
-        },
+        ],
         series: [
           {
             type: 'graph', // 类型:关系图
@@ -247,8 +264,6 @@ export default {
             symbolSize: 100, // 调整节点的大小
             roam: true,
             edgeSymbol: ['arrow', ''],
-            // edgeSymbol: ['circle', 'arrow'],
-            // edgeSymbolSize: [2, 10],
             label: {
               normal: {
                 show: true,
@@ -256,7 +271,7 @@ export default {
                   fontSize: 12,
                   color: '#fff',
                 },
-                formatter: (data, b, c) => {
+                formatter: (data) => {
                   let params = data.data._name
                   let newParamsName = '' // 最终拼接成的字符串
                   let paramsNameNumber = params.length // 实际标签的个数
@@ -305,57 +320,31 @@ export default {
             },
             edgeLabel: {
               normal: {
-                show: false,
+                show: true,
               },
             },
             data: dot,
             links: lines,
+            categories: categories,
             itemStyle: {
               normal: {
                 color: function (params) {
-                  // return 'red'
-                  return _this.findInCategoryColor(params, dot)
+                  let idx = params.data.category
+                  console.log('formatter color,idx=',idx)
+                  let color = 'rgba(145,191,252,1)' // 根节点 or 其他未在 categories 内的节点颜色
+                  // idx = 0 也会 精准匹配 undefined
+                  if(idx!==undefined &&  _this.categories[idx]){
+                    color = categories[idx].itemStyle.color
+                  }
+                  return color
                 },
               },
             },
-            // categories: categories,
           },
         ],
       }
       let myChart = echarts.init(this.$refs.echartId)
       myChart.setOption(option)
-    },
-    findInCategoryColor(params, allNode) {
-      let map = this.setGraphCategoryColor()
-      let data = params.data
-      let res = 'black'
-      let levelRelation = []
-      function findUp(start, allNode) {
-        allNode.forEach((item) => {
-          if (item.name === start) {
-            levelRelation.push(item.name)
-            if (item.pname && levelRelation.includes(item.pname) === false) {
-              findUp(item.pname, allNode)
-            }
-          }
-        })
-      }
-      findUp(data.name, allNode)
-      // 逐级向上查找
-      // console.log('-------------逐级向上查找')
-      let levelRelationNames = levelRelation.map((code) => {
-        let item = allNode.find((e) => e.name === code)
-        return item._name
-      })
-      levelRelationNames.forEach((item) => {})
-      for (let i = 0; i < levelRelationNames.length; i++) {
-        let item = levelRelationNames[i]
-        if (item in map) {
-          res = map[item]
-          break
-        }
-      }
-      return res
     },
     setRadarData() {
       let indicator = []
@@ -373,11 +362,11 @@ export default {
     },
     initRadar(indicator, data) {
       let myChart = echarts.init(this.$refs.chartRadar, null, { renderer: 'svg' })
-      let _this = this;
+      let _this = this
       var option = {
         backgroundColor: 'transparent',
         title: {
-          text: '企业实力指数：' +this.baseInfo.strength,
+          text: '企业实力指数：' + this.baseInfo.strength,
           left: '100',
           top: 20,
           textStyle: {
@@ -445,7 +434,7 @@ export default {
     },
     initColumn(xData, yData) {
       let myChart = echarts.init(this.$refs.chartColumn)
-      let _this = this;
+      let _this = this
       var option
       option = {
         title: {
@@ -717,7 +706,7 @@ main {
         justify-content: space-between;
         align-items: flex-start;
         .l-inner {
-          flex:1;
+          flex: 1;
           height: 100%;
           padding: 40px;
           .logo {
@@ -778,26 +767,26 @@ main {
             }
           }
         }
-        .l-list{
-          flex:1;
+        .l-list {
+          flex: 1;
           // background: blue;
-          .title{
+          .title {
             font-size: 24px;
             line-height: 40px;
             font-weight: bold;
-            color:#fff;
-            padding:10px 0;
+            color: #fff;
+            padding: 10px 0;
           }
-          ul{
-            margin:0;
-            padding:0;
+          ul {
+            margin: 0;
+            padding: 0;
           }
-          padding-top:40px;
-          li{
+          padding-top: 40px;
+          li {
             list-style: none;
             // background: red;
             line-height: 50px;
-            color:#fff;
+            color: #fff;
           }
         }
       }
