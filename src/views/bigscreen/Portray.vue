@@ -5,14 +5,17 @@
     </div>
     <main>
       <div class="ht"></div>
-      <div class="lside" v-if="baseInfo != null">
-        <div class="recommendPNG" v-show="baseInfo.recommendFlag == 1"></div>
+      <div class="lside"
+           v-if="baseInfo != null">
+        <div class="recommendPNG"
+             v-show="baseInfo.recommendFlag == 1"></div>
         <div class="recommendOffice">推荐办公区：{{ baseInfo.recommendOffice }}</div>
         <div class="content">
           <div class="l-info">
             <div class="l-inner">
               <div class="logo">
-                <img :src="baseInfo.logoUrl" alt="" />
+                <img :src="baseInfo.logoUrl"
+                     alt="" />
               </div>
               <div class="name">{{ baseInfo.name }}</div>
               <ul>
@@ -36,26 +39,79 @@
             </div>
             <div class="l-list">
               <div class="title">产品列表</div>
-              <ul>
-                <li>产品1</li>
-                <li>产品2</li>
-                <li>产品3</li>
-              </ul>
+              <div class="scroll_table_container">
+                <div class="scroll_table_wrapper"
+                     style=""
+                     v-if="products!=null">
+                  <div class="tempTableWrapper">
+                    <table class="tempTable data_table">
+                      <thead>
+                        <tr>
+                          <th>产品名称</th>
+                          <th>竞争对手</th>
+                          <th>竞争企业</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="(item, index) in scroll_data"
+                            :key='index'>
+                          <td>
+                            {{item.c0}}
+                          </td>
+                          <td>
+                            {{item.c1}}
+                          </td>
+                          <td>
+                            <div class="company">
+                              {{item.c2}}
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                  <vue-seamless-scroll :data="scroll_data"
+                                       :class-option="defaultOption">
+                    <table class="ul-scoll data_table">
+                      <tr v-for="(item, index) in scroll_data"
+                          :key='index'>
+                        <td>
+                          {{item.c0}}
+                        </td>
+                        <td>
+                          {{item.c1}}
+                        </td>
+                        <td>
+                          <div class="company"
+                               :title="item.c2">
+                            {{item.c2}}
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </vue-seamless-scroll>
+                </div>
+              </div>
             </div>
           </div>
           <div class="r-charts">
-            <div ref="chartRadar" class="chart chart1"></div>
-            <div ref="chartColumn" class="chart chart2"></div>
+            <div ref="chartRadar"
+                 class="chart chart1"></div>
+            <div ref="chartColumn"
+                 class="chart chart2"></div>
           </div>
         </div>
       </div>
       <div class="rside">
-        <div ref="echartId" class="my-echarts"></div>
+        <div ref="echartId"
+             class="my-echarts"></div>
       </div>
     </main>
   </div>
 </template>
 <script>
+import vueSeamlessScroll from 'vue-seamless-scroll'
 import { getPortray } from '@/api/manage'
 const echarts = require('echarts')
 /*websocket集成*/
@@ -71,6 +127,7 @@ export default {
       atlas: null,
       riskDetails: null,
       strengthDetails: null,
+      products: null,
       dataArr: [],
       dots: [],
       lines: [],
@@ -80,14 +137,51 @@ export default {
       lockReconnect: false,
       heartCheck: null,
       // 图谱 legend
-      categories : [
+      categories: [
         { name: '竞争图谱', cover_name: ['竞争企业'], itemStyle: { color: 'rgb(255,147,42)' } },
-        { name: '投资图谱', cover_name: ['投资公司', '分支机构', '独资子公司'], itemStyle: { color: 'rgb(0,105,255)' } },
-        { name: '参股图谱', cover_name: ['控股企业', '参股投资企业','控股子公司'], itemStyle: { color: 'rgb(0,139,209)' } },
+        {
+          name: '投资图谱',
+          cover_name: ['投资公司', '分支机构', '独资子公司'],
+          itemStyle: { color: 'rgb(0,105,255)' },
+        },
+        {
+          name: '参股图谱',
+          cover_name: ['控股企业', '参股投资企业', '控股子公司'],
+          itemStyle: { color: 'rgb(0,139,209)' },
+        },
         { name: '股权结构', cover_name: ['主要股东'], itemStyle: { color: 'rgb(255,51,87)' } },
         { name: '上下游', cover_name: ['上下游企业'], itemStyle: { color: 'rgb(0,209,64)' } },
-      ]
+      ],
+      scroll_data: [
+        { id: '1', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '1', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '2', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '3', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '4', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '5', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '6', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '7', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '8', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+      ],
     }
+  },
+  components: {
+    vueSeamlessScroll,
+  },
+  // 监听属性 类似于data概念
+  computed: {
+    defaultOption() {
+      return {
+        step: 0.2, // 数值越大速度滚动越快
+        limitMoveNum: 5, // 开始无缝滚动的数据量 this.dataList.length
+        hoverStop: true, // 是否开启鼠标悬停stop
+        direction: 1, // 0向下 1向上 2向左 3向右
+        openWatch: true, // 开启数据实时监控刷新dom
+        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+        waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
+      }
+    },
   },
   created() {},
   mounted() {
@@ -105,11 +199,12 @@ export default {
   methods: {
     getData() {
       const execData = (res) => {
-        let { baseInfo, atlas, riskDetails, strengthDetails } = res.result
+        let { baseInfo, atlas, riskDetails, strengthDetails, products } = res.result
         this.baseInfo = baseInfo != null ? baseInfo : {}
         this.atlas = atlas != null ? atlas : {}
         this.riskDetails = riskDetails != null ? riskDetails : []
         this.strengthDetails = strengthDetails != null ? strengthDetails : []
+        this.products = products != null ? products : []
         this.$nextTick(() => {
           this.initChart()
         })
@@ -141,7 +236,7 @@ export default {
       this.initRadar(indicator, radarData)
       let { c_category, data } = this.setColumnData()
       this.initColumn(c_category, data)
-      let { dots, lines} = this.setGraphData()
+      let { dots, lines } = this.setGraphData()
       this.setGraph(dots, lines, this.categories)
     },
 
@@ -165,7 +260,7 @@ export default {
         descr: rootNode.descr,
         symbolSize: 120,
       })
-     
+
       function forEachDeepNode(node, category) {
         node.forEach((item) => {
           let temp = {
@@ -196,15 +291,15 @@ export default {
       this.setNodeCategory(dots)
       return {
         dots,
-        lines
+        lines,
       }
     },
-     setNodeCategory(allNode) {
-       let _this = this;
+    setNodeCategory(allNode) {
+      let _this = this
       allNode.forEach((e) => {
-       console.log(5,e)
+        console.log(5, e)
 
-        let name = e.name;
+        let name = e.name
         let levelRelation = []
         function findUp(start, allNode) {
           allNode.forEach((item) => {
@@ -222,23 +317,23 @@ export default {
           let item = allNode.find((e) => e.name === code)
           return item._name
         })
-        function findInCategoryMap(node_name){
+        function findInCategoryMap(node_name) {
           let category = null
-          for(let i=0;i<_this.categories.length;i++){
-             let currentCategory = _this.categories[i]
-            if(currentCategory.cover_name.includes(node_name)){
-                category = i;
-                break;
-              }
+          for (let i = 0; i < _this.categories.length; i++) {
+            let currentCategory = _this.categories[i]
+            if (currentCategory.cover_name.includes(node_name)) {
+              category = i
+              break
+            }
           }
-          return category;
+          return category
         }
         console.log('----------levelRelationNames forEach------------')
         for (let i = 0; i < levelRelationNames.length; i++) {
           let node_name = levelRelationNames[i]
           let findResult = findInCategoryMap(node_name)
-          if (findResult!==null) {
-            console.log('我找到了',node_name,findResult)
+          if (findResult !== null) {
+            console.log('我找到了', node_name, findResult)
             e.category = findResult
             break
           }
@@ -252,9 +347,9 @@ export default {
           {
             // selectedMode: 'single',
             data: categories.map((item) => item.name),
-            textStyle:{
-              color:'#fff'
-            }
+            textStyle: {
+              color: '#fff',
+            },
           },
         ],
         series: [
@@ -330,10 +425,10 @@ export default {
               normal: {
                 color: function (params) {
                   let idx = params.data.category
-                  console.log('formatter color,idx=',idx)
+                  console.log('formatter color,idx=', idx)
                   let color = 'rgba(145,191,252,1)' // 根节点 or 其他未在 categories 内的节点颜色
                   // idx = 0 也会 精准匹配 undefined
-                  if(idx!==undefined &&  _this.categories[idx]){
+                  if (idx !== undefined && _this.categories[idx]) {
                     color = categories[idx].itemStyle.color
                   }
                   return color
@@ -777,16 +872,73 @@ main {
             color: #fff;
             padding: 10px 0;
           }
-          ul {
-            margin: 0;
-            padding: 0;
-          }
-          padding-top: 40px;
-          li {
-            list-style: none;
-            // background: red;
-            line-height: 50px;
-            color: #fff;
+          padding-right: 20px;
+          .scroll_table_wrapper {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border: 1px solid #283dff;
+            position: relative;
+            .data_table {
+              border-collapse: collapse;
+              border: 1px solid #011b70;
+              tr {
+                th {
+                  color: #fff;
+                  font-weight: bold;
+                  font-size: 18px;
+                }
+                th,
+                td {
+                  border: 1px solid #011b70;
+                  padding-left: 20px;
+                }
+                th:nth-child(1),
+                td:nth-child(1) {
+                  width: 30%;
+                }
+                th:nth-child(2),
+                th:nth-child(3),
+                td:nth-child(2),
+                td:nth-child(3) {
+                  width: 35%;
+                }
+                .company {
+                  width: 150px;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                  overflow: hidden;
+                }
+              }
+            }
+            .tempTableWrapper {
+              position: absolute;
+              left: 0;
+              top: 0;
+              right: 0;
+              height: 44px;
+              z-index: 10;
+              overflow: hidden;
+              background: pink;
+            }
+            .tempTable {
+              width: 100%;
+              background-color: #000c34;
+              color: #91e5ce !important;
+              border-collapse: collapse;
+              border: 1px solid #011b70;
+              font-size: 16px;
+              line-height: 40px;
+            }
+            .ul-scoll {
+              width: 100%;
+              tr td {
+                background-color: #000c34;
+                color: #91e5ce !important;
+                font-size: 16px;
+                line-height: 50px;
+              }
+            }
           }
         }
       }
