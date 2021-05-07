@@ -48,8 +48,8 @@
                       <thead>
                         <tr>
                           <th>产品名称</th>
-                          <th>竞争对手</th>
-                          <th>竞争企业</th>
+                          <th>竞品名称</th>
+                          <th>竞品企业</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -371,6 +371,11 @@ export default {
                   let newParamsName = '' // 最终拼接成的字符串
                   let paramsNameNumber = params.length // 实际标签的个数
                   let provideNumber = 10 // 每行能显示的字的个数
+                  let reg = new RegExp('^[a-zA-Z]+$')
+                  if (reg.test(params)) {
+                  } else {
+                    provideNumber = 5
+                  }
                   let rowNumber = Math.ceil(paramsNameNumber / provideNumber) // 换行的话，需要显示几行，向上取整
                   /**
                    * 判断标签的个数是否大于规定的个数， 如果大于，则进行换行处理 如果不大于，即等于或小于，就返回原标签
