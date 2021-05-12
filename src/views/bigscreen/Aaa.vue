@@ -1,138 +1,2463 @@
 <template>
-  <div class="scroll_table_container">
-    <div class="scroll_table_wrapper"
-         style="">
-      <div class="tempTableWrapper">
-        <table class="tempTable data_table">
-          <thead>
-            <tr>
-              <th>产品列表</th>
-              <th>竞争产品</th>
-              <th>竞争企业</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <vue-seamless-scroll :data="scroll_data"
-                           :class-option="defaultOption">
-
-        <table class="ul-scoll data_table">
-          <tr v-for="(item, index) in scroll_data"
-              :key='index'>
-            <td>
-              {{index}}-{{item.c0}}
-            </td>
-            <td>
-              {{item.c1}}
-            </td>
-            <td>
-              {{item.c2}}
-            </td>
-          </tr>
-        </table>
-      </vue-seamless-scroll>
-    </div>
+  <div class="wrapper">
+    <div ref="echartId"
+         class="my-echarts"></div>
   </div>
 </template>
- 
+
 <script>
-import vueSeamlessScroll from 'vue-seamless-scroll'
-export default {
-  name: 'SCROLL_TABLE',
-  components: {
-    vueSeamlessScroll,
+let mock_data2 = {
+  status: 'ok',
+  msg: '获取成功',
+  data: {
+    id: 1234,
+    pid: null,
+    name: '天津',
+    code: 'tj',
+    pcode: null,
+    value: 18,
+    children: [
+      {
+        id: 1,
+        pid: 1234,
+        name: '和平',
+        code: 'heping',
+        pcode: 'tj',
+        value: 6,
+        children: [
+          {
+            id: 1,
+            pid: 1,
+            name: '南市',
+            code: 'heping_nanshi',
+            pcode: 'heping',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 2,
+            pid: 1,
+            name: '南营门街',
+            code: 'heping_nanyingmenjie',
+            pcode: 'heping',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 3,
+            pid: 1,
+            name: '劝业场',
+            code: 'heping_quanyechang',
+            pcode: 'heping',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 4,
+            pid: 1,
+            name: '体育馆街',
+            code: 'heping_tiyuguanjie',
+            pcode: 'heping',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 5,
+            pid: 1,
+            name: '小白楼',
+            code: 'heping_xiaobailou',
+            pcode: 'heping',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 6,
+            pid: 1,
+            name: '新兴街',
+            code: 'heping_xinxingjie',
+            pcode: 'heping',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 2,
+        pid: 1234,
+        name: '南开',
+        code: 'nankai',
+        pcode: 'tj',
+        value: 12,
+        children: [
+          {
+            id: 7,
+            pid: 2,
+            name: '长虹街',
+            code: 'nankai_changhongjie',
+            pcode: 'nankai',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 8,
+            pid: 2,
+            name: '广开街',
+            code: 'nankai_guangkaijie',
+            pcode: 'nankai',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 9,
+            pid: 2,
+            name: '鼓楼街',
+            code: 'nankai_guloujie',
+            pcode: 'nankai',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 10,
+            pid: 2,
+            name: '华苑',
+            code: 'nankai_huayuan',
+            pcode: 'nankai',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 11,
+            pid: 2,
+            name: '嘉陵道街',
+            code: 'nankai_jialingdaojie',
+            pcode: 'nankai',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 12,
+            pid: 2,
+            name: '水上公园街',
+            code: 'nankai_shuishanggongyuanjie',
+            pcode: 'nankai',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 13,
+            pid: 2,
+            name: '体育中心街',
+            code: 'nankai_tiyuzhongxinjie',
+            pcode: 'nankai',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 14,
+            pid: 2,
+            name: '王顶堤',
+            code: 'nankai_wangdingdi',
+            pcode: 'nankai',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 15,
+            pid: 2,
+            name: '万兴街',
+            code: 'nankai_wanxingjie',
+            pcode: 'nankai',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 16,
+            pid: 2,
+            name: '向阳路',
+            code: 'nankai_xiangyanglu',
+            pcode: 'nankai',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 17,
+            pid: 2,
+            name: '兴南街',
+            code: 'nankai_xingnanjie',
+            pcode: 'nankai',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 18,
+            pid: 2,
+            name: '学府街',
+            code: 'nankai_xuefujie',
+            pcode: 'nankai',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 3,
+        pid: 1234,
+        name: '河西',
+        code: 'hexi',
+        pcode: 'tj',
+        value: 14,
+        children: [
+          {
+            id: 19,
+            pid: 3,
+            name: '陈塘庄',
+            code: 'hexi_chentangzhuang',
+            pcode: 'hexi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 20,
+            pid: 3,
+            name: '大营门',
+            code: 'hexi_dayingmen',
+            pcode: 'hexi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 21,
+            pid: 3,
+            name: '挂甲寺',
+            code: 'hexi_guajiasi',
+            pcode: 'hexi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 22,
+            pid: 3,
+            name: '尖山',
+            code: 'hexi_jianshan',
+            pcode: 'hexi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 23,
+            pid: 3,
+            name: '柳林街',
+            code: 'hexi_liulinjie',
+            pcode: 'hexi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 24,
+            pid: 3,
+            name: '马场街',
+            code: 'hexi_machangjie',
+            pcode: 'hexi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 25,
+            pid: 3,
+            name: '梅江',
+            code: 'hexi_meijiang',
+            pcode: 'hexi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 26,
+            pid: 3,
+            name: '桃园街',
+            code: 'hexi_taoyuanjie',
+            pcode: 'hexi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 27,
+            pid: 3,
+            name: '天塔街',
+            code: 'hexi_tiantajie',
+            pcode: 'hexi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 28,
+            pid: 3,
+            name: '小海地',
+            code: 'hexi_xiaohaidi',
+            pcode: 'hexi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 29,
+            pid: 3,
+            name: '下瓦房',
+            code: 'hexi_xiawafang',
+            pcode: 'hexi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 30,
+            pid: 3,
+            name: '新梅江',
+            code: 'hexi_xinmeijiang',
+            pcode: 'hexi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 31,
+            pid: 3,
+            name: '友谊路',
+            code: 'hexi_youyilu',
+            pcode: 'hexi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 32,
+            pid: 3,
+            name: '越秀路',
+            code: 'hexi_yuexiulu',
+            pcode: 'hexi',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 4,
+        pid: 1234,
+        name: '河北',
+        code: 'hebei',
+        pcode: 'tj',
+        value: 13,
+        children: [
+          {
+            id: 33,
+            pid: 4,
+            name: '光复道',
+            code: 'hebei_guangfudao',
+            pcode: 'hebei',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 34,
+            pid: 4,
+            name: '鸿顺里街',
+            code: 'hebei_hongshunlijie',
+            pcode: 'hebei',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 35,
+            pid: 4,
+            name: '建昌道',
+            code: 'hebei_jianchangdao',
+            pcode: 'hebei',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 36,
+            pid: 4,
+            name: '江都路',
+            code: 'hebei_jiangdoulu',
+            pcode: 'hebei',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 37,
+            pid: 4,
+            name: '靖江路',
+            code: 'hebei_jingjianglu',
+            pcode: 'hebei',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 38,
+            pid: 4,
+            name: '宁园',
+            code: 'hebei_ningyuan',
+            pcode: 'hebei',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 39,
+            pid: 4,
+            name: '天穆镇',
+            code: 'hebei_tianmuzhen',
+            pcode: 'hebei',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 40,
+            pid: 4,
+            name: '铁东路',
+            code: 'hebei_tiedonglu',
+            pcode: 'hebei',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 41,
+            pid: 4,
+            name: '王串场',
+            code: 'hebei_wangchuanchang',
+            pcode: 'hebei',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 42,
+            pid: 4,
+            name: '望海楼',
+            code: 'hebei_wanghailou',
+            pcode: 'hebei',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 43,
+            pid: 4,
+            name: '新开河',
+            code: 'hebei_xinkaihe',
+            pcode: 'hebei',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 44,
+            pid: 4,
+            name: '月牙河',
+            code: 'hebei_yueyahe',
+            pcode: 'hebei',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 45,
+            pid: 4,
+            name: '真理道',
+            code: 'hebei_zhenlidao',
+            pcode: 'hebei',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 5,
+        pid: 1234,
+        name: '河东',
+        code: 'hedong',
+        pcode: 'tj',
+        value: 16,
+        children: [
+          {
+            id: 46,
+            pid: 5,
+            name: '常州道',
+            code: 'hedong_changzhoudao',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 47,
+            pid: 5,
+            name: '春华街',
+            code: 'hedong_chunhuajie',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 48,
+            pid: 5,
+            name: '大王庄',
+            code: 'hedong_dawangzhuang',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 49,
+            pid: 5,
+            name: '大直沽',
+            code: 'hedong_dazhigu',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 50,
+            pid: 5,
+            name: '二号桥街',
+            code: 'hedong_erhaoqiaojie',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 51,
+            pid: 5,
+            name: '富民路',
+            code: 'hedong_fuminlu',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 52,
+            pid: 5,
+            name: '靖江路',
+            code: 'hedong_jingjianglu',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 53,
+            pid: 5,
+            name: '鲁山道',
+            code: 'hedong_lushandao',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 54,
+            pid: 5,
+            name: '上杭路',
+            code: 'hedong_shanghanglu',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 55,
+            pid: 5,
+            name: '太阳城',
+            code: 'hedong_taiyangcheng',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 56,
+            pid: 5,
+            name: '唐家口',
+            code: 'hedong_tangjiakou',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 57,
+            pid: 5,
+            name: '万新村',
+            code: 'hedong_wanxincun',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 58,
+            pid: 5,
+            name: '向阳楼',
+            code: 'hedong_xiangyanglou',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 59,
+            pid: 5,
+            name: '张贵庄',
+            code: 'hedong_zhangguizhuang',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 60,
+            pid: 5,
+            name: '真理道',
+            code: 'hedong_zhenlidao',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 61,
+            pid: 5,
+            name: '中山门街',
+            code: 'hedong_zhongshanmenjie',
+            pcode: 'hedong',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 6,
+        pid: 1234,
+        name: '红桥',
+        code: 'hongqiao',
+        pcode: 'tj',
+        value: 12,
+        children: [
+          {
+            id: 62,
+            pid: 6,
+            name: '大胡同',
+            code: 'hongqiao_dahutong',
+            pcode: 'hongqiao',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 63,
+            pid: 6,
+            name: '丁字沽街',
+            code: 'hongqiao_dingzigujie',
+            pcode: 'hongqiao',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 64,
+            pid: 6,
+            name: '芥园道',
+            code: 'hongqiao_jieyuandao',
+            pcode: 'hongqiao',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 65,
+            pid: 6,
+            name: '铃铛阁',
+            code: 'hongqiao_lingdangge',
+            pcode: 'hongqiao',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 66,
+            pid: 6,
+            name: '三条石',
+            code: 'hongqiao_santiaoshi',
+            pcode: 'hongqiao',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 67,
+            pid: 6,
+            name: '邵公庄',
+            code: 'hongqiao_shaogongzhuang',
+            pcode: 'hongqiao',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 68,
+            pid: 6,
+            name: '双环邨',
+            code: 'hongqiao_shuanghuancun',
+            pcode: 'hongqiao',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 69,
+            pid: 6,
+            name: '天穆镇',
+            code: 'hongqiao_tianmuzhen',
+            pcode: 'hongqiao',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 70,
+            pid: 6,
+            name: '咸阳北路',
+            code: 'hongqiao_xianyangbeilu',
+            pcode: 'hongqiao',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 71,
+            pid: 6,
+            name: '西沽街',
+            code: 'hongqiao_xigujie',
+            pcode: 'hongqiao',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 72,
+            pid: 6,
+            name: '西营门',
+            code: 'hongqiao_xiyingmen1',
+            pcode: 'hongqiao',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 73,
+            pid: 6,
+            name: '西于庄',
+            code: 'hongqiao_xiyuzhuang',
+            pcode: 'hongqiao',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 7,
+        pid: 1234,
+        name: '西青',
+        code: 'xiqing',
+        pcode: 'tj',
+        value: 14,
+        children: [
+          {
+            id: 74,
+            pid: 7,
+            name: '八里台',
+            code: 'xiqing_balitai',
+            pcode: 'xiqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 75,
+            pid: 7,
+            name: '大寺',
+            code: 'xiqing_dasi',
+            pcode: 'xiqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 76,
+            pid: 7,
+            name: '侯台',
+            code: 'xiqing_houtai',
+            pcode: 'xiqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 77,
+            pid: 7,
+            name: '华苑',
+            code: 'xiqing_huayuan',
+            pcode: 'xiqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 78,
+            pid: 7,
+            name: '精武镇',
+            code: 'xiqing_jingwuzhen',
+            pcode: 'xiqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 79,
+            pid: 7,
+            name: '李七庄',
+            code: 'xiqing_liqizhuang',
+            pcode: 'xiqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 80,
+            pid: 7,
+            name: '梅江',
+            code: 'xiqing_meijiang',
+            pcode: 'xiqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 81,
+            pid: 7,
+            name: '体育中心街',
+            code: 'xiqing_tiyuzhongxinjie',
+            pcode: 'xiqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 82,
+            pid: 7,
+            name: '辛口镇',
+            code: 'xiqing_xinkouzhen',
+            pcode: 'xiqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 83,
+            pid: 7,
+            name: '新梅江',
+            code: 'xiqing_xinmeijiang',
+            pcode: 'xiqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 84,
+            pid: 7,
+            name: '西营门',
+            code: 'xiqing_xiyingmen1',
+            pcode: 'xiqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 85,
+            pid: 7,
+            name: '杨柳青',
+            code: 'xiqing_yangliuqing',
+            pcode: 'xiqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 86,
+            pid: 7,
+            name: '张家窝',
+            code: 'xiqing_zhangjiawo',
+            pcode: 'xiqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 87,
+            pid: 7,
+            name: '中北镇',
+            code: 'xiqing_zhongbeizhen',
+            pcode: 'xiqing',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 8,
+        pid: 1234,
+        name: '北辰',
+        code: 'beichen',
+        pcode: 'tj',
+        value: 11,
+        children: [
+          {
+            id: 88,
+            pid: 8,
+            name: '北仓镇',
+            code: 'beichen_beicangzhen',
+            pcode: 'beichen',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 89,
+            pid: 8,
+            name: '果园新村',
+            code: 'beichen_guoyuanxincun',
+            pcode: 'beichen',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 90,
+            pid: 8,
+            name: '集贤里',
+            code: 'beichen_jixianli',
+            pcode: 'beichen',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 91,
+            pid: 8,
+            name: '瑞景居住区',
+            code: 'beichen_ruijingjuzhuqu',
+            pcode: 'beichen',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 92,
+            pid: 8,
+            name: '双环邨',
+            code: 'beichen_shuanghuancun',
+            pcode: 'beichen',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 93,
+            pid: 8,
+            name: '双街',
+            code: 'beichen_shuangjie',
+            pcode: 'beichen',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 94,
+            pid: 8,
+            name: '双口镇',
+            code: 'beichen_shuangkouzhen',
+            pcode: 'beichen',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 95,
+            pid: 8,
+            name: '天穆镇',
+            code: 'beichen_tianmuzhen',
+            pcode: 'beichen',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 96,
+            pid: 8,
+            name: '小淀镇',
+            code: 'beichen_xiaodianzhen',
+            pcode: 'beichen',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 97,
+            pid: 8,
+            name: '西堤头',
+            code: 'beichen_xiditou',
+            pcode: 'beichen',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 98,
+            pid: 8,
+            name: '宜兴埠',
+            code: 'beichen_yixingbu',
+            pcode: 'beichen',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 9,
+        pid: 1234,
+        name: '东丽',
+        code: 'dongli',
+        pcode: 'tj',
+        value: 11,
+        children: [
+          {
+            id: 99,
+            pid: 9,
+            name: '东丽湖',
+            code: 'dongli_donglihu',
+            pcode: 'dongli',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 100,
+            pid: 9,
+            name: '二号桥街',
+            code: 'dongli_erhaoqiaojie',
+            pcode: 'dongli',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 101,
+            pid: 9,
+            name: '钢管公司',
+            code: 'dongli_gangguangongsi',
+            pcode: 'dongli',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 102,
+            pid: 9,
+            name: '华明镇',
+            code: 'dongli_huamingzhen',
+            pcode: 'dongli',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 103,
+            pid: 9,
+            name: '金钟街',
+            code: 'dongli_jinzhongjie',
+            pcode: 'dongli',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 104,
+            pid: 9,
+            name: '军粮城',
+            code: 'dongli_junliangcheng',
+            pcode: 'dongli',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 105,
+            pid: 9,
+            name: '空港经济区',
+            code: 'dongli_konggangjingjiqu',
+            pcode: 'dongli',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 106,
+            pid: 9,
+            name: '万新街',
+            code: 'dongli_wanxinjie',
+            pcode: 'dongli',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 107,
+            pid: 9,
+            name: '新立街',
+            code: 'dongli_xinlijie',
+            pcode: 'dongli',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 108,
+            pid: 9,
+            name: '月牙河',
+            code: 'dongli_yueyahe',
+            pcode: 'dongli',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 109,
+            pid: 9,
+            name: '张贵庄',
+            code: 'dongli_zhangguizhuang',
+            pcode: 'dongli',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 10,
+        pid: 1234,
+        name: '津南',
+        code: 'jinnan',
+        pcode: 'tj',
+        value: 10,
+        children: [
+          {
+            id: 110,
+            pid: 10,
+            name: '八里台',
+            code: 'jinnan_balitai',
+            pcode: 'jinnan',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 111,
+            pid: 10,
+            name: '北闸口',
+            code: 'jinnan_beizhakou',
+            pcode: 'jinnan',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 112,
+            pid: 10,
+            name: '葛沽镇',
+            code: 'jinnan_geguzhen',
+            pcode: 'jinnan',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 113,
+            pid: 10,
+            name: '柳林街',
+            code: 'jinnan_liulinjie',
+            pcode: 'jinnan',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 114,
+            pid: 10,
+            name: '双港',
+            code: 'jinnan_shuanggang',
+            pcode: 'jinnan',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 115,
+            pid: 10,
+            name: '咸水沽',
+            code: 'jinnan_xianshuigu',
+            pcode: 'jinnan',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 116,
+            pid: 10,
+            name: '小海地',
+            code: 'jinnan_xiaohaidi',
+            pcode: 'jinnan',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 117,
+            pid: 10,
+            name: '小站镇',
+            code: 'jinnan_xiaozhanzhen',
+            pcode: 'jinnan',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 118,
+            pid: 10,
+            name: '新梅江',
+            code: 'jinnan_xinmeijiang',
+            pcode: 'jinnan',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 119,
+            pid: 10,
+            name: '辛庄',
+            code: 'jinnan_xinzhuang',
+            pcode: 'jinnan',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 11,
+        pid: 1234,
+        name: '塘沽',
+        code: 'tanggu',
+        pcode: 'tj',
+        value: 13,
+        children: [
+          {
+            id: 120,
+            pid: 11,
+            name: '北塘街',
+            code: 'tanggu_beitangjie',
+            pcode: 'tanggu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 121,
+            pid: 11,
+            name: '渤海石油街',
+            code: 'tanggu_bohaishiyoujie',
+            pcode: 'tanggu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 122,
+            pid: 11,
+            name: '大沽街',
+            code: 'tanggu_dagujie',
+            pcode: 'tanggu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 123,
+            pid: 11,
+            name: '工农村',
+            code: 'tanggu_gongnongcun',
+            pcode: 'tanggu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 124,
+            pid: 11,
+            name: '杭州道',
+            code: 'tanggu_hangzhoudao',
+            pcode: 'tanggu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 125,
+            pid: 11,
+            name: '胡家园',
+            code: 'tanggu_hujiayuan',
+            pcode: 'tanggu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 126,
+            pid: 11,
+            name: '解放路',
+            code: 'tanggu_jiefanglu',
+            pcode: 'tanggu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 127,
+            pid: 11,
+            name: '三槐路街',
+            code: 'tanggu_sanhuailujie',
+            pcode: 'tanggu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 128,
+            pid: 11,
+            name: '向阳街',
+            code: 'tanggu_xiangyangjie',
+            pcode: 'tanggu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 129,
+            pid: 11,
+            name: '新城镇',
+            code: 'tanggu_xinchengzhen',
+            pcode: 'tanggu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 130,
+            pid: 11,
+            name: '新村街',
+            code: 'tanggu_xincunjie',
+            pcode: 'tanggu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 131,
+            pid: 11,
+            name: '新港',
+            code: 'tanggu_xingang',
+            pcode: 'tanggu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 132,
+            pid: 11,
+            name: '新河街',
+            code: 'tanggu_xinhejie',
+            pcode: 'tanggu',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 12,
+        pid: 1234,
+        name: '开发区',
+        code: 'kaifaqutj',
+        pcode: 'tj',
+        value: 6,
+        children: [
+          {
+            id: 133,
+            pid: 12,
+            name: '第二大街',
+            code: 'kaifaqutj_dierdajie',
+            pcode: 'kaifaqutj',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 134,
+            pid: 12,
+            name: '第三大街',
+            code: 'kaifaqutj_disandajie',
+            pcode: 'kaifaqutj',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 135,
+            pid: 12,
+            name: '第四大街',
+            code: 'kaifaqutj_disidajie',
+            pcode: 'kaifaqutj',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 136,
+            pid: 12,
+            name: '第五大街',
+            code: 'kaifaqutj_diwudajie',
+            pcode: 'kaifaqutj',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 137,
+            pid: 12,
+            name: '第一大街',
+            code: 'kaifaqutj_diyidajie',
+            pcode: 'kaifaqutj',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 138,
+            pid: 12,
+            name: '开发区',
+            code: 'kaifaqutj_kaifaqu',
+            pcode: 'kaifaqutj',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 13,
+        pid: 1234,
+        name: '武清',
+        code: 'wuqing',
+        pcode: 'tj',
+        value: 15,
+        children: [
+          {
+            id: 139,
+            pid: 13,
+            name: '保利金街',
+            code: 'wuqing_baolijinjie',
+            pcode: 'wuqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 140,
+            pid: 13,
+            name: '大王古镇',
+            code: 'wuqing_daiwangguzhen',
+            pcode: 'wuqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 141,
+            pid: 13,
+            name: '佛罗伦萨',
+            code: 'wuqing_fuluolunsa',
+            pcode: 'wuqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 142,
+            pid: 13,
+            name: '高村',
+            code: 'wuqing_gaocun',
+            pcode: 'wuqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 143,
+            pid: 13,
+            name: '河西务',
+            code: 'wuqing_hexiwu',
+            pcode: 'wuqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 144,
+            pid: 13,
+            name: '黄庄',
+            code: 'wuqing_huangzhuang',
+            pcode: 'wuqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 145,
+            pid: 13,
+            name: '静湖',
+            code: 'wuqing_jinghu',
+            pcode: 'wuqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 146,
+            pid: 13,
+            name: '南湖',
+            code: 'wuqing_nanhu6',
+            pcode: 'wuqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 147,
+            pid: 13,
+            name: '泗村',
+            code: 'wuqing_sicun',
+            pcode: 'wuqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 148,
+            pid: 13,
+            name: '体育中心',
+            code: 'wuqing_tiyuzhongxin2',
+            pcode: 'wuqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 149,
+            pid: 13,
+            name: '武清其它',
+            code: 'wuqing_wuqingqita',
+            pcode: 'wuqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 150,
+            pid: 13,
+            name: '下朱庄',
+            code: 'wuqing_xiazhuzhuang',
+            pcode: 'wuqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 151,
+            pid: 13,
+            name: '新湾',
+            code: 'wuqing_xinwan',
+            pcode: 'wuqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 152,
+            pid: 13,
+            name: '杨村',
+            code: 'wuqing_yangcun',
+            pcode: 'wuqing',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 153,
+            pid: 13,
+            name: '中信广场',
+            code: 'wuqing_zhongxinguangchang',
+            pcode: 'wuqing',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 14,
+        pid: 1234,
+        name: '滨海新区',
+        code: 'binhaixinqu',
+        pcode: 'tj',
+        value: 5,
+        children: [
+          {
+            id: 154,
+            pid: 14,
+            name: '滨海其它',
+            code: 'binhaixinqu_binhaiqita',
+            pcode: 'binhaixinqu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 155,
+            pid: 14,
+            name: '大港',
+            code: 'binhaixinqu_dagang',
+            pcode: 'binhaixinqu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 156,
+            pid: 14,
+            name: '汉沽',
+            code: 'binhaixinqu_hangu',
+            pcode: 'binhaixinqu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 157,
+            pid: 14,
+            name: '曾会',
+            code: 'binhaixinqu_zenghui',
+            pcode: 'binhaixinqu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 158,
+            pid: 14,
+            name: '中新生态城',
+            code: 'binhaixinqu_zhongxinshengtaicheng',
+            pcode: 'binhaixinqu',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 15,
+        pid: 1234,
+        name: '宝坻',
+        code: 'baodi',
+        pcode: 'tj',
+        value: 13,
+        children: [
+          {
+            id: 159,
+            pid: 15,
+            name: '宝坻其他东',
+            code: 'baodi_baodiqitadong',
+            pcode: 'baodi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 160,
+            pid: 15,
+            name: '宝坻其他西',
+            code: 'baodi_baodiqitaxi',
+            pcode: 'baodi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 161,
+            pid: 15,
+            name: '北城路',
+            code: 'baodi_beichenglu',
+            pcode: 'baodi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 162,
+            pid: 15,
+            name: '潮阳大道',
+            code: 'baodi_chaoyangdadao',
+            pcode: 'baodi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 163,
+            pid: 15,
+            name: '翡翠湾',
+            code: 'baodi_feicuiwan',
+            pcode: 'baodi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 164,
+            pid: 15,
+            name: '海滨',
+            code: 'baodi_haibin',
+            pcode: 'baodi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 165,
+            pid: 15,
+            name: '火车站',
+            code: 'baodi_huochezhan19',
+            pcode: 'baodi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 166,
+            pid: 15,
+            name: '建设路',
+            code: 'baodi_jianshelu3',
+            pcode: 'baodi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 167,
+            pid: 15,
+            name: '京津新城',
+            code: 'baodi_jingjinxincheng',
+            pcode: 'baodi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 168,
+            pid: 15,
+            name: '马家店',
+            code: 'baodi_majiadian',
+            pcode: 'baodi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 169,
+            pid: 15,
+            name: '南关大街',
+            code: 'baodi_nanguandajie',
+            pcode: 'baodi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 170,
+            pid: 15,
+            name: '南三路',
+            code: 'baodi_nansanlu',
+            pcode: 'baodi',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 171,
+            pid: 15,
+            name: '怡购',
+            code: 'baodi_yigou',
+            pcode: 'baodi',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 16,
+        pid: 1234,
+        name: '蓟州',
+        code: 'jizhou',
+        pcode: 'tj',
+        value: 7,
+        children: [
+          {
+            id: 172,
+            pid: 16,
+            name: '津围线东',
+            code: 'jizhou_jinweixiandong',
+            pcode: 'jizhou',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 173,
+            pid: 16,
+            name: '津围线西',
+            code: 'jizhou_jinweixianxi',
+            pcode: 'jizhou',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 174,
+            pid: 16,
+            name: '蓟州',
+            code: 'jizhou_jizhou1',
+            pcode: 'jizhou',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 175,
+            pid: 16,
+            name: '蓟州城区',
+            code: 'jizhou_jizhouchengqu',
+            pcode: 'jizhou',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 176,
+            pid: 16,
+            name: '盘山风景区',
+            code: 'jizhou_panshanfengjingqu',
+            pcode: 'jizhou',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 177,
+            pid: 16,
+            name: '人民公园',
+            code: 'jizhou_renmingongyuan4',
+            pcode: 'jizhou',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 178,
+            pid: 16,
+            name: '于桥水库',
+            code: 'jizhou_yuqiaoshuiku',
+            pcode: 'jizhou',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 17,
+        pid: 1234,
+        name: '海河教育园区',
+        code: 'haihejiaoyuyuanqu',
+        pcode: 'tj',
+        value: 3,
+        children: [
+          {
+            id: 179,
+            pid: 17,
+            name: '八里台',
+            code: 'haihejiaoyuyuanqu_balitai',
+            pcode: 'haihejiaoyuyuanqu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 180,
+            pid: 17,
+            name: '咸水沽',
+            code: 'haihejiaoyuyuanqu_xianshuigu',
+            pcode: 'haihejiaoyuyuanqu',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 181,
+            pid: 17,
+            name: '辛庄',
+            code: 'haihejiaoyuyuanqu_xinzhuang',
+            pcode: 'haihejiaoyuyuanqu',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+      {
+        id: 18,
+        pid: 1234,
+        name: '静海',
+        code: 'jinghai',
+        pcode: 'tj',
+        value: 4,
+        children: [
+          {
+            id: 182,
+            pid: 18,
+            name: '静海',
+            code: 'jinghai_jinghai1',
+            pcode: 'jinghai',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 183,
+            pid: 18,
+            name: '静海其他',
+            code: 'jinghai_jinghaiqita',
+            pcode: 'jinghai',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 184,
+            pid: 18,
+            name: '团泊东',
+            code: 'jinghai_tuanbodong',
+            pcode: 'jinghai',
+            value: 0,
+            children: null,
+          },
+          {
+            id: 185,
+            pid: 18,
+            name: '团泊西',
+            code: 'jinghai_tuanboxi',
+            pcode: 'jinghai',
+            value: 0,
+            children: null,
+          },
+        ],
+      },
+    ],
   },
-  data() {
-    return {
-      scroll_data: [
-        { id: '1', c0: 'anyData', c1: '日志易', c2: '希望在2021年2月将拟购生态城土' },
-        { id: '1', c0: 'anyData', c1: '日志易', c2: '希望在2021年2月将拟购生态城土' },
-        { id: '2', c0: 'anyData', c1: '日志易', c2: '希望在2021年2月将拟购生态城土' },
-        { id: '3', c0: 'anyData', c1: '日志易', c2: '希望在2021年2月将拟购生态城土' },
-        { id: '4', c0: 'anyData', c1: '日志易', c2: '希望在2021年2月将拟购生态城土' },
-        { id: '5', c0: 'anyData', c1: '日志易', c2: '希望在2021年2月将拟购生态城土' },
-        { id: '6', c0: 'anyData', c1: '日志易', c2: '希望在2021年2月将拟购生态城土' },
-        { id: '7', c0: 'anyData', c1: '日志易', c2: '希望在2021年2月将拟购生态城土' },
-        { id: '8', c0: 'anyData', c1: '日志易', c2: '希望在2021年2月将拟购生态城土' },
+}
+let mock_data = {
+  success: true,
+  message: '操作成功！',
+  code: 200,
+  result: {
+    atlas: {
+      name: '中智智人信息技术有限公司',
+      code: '91520381MA6DP84K7W',
+      pcode: '91520381MA6DP84K7W',
+      descr: null,
+      direction: 0,
+      children: [
+        {
+          name: '分支机构',
+          code: 'fzjg',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 0,
+          children: null,
+        },
+        {
+          name: '投资公司',
+          code: 'tzgs',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 0,
+          children: null,
+        },
+        {
+          name: '控股子公司',
+          code: 'kgzgs',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 0,
+          children: null,
+        },
+        {
+          name: '竞争企业',
+          code: 'jzqy',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 0,
+          children: [
+            {
+              name: '中智智人',
+              code: 'jzqy10',
+              pcode: 'jzqy',
+              descr: null,
+              direction: 0,
+              children: [
+                {
+                  name: '郑州远传信息技术有限公司',
+                  code: 'jzqy1022',
+                  pcode: 'jzqy10',
+                  descr: '竞品：远传信息',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '融创天成科技成都有限公司',
+                  code: 'jzqy1023',
+                  pcode: 'jzqy10',
+                  descr: '竞品：融创天成',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '北京快人科技有限公司',
+                  code: 'jzqy1024',
+                  pcode: 'jzqy10',
+                  descr: '竞品：快人科技',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '上海联栈信息科技有限公司',
+                  code: 'jzqy1025',
+                  pcode: 'jzqy10',
+                  descr: '竞品：Unistacks',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '浙江云安阁科技有限公司',
+                  code: 'jzqy1026',
+                  pcode: 'jzqy10',
+                  descr: '竞品：云安阁',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '隆正信息科技有限公司',
+                  code: 'jzqy1027',
+                  pcode: 'jzqy10',
+                  descr: '竞品：隆正信息',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '北京友友天宇系统技术有限公司',
+                  code: 'jzqy1028',
+                  pcode: 'jzqy10',
+                  descr: '竞品：友友系统',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '北京云势数据科技有限责任公司',
+                  code: 'jzqy1029',
+                  pcode: 'jzqy10',
+                  descr: '竞品：云势数据',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '武汉瑞云互动科技有限公司',
+                  code: 'jzqy1030',
+                  pcode: 'jzqy10',
+                  descr: '竞品：武汉瑞云互动科技',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '广州市科南软件有限公司',
+                  code: 'jzqy1031',
+                  pcode: 'jzqy10',
+                  descr: '竞品：conow科南软件',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '神州灵云(北京)科技有限公司',
+                  code: 'jzqy1032',
+                  pcode: 'jzqy10',
+                  descr: '竞品：神州灵云',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '深圳秦云网科技有限公司',
+                  code: 'jzqy1033',
+                  pcode: 'jzqy10',
+                  descr: '竞品：秦云网',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '无锡聚云科技有限公司',
+                  code: 'jzqy1034',
+                  pcode: 'jzqy10',
+                  descr: '竞品：无锡聚云科技ClearClouds',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '北京美邦天下科技有限公司',
+                  code: 'jzqy1035',
+                  pcode: 'jzqy10',
+                  descr: '竞品：美邦天下科技',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '浪潮电子信息产业股份有限公司',
+                  code: 'jzqy1036',
+                  pcode: 'jzqy10',
+                  descr: '竞品：浪潮信息',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '上海幸乙网络科技有限公司',
+                  code: 'jzqy1037',
+                  pcode: 'jzqy10',
+                  descr: '竞品：易拓云',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '武汉柒零社商业服务有限责任公司',
+                  code: 'jzqy1038',
+                  pcode: 'jzqy10',
+                  descr: '竞品：微小智能',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '数说(长沙)信息科技有限公司',
+                  code: 'jzqy1039',
+                  pcode: 'jzqy10',
+                  descr: '竞品：芝麻数据',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '武汉谷泰软件科技有限公司',
+                  code: 'jzqy1040',
+                  pcode: 'jzqy10',
+                  descr: '竞品：谷泰软件',
+                  direction: 0,
+                  children: null,
+                },
+                {
+                  name: '成都云路天行科技有限公司',
+                  code: 'jzqy1041',
+                  pcode: 'jzqy10',
+                  descr: '竞品：云路天行',
+                  direction: 0,
+                  children: null,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: '上下游企业',
+          code: 'sxyqy',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 0,
+          children: [
+            {
+              name: '中信银行股份有限公司',
+              code: 'sxyqy6',
+              pcode: 'sxyqy',
+              descr: '下游',
+              direction: 0,
+              children: null,
+            },
+            {
+              name: '北京开运联合信息技术股份有限公司',
+              code: 'sxyqy7',
+              pcode: 'sxyqy',
+              descr: '上游',
+              direction: 0,
+              children: null,
+            },
+          ],
+        },
+        {
+          name: '参股投资企业',
+          code: 'cgtzqy',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 1,
+          children: null,
+        },
+        {
+          name: '控股企业',
+          code: 'kgqy',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 1,
+          children: null,
+        },
+        {
+          name: '主要股东',
+          code: 'zygd',
+          pcode: '91520381MA6DP84K7W',
+          descr: null,
+          direction: 1,
+          children: [
+            {
+              name: '王晓辉',
+              code: 'zygd10',
+              pcode: 'zygd',
+              descr: null,
+              direction: 1,
+              children: null,
+            },
+            {
+              name: '叶欲晓',
+              code: 'zygd11',
+              pcode: 'zygd',
+              descr: null,
+              direction: 1,
+              children: null,
+            },
+            {
+              name: '杨秀明',
+              code: 'zygd12',
+              pcode: 'zygd',
+              descr: null,
+              direction: 1,
+              children: null,
+            },
+            {
+              name: '章祖达',
+              code: 'zygd13',
+              pcode: 'zygd',
+              descr: null,
+              direction: 1,
+              children: null,
+            },
+            {
+              name: '李欣、',
+              code: 'zygd14',
+              pcode: 'zygd',
+              descr: null,
+              direction: 1,
+              children: null,
+            },
+            {
+              name: '张婷',
+              code: 'zygd15',
+              pcode: 'zygd',
+              descr: null,
+              direction: 1,
+              children: null,
+            },
+            {
+              name: '张珅',
+              code: 'zygd16',
+              pcode: 'zygd',
+              descr: null,
+              direction: 1,
+              children: null,
+            },
+          ],
+        },
       ],
-    }
-  },
-  // 监听属性 类似于data概念
-  computed: {
-    defaultOption() {
-      return {
-        step: 0.2, // 数值越大速度滚动越快
-        limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
-        hoverStop: true, // 是否开启鼠标悬停stop
-        direction: 1, // 0向下 1向上 2向左 3向右
-        openWatch: true, // 开启数据实时监控刷新dom
-        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
-        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-        waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
-      }
     },
   },
+}
+import { getPortray } from '@/api/manage'
+const echarts = require('echarts')
+/*websocket集成*/
+import store from '@/store/'
+import { randomUUID } from '@/utils/util'
+// import func from 'vue-editor-bridge'
+export default {
+  name: 'Portray',
+  data() {
+    return {
+      enterpriseId: null,
+      baseInfo: null,
+      atlas: null,
+      riskDetails: null,
+      strengthDetails: null,
+      dataArr: [],
+      dots: [],
+      lines: [],
+    }
+  },
   created() {},
-  mounted() {},
+  mounted() {
+    this.getData()
+  },
+  /*websocket集成*/
+  destroyed: function () {
+    this.websocketOnclose()
+  },
+  methods: {
+    getData() {
+      const execData = (res) => {
+        let { atlas } = res.result
+        this.atlas = atlas != null ? atlas : {}
+        this.atlas = mock_data2.data
+        this.$nextTick(() => {
+          this.initChart()
+        })
+      }
+      execData(mock_data)
+    },
+    initChart() {
+      let { dots, lines } = this.setGraphData()
+      console.log(dots)
+      console.log(lines)
+      this.setGraph(dots, lines)
+    },
+    setGraphCategoryColor() {
+      let mapCategory = {}
+      let mapColor = {
+        root: 'rgb(14,67,255)', // 首节点
+        主要股东: 'rgb(255,51,87)', // red
+
+        控股子公司: 'rgb(0,105,255)',
+        投资公司: 'rgb(0,105,255)',
+        分支机构: 'rgb(0,105,255)',
+
+        上下游企业: 'rgb(0,209,64)', // green
+
+        竞争企业: 'rgb(255,147,42)',
+
+        控股企业: 'rgb(0,139,209)',
+        参股投资企业: 'rgb(0,139,209)',
+      }
+      let rootNode = JSON.parse(JSON.stringify(this.atlas))
+      mapCategory[rootNode.name] = mapColor['root']
+      let currentNode = this.atlas
+      currentNode.children.forEach((e) => {
+        let color = mapColor[e.name] || 'black'
+        mapCategory[e.name] = color
+      })
+      return mapCategory
+    },
+    setGraphData() {
+      let mapCategory = {}
+      let dots = []
+      let lines = []
+
+      let rootNode = JSON.parse(JSON.stringify(this.atlas))
+      mapCategory[rootNode.name] = 1
+      delete rootNode.children
+      let currentNode = this.atlas
+      currentNode.children.forEach((e) => {
+        mapCategory[e.name] = 1
+      })
+      dots.push({
+        name: rootNode.code,
+        pname: rootNode.pcode,
+        direction: rootNode.direction,
+        _name: rootNode.name,
+        descr: rootNode.descr,
+        symbolSize: 120,
+      })
+      function forEachDeepNode(node) {
+        node.forEach((item) => {
+          dots.push({
+            name: item.code,
+            pname: item.pcode,
+            _name: item.name,
+            direction: item.direction,
+            descr: item.descr,
+            symbolSize: 70,
+          })
+          lines.push({
+            source: item.code,
+            target: item.pcode,
+            label: {
+              show: true,
+              formatter: function () {
+                return item.descr || ''
+              },
+            },
+          })
+          if (item.children != null) {
+            forEachDeepNode(item.children)
+          }
+        })
+      }
+      forEachDeepNode(currentNode.children)
+      return {
+        dots,
+        lines,
+      }
+    },
+    setGraph(dot, lines) {
+      let _this = this
+      let option = {
+        title: {
+          text: '企业知识图谱',
+          left: '10',
+          top: 10,
+          textStyle: {
+            color: '#fff',
+            fontSize: 32,
+          },
+        },
+        tooltip: {
+          show: false,
+        },
+        toolbox: {
+          show: false,
+        },
+        series: [
+          {
+            type: 'graph', // 类型:关系图
+            layout: 'force', //图的布局，类型为力导图
+            symbolSize: 100, // 调整节点的大小
+            roam: true,
+            edgeSymbol: ['arrow', ''],
+            // edgeSymbol: ['circle', 'arrow'],
+            // edgeSymbolSize: [2, 10],
+            label: {
+              normal: {
+                show: true,
+                textStyle: {
+                  fontSize: 12,
+                  color: '#fff',
+                },
+                formatter: (data, b, c) => {
+                  let params = data.data._name
+                  let newParamsName = '' // 最终拼接成的字符串
+                  let paramsNameNumber = params.length // 实际标签的个数
+                  let provideNumber = 10 // 每行能显示的字的个数
+                  let rowNumber = Math.ceil(paramsNameNumber / provideNumber) // 换行的话，需要显示几行，向上取整
+                  /**
+                   * 判断标签的个数是否大于规定的个数， 如果大于，则进行换行处理 如果不大于，即等于或小于，就返回原标签
+                   */
+                  // 条件等同于rowNumber>1
+                  if (paramsNameNumber > provideNumber) {
+                    /** 循环每一行,p表示行 */
+                    for (let p = 0; p < rowNumber; p++) {
+                      let tempStr = '' // 表示每一次截取的字符串
+                      let start = p * provideNumber // 开始截取的位置
+                      let end = start + provideNumber // 结束截取的位置
+                      // 此处特殊处理最后一行的索引值
+                      if (p === rowNumber - 1) {
+                        // 最后一次不换行
+                        tempStr = params.substring(start, paramsNameNumber)
+                      } else {
+                        // 每一次拼接字符串并换行
+                        tempStr = params.substring(start, end) + '\n'
+                      }
+                      newParamsName += tempStr // 最终拼成的字符串
+                    }
+                  } else {
+                    // 将旧标签的值赋给新标签
+                    newParamsName = params
+                  }
+                  //将最终的字符串返回
+                  return newParamsName
+                },
+              },
+            },
+            force: {
+              edgeLength: [70, 100],
+              // edgeLength: 80, //默认距离
+              repulsion: 700, //斥力
+            },
+            draggable: true,
+            lineStyle: {
+              normal: {
+                width: 2,
+                color: '#f9f9f9',
+              },
+            },
+            edgeLabel: {
+              normal: {
+                show: false,
+              },
+            },
+            data: dot,
+            links: lines,
+            itemStyle: {
+              normal: {
+                color: function (params) {
+                  // return 'red'
+                  return _this.findInCategoryColor(params, dot)
+                },
+              },
+            },
+            // categories: categories,
+          },
+        ],
+      }
+      let myChart = echarts.init(this.$refs.echartId)
+      myChart.setOption(option)
+    },
+    findInCategoryColor(params, allNode) {
+      let map = this.setGraphCategoryColor()
+      let data = params.data
+      let res = 'black'
+      let levelRelation = []
+      function findUp(start, allNode) {
+        allNode.forEach((item) => {
+          if (item.name === start) {
+            levelRelation.push(item.name)
+            if (item.pname && levelRelation.includes(item.pname) === false) {
+              findUp(item.pname, allNode)
+            }
+          }
+        })
+      }
+      findUp(data.name, allNode)
+      // 逐级向上查找
+      // console.log('-------------逐级向上查找')
+      let levelRelationNames = levelRelation.map((code) => {
+        let item = allNode.find((e) => e.name === code)
+        return item._name
+      })
+      levelRelationNames.forEach((item) => {})
+      for (let i = 0; i < levelRelationNames.length; i++) {
+        let item = levelRelationNames[i]
+        if (item in map) {
+          res = map[item]
+          break
+        }
+      }
+      return res
+    },
+  },
 }
 </script>
 <style scoped lang="less">
-.scroll_table_wrapper {
-  width: 100%;
-  height: 400px;
-  overflow: hidden;
-  border: 1px solid #283dff;
-  position: relative;
-
-  .data_table {
-    border-collapse: collapse;
-    border: 1px solid #011b70;
-    tr {
-      th:nth-child(1),
-      td:nth-child(1) {
-        width: 20%;
-      }
-      th:nth-child(2),
-      th:nth-child(3),
-      td:nth-child(2),
-      td:nth-child(3) {
-        width: 40%;
-      }
-    }
-  }
-  .tempTableWrapper {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    height: 43px;
-    z-index: 10;
-    overflow: hidden;
-  }
-  .tempTable {
+.wrapper {
+  height: 100vh;
+  .my-echarts {
     width: 100%;
-    background-color: #000c34;
-    color: #91e5ce !important;
-    border-collapse: collapse;
-    border: 1px solid #011b70;
-    font-size: 16px;
-    line-height: 40px;
-    thead,
-    tbody,
-    thead tr,
-    tbody,
-    tr {
-      width: 100%;
-    }
+    height: 100%;
+    z-index: 3;
   }
-  .ul-scoll {
-    width: 100%;
-    tr td {
-      background-color: #000c34;
-      color: #91e5ce !important;
-      font-size: 16px;
-      line-height: 50px;
-    }
-  }
+  background: aquamarine;
 }
-</style>　
+</style>

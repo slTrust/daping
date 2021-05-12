@@ -1,123 +1,113 @@
 <template>
-  <div>
-    <!-- <video autoplay
-           loop
-           muted
-           class="full-video">
-      <source src="@/assets/big/sp-back.mp4"
-              type="video/mp4" />
-    </video> -->
-    <div class="hai-content">
-      <div class="service-tit">
-        <span class="span1">
-          <div class="in">企业画像</div>
-        </span>
-      </div>
-      <main>
-        <div class="ht"></div>
-        <div class="lside"
-             v-if="baseInfo != null">
-          <div class="recommendPNG"
-               v-show="baseInfo.recommendFlag == 1"></div>
-          <div class="recommendOffice">推荐办公区：{{ baseInfo.recommendOffice }}</div>
-          <div class="content">
-            <div class="l-info">
-              <div class="l-inner">
-                <div class="logo">
-                  <img :src="baseInfo.logoUrl"
-                       alt="" />
-                </div>
-                <div class="name">{{ baseInfo.name }}</div>
-                <ul>
-                  <li>
-                    <div class="label">企业规模:</div>
-                    <div class="value">{{ baseInfo.scaleMin }}-{{ baseInfo.scaleMax }}</div>
-                  </li>
-                  <li>
-                    <div class="label">企业类型:</div>
-                    <div class="value">{{ baseInfo.econKind }}</div>
-                  </li>
-                  <li>
-                    <div class="label">融资情况:</div>
-                    <div class="value">{{ baseInfo.financingDt }} {{ baseInfo.financingRound }}</div>
-                  </li>
-                  <li>
-                    <div class="label">联系电话:</div>
-                    <div class="value">{{ baseInfo.tel }}</div>
-                  </li>
-                </ul>
+  <div class="hai-content">
+    <div class="service-tit">
+      <span class="span1">企业画像</span>
+    </div>
+    <main>
+      <div class="ht"></div>
+      <div class="lside"
+           v-if="baseInfo != null">
+        <div class="recommendPNG"
+             v-show="baseInfo.recommendFlag == 1"></div>
+        <div class="recommendOffice">推荐办公区：{{ baseInfo.recommendOffice }}</div>
+        <div class="content">
+          <div class="l-info">
+            <div class="l-inner">
+              <div class="logo">
+                <img :src="baseInfo.logoUrl"
+                     alt="" />
               </div>
-              <div class="l-list">
-                <div class="title">产品列表</div>
-                <div class="scroll_table_container">
-                  <div class="scroll_table_wrapper"
-                       style=""
-                       v-if="products!=null">
-                    <div class="tempTableWrapper">
-                      <table class="tempTable data_table">
-                        <thead>
-                          <tr>
-                            <th>产品名称</th>
-                            <th>竞品名称</th>
-                            <th>竞品企业</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr v-for="(item, index) in products"
-                              :key='index'>
-                            <td>
-                              {{item.productName }}
-                            </td>
-                            <td>
-                              {{item.cptProductName }}
-                            </td>
-                            <td>
-                              <div class="company">
-                                {{item.cptEnterpriseName }}
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-
-                    </div>
-                    <vue-seamless-scroll :data="products"
-                                         :class-option="defaultOption">
-                      <table class="ul-scoll data_table">
-                        <tr v-for="(item, index) in products"
+              <div class="name">{{ baseInfo.name }}</div>
+              <ul>
+                <li>
+                  <div class="label">企业规模:</div>
+                  <div class="value">{{ baseInfo.scaleMin }}-{{ baseInfo.scaleMax }}</div>
+                </li>
+                <li>
+                  <div class="label">企业类型:</div>
+                  <div class="value">{{ baseInfo.econKind }}</div>
+                </li>
+                <li>
+                  <div class="label">融资情况:</div>
+                  <div class="value">{{ baseInfo.financingDt }} {{ baseInfo.financingRound }}</div>
+                </li>
+                <li>
+                  <div class="label">联系电话:</div>
+                  <div class="value">{{ baseInfo.tel }}</div>
+                </li>
+              </ul>
+            </div>
+            <div class="l-list">
+              <div class="title">产品列表</div>
+              <div class="scroll_table_container">
+                <div class="scroll_table_wrapper"
+                     style=""
+                     v-if="products!=null">
+                  <div class="tempTableWrapper">
+                    <table class="tempTable data_table">
+                      <thead>
+                        <tr>
+                          <th>产品名称</th>
+                          <th>竞品名称</th>
+                          <th>竞品企业</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="(item, index) in scroll_data"
                             :key='index'>
                           <td>
-                            {{item.productName  }}
+                            {{item.c0}}
                           </td>
                           <td>
-                            {{item.cptProductName   }}
+                            {{item.c1}}
                           </td>
                           <td>
                             <div class="company">
-                              {{item.cptEnterpriseName   }}
+                              {{item.c2}}
                             </div>
                           </td>
                         </tr>
-                      </table>
-                    </vue-seamless-scroll>
+                      </tbody>
+                    </table>
+
                   </div>
+                  <vue-seamless-scroll :data="scroll_data"
+                                       :class-option="defaultOption">
+                    <table class="ul-scoll data_table">
+                      <tr v-for="(item, index) in scroll_data"
+                          :key='index'>
+                        <td>
+                          {{item.c0}}
+                        </td>
+                        <td>
+                          {{item.c1}}
+                        </td>
+                        <td>
+                          <div class="company"
+                               :title="item.c2">
+                            {{item.c2}}
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </vue-seamless-scroll>
                 </div>
               </div>
             </div>
-            <div class="r-charts">
-              <div ref="chartRadar"
-                   class="chart chart1"></div>
-              <div ref="chartColumn"
-                   class="chart chart2"></div>
-            </div>
+          </div>
+          <div class="r-charts">
+            <div ref="chartRadar"
+                 class="chart chart1"></div>
+            <div ref="chartColumn"
+                 class="chart chart2"></div>
           </div>
         </div>
-        <div class="rside">
-          <div ref="echartId"
-               class="my-echarts"></div>
-        </div>
-      </main>
-    </div>
+      </div>
+      <div class="rside">
+        <div ref="echartId"
+             class="my-echarts"></div>
+      </div>
+    </main>
   </div>
 </template>
 <script>
@@ -134,10 +124,10 @@ export default {
     return {
       enterpriseId: null,
       baseInfo: null,
-      products: null,
       atlas: null,
       riskDetails: null,
       strengthDetails: null,
+      products: null,
       dataArr: [],
       dots: [],
       lines: [],
@@ -148,19 +138,30 @@ export default {
       heartCheck: null,
       // 图谱 legend
       categories: [
-        { name: '竞争图谱', cover_name: ['竞争企业'], itemStyle: { color: 'rgba(255,147,42,0.6)' } },
+        { name: '竞争图谱', cover_name: ['竞争企业'], itemStyle: { color: 'rgb(255,147,42)' } },
         {
           name: '投资图谱',
           cover_name: ['投资公司', '分支机构', '独资子公司'],
-          itemStyle: { color: 'rgba(0,105,255,0.6)' },
+          itemStyle: { color: 'rgb(0,105,255)' },
         },
         {
           name: '参股图谱',
           cover_name: ['控股企业', '参股投资企业', '控股子公司'],
-          itemStyle: { color: 'rgba(0,139,209,0.6)' },
+          itemStyle: { color: 'rgb(0,139,209)' },
         },
-        { name: '股权结构', cover_name: ['主要股东'], itemStyle: { color: 'rgba(255,51,87,0.6)' } },
-        { name: '上下游', cover_name: ['上下游企业'], itemStyle: { color: 'rgba(0,209,64,0.6)' } },
+        { name: '股权结构', cover_name: ['主要股东'], itemStyle: { color: 'rgb(255,51,87)' } },
+        { name: '上下游', cover_name: ['上下游企业'], itemStyle: { color: 'rgb(0,209,64)' } },
+      ],
+      scroll_data: [
+        { id: '1', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '1', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '2', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '3', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '4', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '5', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '6', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '7', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
+        { id: '8', c0: 'anyData', c1: '日志易', c2: '上海爱数信息技术有限公司' },
       ],
     }
   },
@@ -198,29 +199,12 @@ export default {
   methods: {
     getData() {
       const execData = (res) => {
-        let { baseInfo, products, atlas, riskDetails, strengthDetails } = res.result
+        let { baseInfo, atlas, riskDetails, strengthDetails, products } = res.result
         this.baseInfo = baseInfo != null ? baseInfo : {}
-        this.products = products != null ? products : [{}]
-        this.products = [
-          {
-            productName: 'aaaa1111fdsafsafsda1',
-            cptEnterpriseName: 'fdsaffdsbbbb2222',
-            cptProductName: 'ccccccccc',
-          },
-          {
-            productName: 'aaaa2',
-            cptEnterpriseName: 'bbbb',
-            cptProductName: 'cccc',
-          },
-          {
-            productName: 'aaaa3',
-            cptEnterpriseName: 'bbbb',
-            cptProductName: 'cccc',
-          },
-        ]
         this.atlas = atlas != null ? atlas : {}
         this.riskDetails = riskDetails != null ? riskDetails : []
         this.strengthDetails = strengthDetails != null ? strengthDetails : []
+        this.products = products != null ? products : []
         this.$nextTick(() => {
           this.initChart()
         })
@@ -230,6 +214,22 @@ export default {
           execData(res)
         }
       })
+      // execData(mock_data)
+
+      // setInterval(() => {
+      //   mock_data.result.baseInfo.name = parseInt(Math.random() * 100)
+      //   console.log(mock_data.result.baseInfo.name)
+      //   mock_data.result.strengthDetails[0].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.strengthDetails[1].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.strengthDetails[2].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.strengthDetails[3].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.riskDetails[0].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.riskDetails[1].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.riskDetails[2].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.riskDetails[3].cnt = parseInt(Math.random() * 100)
+      //   mock_data.result.atlas.name = parseInt(Math.random() * 10000)
+      //   execData(mock_data)
+      // }, 2000)
     },
     initChart() {
       let { indicator, data: radarData } = this.setRadarData()
@@ -376,7 +376,6 @@ export default {
                   } else {
                     provideNumber = 5
                   }
-
                   let rowNumber = Math.ceil(paramsNameNumber / provideNumber) // 换行的话，需要显示几行，向上取整
                   /**
                    * 判断标签的个数是否大于规定的个数， 如果大于，则进行换行处理 如果不大于，即等于或小于，就返回原标签
@@ -432,7 +431,7 @@ export default {
                 color: function (params) {
                   let idx = params.data.category
                   console.log('formatter color,idx=', idx)
-                  let color = 'rgba(145,191,252,0.6)' // 根节点 or 其他未在 categories 内的节点颜色
+                  let color = 'rgba(145,191,252,1)' // 根节点 or 其他未在 categories 内的节点颜色
                   // idx = 0 也会 精准匹配 undefined
                   if (idx !== undefined && _this.categories[idx]) {
                     color = categories[idx].itemStyle.color
@@ -684,10 +683,10 @@ export default {
           var enterpriseId = data.data.enterpriseId
           if (this.enterpriseId != enterpriseId) {
             this.enterpriseId = enterpriseId
-            // this.enterpriseId = '91310000792783700P'
-            // console.log('enterpriseId----change-')
+            this.enterpriseId = '91310000792783700P'
+            console.log('enterpriseId----change-')
             //  console.log(enterpriseId)
-            this.getData()
+            // this.getData();
           }
         }
       }
@@ -885,7 +884,6 @@ main {
             overflow: hidden;
             border: 1px solid #283dff;
             position: relative;
-            padding-top: 44px;
             .data_table {
               border-collapse: collapse;
               border: 1px solid #011b70;
